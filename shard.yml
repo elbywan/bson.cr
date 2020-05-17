@@ -1,0 +1,9 @@
+name: bson.cr
+version: 0.1.0
+
+authors:
+  - elbywan <elbywan@hotmail.com>
+
+crystal: 0.34.0
+
+license: MIT
