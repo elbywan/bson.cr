@@ -63,6 +63,8 @@ struct BSON
 
   def initialize(data : Bytes? = nil)
     if d = data
+      size = data[0..4].to_unsafe.as(Pointer(Int32)).value
+      BSON.check_size! data.size, 5, size
       @data = d.clone
     else
       @data = Bytes.new(5)
@@ -348,8 +350,8 @@ struct BSON
       str_size = (pointer + pos).as(Pointer(Int32)).value
       pos += 4 + str_size
     when Element::JSCodeWithScope
-      full_size = (pointer + pos).as(Pointer(Int32)).value
-      pos += full_size
+      field_size = (pointer + pos).as(Pointer(Int32)).value
+      pos += field_size
     when Element::Int32
       pos += 4
     when Element::Timestamp
@@ -370,6 +372,27 @@ struct BSON
     pos
   end
 
+  private def self.check_overflow!(pos, offset, max_pos)
+    raise "Invalid BSON (overflow)" if pos + offset >= max_pos
+  end
+
+  protected def self.check_size!(size, min_size = 0, compare_to = nil)
+    if size < min_size || (compare_to && size != compare_to)
+      raise "Invalid BSON (wrong field size: #{size})"
+    end
+  end
+
+  private def self.decode_string!(ptr, size = nil)
+    if size
+      str = String.new(ptr, size)
+      raise "Invalid string is not null-terminated: #{str}" unless (ptr + size).value == 0x00
+    else
+      str = String.new(ptr)
+    end
+    raise "Invalid utf-8 encoding: #{str}" unless str.valid_encoding?
+    str
+  end
+
   # ameba:disable Metrics/CyclomaticComplexity
   protected def self.decode_field!(pointer, pos, header = nil, max_pos = nil)
     if header
@@ -379,7 +402,7 @@ struct BSON
       code = Element.new((pointer + pos).value)
       pos += 1
       # Field name
-      key = String.new(pointer + pos)
+      key = decode_string!(pointer + pos)
       pos += key.bytesize + 1
     end
 
@@ -390,19 +413,28 @@ struct BSON
       pos += 8
     when Element::String
       str_size = (pointer + pos).as(Pointer(Int32)).value
+      check_size! str_size
       pos += 4
-      value = String.new(pointer + pos, str_size - 1)
+      check_overflow! pos, str_size, max_pos
+      value = decode_string!(pointer + pos, str_size - 1)
+      check_size! str_size, compare_to: value.bytesize + 1
       pos += str_size
     when Element::Document
       size = (pointer + pos).as(Pointer(Int32)).value
+      check_size! size, 5
+      check_overflow! pos, size, max_pos
       value = BSON.new(Bytes.new(pointer + pos, size, read_only: true))
       pos += size
     when Element::Array
       size = (pointer + pos).as(Pointer(Int32)).value
+      check_size! size, 5
+      check_overflow! pos, size, max_pos
       value = BSON.new(Bytes.new(pointer + pos, size, read_only: true))
       pos += size
     when Element::Binary
       size = (pointer + pos).as(Pointer(Int32)).value
+      check_size! size
+      check_overflow! pos, size, max_pos
       pos += 4
       subtype = Binary::SubType.new((pointer + pos).value)
       pos += 1
@@ -410,6 +442,7 @@ struct BSON
         value = UUID.new(Bytes.new(pointer + pos, size, read_only: true))
       elsif subtype == Binary::SubType::Binary_Old
         old_binary_size = (pointer + pos).as(Pointer(Int32)).value
+        check_size! old_binary_size, compare_to: size - 4
         value = Bytes.new(pointer + pos + 4, old_binary_size, read_only: true)
       else
         value = Bytes.new(pointer + pos, size, read_only: true)
@@ -422,7 +455,11 @@ struct BSON
       value = oid
       pos += 12
     when Element::Boolean
-      value = (pointer + pos).value != 0
+      bool_value = (pointer + pos).value
+      if bool_value != 0 && bool_value != 1
+        raise "Invalid BSON bool value: #{bool_value}"
+      end
+      value = bool_value != 0
       pos += 1
     when Element::DateTime
       value = Time.unix_ms((pointer + pos).as(Pointer(Int64)).value)
@@ -438,7 +475,9 @@ struct BSON
         end
         pattern_size += 1
       end
-      pattern = String.new(pointer + pos, pattern_size)
+      check_size! pattern_size
+      check_overflow! pos, pattern_size, max_pos
+      pattern = decode_string!(pointer + pos, pattern_size)
       pos += pattern_size + 1
 
       opts_size = 0
@@ -449,7 +488,8 @@ struct BSON
         end
         opts_size += 1
       end
-      opts = String.new(pointer + pos, opts_size)
+      check_size! opts_size
+      opts = decode_string!(pointer + pos, opts_size)
       pos += opts_size + 1
 
       modifiers = Regex::Options::None
@@ -461,31 +501,45 @@ struct BSON
       value = Regex.new(pattern, modifiers)
     when Element::DBPointer
       str_size = (pointer + pos).as(Pointer(Int32)).value
+      check_size! str_size
+      check_overflow! pos, str_size, max_pos
       pos += 4
-      str = String.new(pointer + pos, str_size - 1)
+      str = decode_string!(pointer + pos, str_size - 1)
       pos += str_size
       oid = ObjectId.new(Bytes.new(pointer + pos, 12, read_only: true))
       pos += 12
       value = DBPointer.new(str, oid)
     when Element::JSCode
       str_size = (pointer + pos).as(Pointer(Int32)).value
+      check_size! str_size
+      check_overflow! pos, str_size, max_pos
       pos += 4
-      value = Code.new(String.new(pointer + pos, str_size - 1))
+      value = Code.new(decode_string!(pointer + pos, str_size - 1))
       pos += str_size
     when Element::Symbol
       str_size = (pointer + pos).as(Pointer(Int32)).value
+      check_size! str_size
+      check_overflow! pos, str_size, max_pos
       pos += 4
-      value = Symbol.new(String.new(pointer + pos, str_size - 1))
+      value = Symbol.new(decode_string!(pointer + pos, str_size - 1))
       pos += str_size
     when Element::JSCodeWithScope
+      field_size = (pointer + pos).as(Pointer(Int32)).value
+      check_size! field_size, 10
+      check_overflow! pos, field_size, max_pos
       pos += 4
       str_size = (pointer + pos).as(Pointer(Int32)).value
+      check_size! str_size
+      check_overflow! pos, str_size, max_pos
       pos += 4
-      js_code = String.new(pointer + pos, str_size - 1)
+      js_code = decode_string!(pointer + pos, str_size - 1)
       pos += str_size
       doc_size = (pointer + pos).as(Pointer(Int32)).value
+      check_size! doc_size, 5
+      check_overflow! pos, doc_size, max_pos
       scope = BSON.new(Bytes.new(pointer + pos, doc_size, read_only: true))
       pos += doc_size
+      check_size! field_size, str_size + doc_size + 8
       value = Code.new(js_code, scope)
     when Element::Int32
       value = (pointer + pos).as(Pointer(Int32)).value
@@ -522,7 +576,11 @@ struct BSON
     pos = 4
 
     loop do
-      break if (pointer + pos).value == 0
+      if (pointer + pos).value == 0x00
+        raise "Invalid BSON size." if pos != size - 1
+        break
+      end
+      raise "Invalid BSON size." if pos >= size
 
       new_pos, data = BSON.decode_field!(pointer, pos, max_pos: size)
       pos = new_pos
@@ -563,6 +621,12 @@ struct BSON
       hash[key] = value
     }
     hash
+  end
+
+  def validate!
+    self.each { |(k,v)|
+      { k, v }
+    }
   end
 
   def self.from_json(json : String)

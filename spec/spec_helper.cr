@@ -9,8 +9,9 @@ module Runner::Corpus
     corpus = File.open("./spec/corpus/#{name}.json") do |file|
       JSON.parse(file)
     end
-    tests = corpus["valid"]?
-    tests.try &.as_a.each { |test|
+
+    # Valid tests
+    corpus["valid"]?.try &.as_a.each { |test|
       description = test["description"].as_s
       it description, focus: focus.includes?(description) do
         # Parse canonical bson
@@ -29,6 +30,18 @@ module Runner::Corpus
         unless test["ignore_json_roundtrip"]?
           BSON.from_json(json).to_json.should eq json
         end
+      end
+    }
+
+    # Errors
+    corpus["decodeErrors"]?.try &.as_a.each { |test|
+      description = test["description"].as_s
+      it description, focus: focus.includes?(description), tags: "decode-errors" do
+        expect_raises(Exception) {
+          bson = BSON.new(test["bson"].as_s.hexbytes)
+          bson.validate!
+          puts bson.to_json
+        }
       end
     }
   end

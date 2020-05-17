@@ -120,7 +120,7 @@ struct BSON
     def []=(key : String, value : Code)
       if scope = value.scope
         field(:js_code_with_scope, key)
-        total_size = 4 + value.code.bytesize + 1 + scope.data.size
+        total_size = 8 + value.code.bytesize + 1 + scope.data.size
         @io.write_bytes total_size, IO::ByteFormat::LittleEndian
         @io.write_bytes value.code.bytesize + 1, IO::ByteFormat::LittleEndian
         @io << value.code
