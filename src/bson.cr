@@ -225,7 +225,19 @@ struct BSON
           }
           builder[key] = DBPointer.new(db_ref, ObjectId.new db_oid)
         when "$date"
-          builder[key] = Time.new(pull)
+          if pull.kind.string?
+            builder[key] = Time.new(pull)
+          else
+            date_time = ""
+            pull.read_object { |date_key|
+              if date_key === "$numberLong"
+                date_time = pull.read_string
+              else
+                pull.read_next
+              end
+            }
+            builder[key] = Time.unix_ms(date_time.to_i64)
+          end
         when "$minKey"
           builder[key] = MinKey.new
           pull.read_next
@@ -654,7 +666,7 @@ struct BSON
           else
             value.to_json(builder)
           end
-        elsif value.is_a? Time
+        elsif value.is_a? Time && value.year >= 1970 && value.year <= 9999
           value.to_relaxed_extjson(builder)
         elsif value.responds_to? :to_canonical_extjson
           value.to_canonical_extjson(builder)

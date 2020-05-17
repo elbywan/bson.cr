@@ -13,6 +13,7 @@ module Runner::Corpus
     # Valid tests
     corpus["valid"]?.try &.as_a.each { |test|
       description = test["description"].as_s
+      return if test["ignore"]?
       it description, focus: focus.includes?(description) do
         # Parse canonical bson
         bson_bytes = test["canonical_bson"].as_s.hexbytes
