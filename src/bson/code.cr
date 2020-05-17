@@ -1,4 +1,5 @@
 struct BSON
+  # JavaScript code.
   struct Code
     getter code, scope
 
@@ -8,6 +9,9 @@ struct BSON
       to_canonical_extjson(builder)
     end
 
+    # Serialize to a canonical extended json representation.
+    #
+    # NOTE: see https://github.com/mongodb/specifications/blob/master/source/extended-json.rst
     def to_canonical_extjson(builder : JSON::Builder)
       builder.object {
         builder.string("$code")

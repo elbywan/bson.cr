@@ -1,7 +1,10 @@
 require "uuid"
 
 struct BSON
+  # Binary data.
   struct Binary
+    # BSON binary values have a subtype. This is used to indicate what kind of data is in the byte array.
+    # Subtypes from zero to 127 are predefined or reserved. Subtypes from 128-255 are user-defined.
     enum SubType : UInt8
       Generic = 0x00
       Function = 0x01

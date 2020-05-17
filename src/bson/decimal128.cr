@@ -6,6 +6,7 @@ lib LibGMP
 end
 
 struct BigInt
+  # Fetch a copy of the underlying byte representation.
   def bytes
     ptr = LibGMP.export(nil, out size, -1, 1, -1, 0, self)
     slice = Bytes.new(size)
@@ -13,27 +14,23 @@ struct BigInt
     slice
   end
 
+  # Initialize from a Byte array.
   def initialize(bytes : Bytes)
     LibGMP.import(out @mpz, bytes.size, -1, 1, -1, 0, bytes)
   end
 end
 
 struct BSON
+  # 128-bit decimal floating point.
+  #
+  # NOTE: This implementation has been mostly ported from https://github.com/mongodb/bson-ruby/blob/master/lib/bson/decimal128.rb.
+  #
+  # **Performance is bad because it relies on a string representation of the value.**
+  #
+  # See: https://github.com/mongodb/specifications/blob/master/source/bson-decimal128/decimal128.rst
   struct Decimal128
 
     getter low : BigInt, high : BigInt
-
-    def bytes
-      low = Bytes.new(8)
-      low.copy_from(@low.bytes)
-      high = Bytes.new(8)
-      high.copy_from(@high.bytes)
-
-      io = IO::Memory.new
-      io.write low
-      io.write high
-      io.to_slice
-    end
 
     # Infinity mask.
     INFINITY_MASK = 0x7800000000000000.to_big_i
@@ -123,7 +120,62 @@ struct BSON
       @high = BigInt.new(bytes[8..])
     end
 
-    def self.parts_to_bits(significand : BigInt, exponent : Int32, is_negative : Bool)
+    def nan?
+      @high & NAN_MASK == NAN_MASK
+    end
+
+    def negative?
+      @high & SIGN_BIT_MASK == SIGN_BIT_MASK
+    end
+
+    def infinity?
+      @high & INFINITY_MASK == INFINITY_MASK
+    end
+
+    def to_s(io : IO)
+      return io << NAN_STRING if nan?
+      str = infinity? ? INFINITY_STRING : create_string
+      str = negative? ? '-' + str : str
+      io << str
+    end
+
+    def to_big_d
+      BigDecimal.new(self.to_s)
+    end
+
+    def to_json(builder : JSON::Builder)
+      to_canonical_extjson(builder)
+    end
+
+    # Serialize to a canonical extended json representation.
+    #
+    # NOTE: see https://github.com/mongodb/specifications/blob/master/source/extended-json.rst
+    def to_canonical_extjson(builder : JSON::Builder)
+      builder.object {
+        builder.string("$numberDecimal")
+        builder.scalar(self.to_s)
+      }
+    end
+
+    # BSON byte representation.
+    def bytes
+      low = Bytes.new(8)
+      low.copy_from(@low.bytes)
+      high = Bytes.new(8)
+      high.copy_from(@high.bytes)
+
+      io = IO::Memory.new
+      io.write low
+      io.write high
+      io.to_slice
+    end
+
+    class InvalidString < Exception
+    end
+    class InvalidRange < Exception
+    end
+
+    protected def self.parts_to_bits(significand : BigInt, exponent : Int32, is_negative : Bool)
       Decimal128.validate_range!(exponent, significand)
       exponent = exponent.to_big_i + EXPONENT_OFFSET
       high = significand >> 64
@@ -144,7 +196,7 @@ struct BSON
       { low, high }
     end
 
-    def self.round_exact(exponent, significand)
+    protected def self.round_exact(exponent, significand)
       if exponent < MIN_EXPONENT
         if significand.to_big_i == 0
           round = MIN_EXPONENT - exponent
@@ -168,7 +220,7 @@ struct BSON
       { exponent, significand }
     end
 
-    def self.clamp(exponent, significand)
+    protected def self.clamp(exponent, significand)
       if exponent > MAX_EXPONENT
         if significand.to_big_i == 0
           adjust = exponent - MAX_EXPONENT
@@ -184,17 +236,17 @@ struct BSON
       { exponent, significand }
     end
 
-    def self.validate_range!(exponent : Int32, significand : BigInt)
+    protected def self.validate_range!(exponent : Int32, significand : BigInt)
       unless valid_significand?(significand) && valid_exponent?(exponent)
         raise InvalidRange.new
       end
     end
 
-    def self.valid_significand?(significand : BigInt)
+    protected def self.valid_significand?(significand : BigInt)
       significand.to_s.size <= MAX_DIGITS_OF_PRECISION
     end
 
-    def self.valid_exponent?(exponent : Int32)
+    protected def self.valid_exponent?(exponent : Int32)
       exponent <= MAX_EXPONENT && exponent >= MIN_EXPONENT
     end
 
@@ -218,75 +270,36 @@ struct BSON
       str || significand
     end
 
-    def to_s(io : IO)
-      return io << NAN_STRING if nan?
-      str = infinity? ? INFINITY_STRING : create_string
-      str = negative? ? '-' + str : str
-      io << str
-    end
-
     @scientific_exponent : BigInt?
-    def scientific_exponent
+    private def scientific_exponent
       @scientific_exponent ||= (significand.size - 1) + exponent
     end
 
-    def use_scientific_notation?
+    private def use_scientific_notation?
       exponent > 0 || scientific_exponent < -6
     end
 
     @exponent : BigInt?
-    def exponent
+    private def exponent
       @exponent ||= two_highest_bits_set? ?
           ((@high & 0x1fffe00000000000) >> 47) - Decimal128::EXPONENT_OFFSET :
           ((@high & 0x7fff800000000000) >> 49) - Decimal128::EXPONENT_OFFSET
     end
 
     @significand : String?
-    def significand
+    private def significand
       @significand ||= two_highest_bits_set? ? "0" : bits_to_significand.to_s
     end
 
-    def bits_to_significand
+    private def bits_to_significand
       significand = @high & 0x1ffffffffffff
       significand = significand << 64
       significand |= @low
       significand
     end
 
-    def two_highest_bits_set?
+    private def two_highest_bits_set?
       @high & TWO_HIGHEST_BITS_SET == TWO_HIGHEST_BITS_SET
-    end
-
-    def nan?
-      @high & NAN_MASK == NAN_MASK
-    end
-
-    def negative?
-      @high & SIGN_BIT_MASK == SIGN_BIT_MASK
-    end
-
-    def infinity?
-      @high & INFINITY_MASK == INFINITY_MASK
-    end
-
-    def to_big_d
-      BigDecimal.new(self.to_s)
-    end
-
-    def to_json(builder : JSON::Builder)
-      to_canonical_extjson(builder)
-    end
-
-    def to_canonical_extjson(builder : JSON::Builder)
-      builder.object {
-        builder.string("$numberDecimal")
-        builder.scalar(self.to_s)
-      }
-    end
-
-    class InvalidString < Exception
-    end
-    class InvalidRange < Exception
     end
   end
 end

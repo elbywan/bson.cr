@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.33.0">
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="github.com/elbywan/bson.cr">
+  <title>BSON::Element - github.com/elbywan/bson.cr</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "../";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BigInt" data-name="bigint">
+      <a href="../BigInt.html">BigInt</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Bool" data-name="bool">
+      <a href="../Bool.html">Bool</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/elbywan/bson.cr/BSON" data-name="bson">
+      <a href="../BSON.html">BSON</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/elbywan/bson.cr/BSON/Binary" data-name="bson::binary">
+      <a href="../BSON/Binary.html">Binary</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Binary/SubType" data-name="bson::binary::subtype">
+      <a href="../BSON/Binary/SubType.html">SubType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Code" data-name="bson::code">
+      <a href="../BSON/Code.html">Code</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/DBPointer" data-name="bson::dbpointer">
+      <a href="../BSON/DBPointer.html">DBPointer</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/elbywan/bson.cr/BSON/Decimal128" data-name="bson::decimal128">
+      <a href="../BSON/Decimal128.html">Decimal128</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Decimal128/InvalidRange" data-name="bson::decimal128::invalidrange">
+      <a href="../BSON/Decimal128/InvalidRange.html">InvalidRange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Decimal128/InvalidString" data-name="bson::decimal128::invalidstring">
+      <a href="../BSON/Decimal128/InvalidString.html">InvalidString</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/elbywan/bson.cr/BSON/Element" data-name="bson::element">
+      <a href="../BSON/Element.html">Element</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/MaxKey" data-name="bson::maxkey">
+      <a href="../BSON/MaxKey.html">MaxKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/MinKey" data-name="bson::minkey">
+      <a href="../BSON/MinKey.html">MinKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/ObjectId" data-name="bson::objectid">
+      <a href="../BSON/ObjectId.html">ObjectId</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Symbol" data-name="bson::symbol">
+      <a href="../BSON/Symbol.html">Symbol</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Timestamp" data-name="bson::timestamp">
+      <a href="../BSON/Timestamp.html">Timestamp</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Undefined" data-name="bson::undefined">
+      <a href="../BSON/Undefined.html">Undefined</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Value" data-name="bson::value">
+      <a href="../BSON/Value.html">Value</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Float64" data-name="float64">
+      <a href="../Float64.html">Float64</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Int32" data-name="int32">
+      <a href="../Int32.html">Int32</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Int64" data-name="int64">
+      <a href="../Int64.html">Int64</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Nil" data-name="nil">
+      <a href="../Nil.html">Nil</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Regex" data-name="regex">
+      <a href="../Regex.html">Regex</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Slice" data-name="slice(t)">
+      <a href="../Slice.html">Slice</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/String" data-name="string">
+      <a href="../String.html">String</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Time" data-name="time">
+      <a href="../Time.html">Time</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/UUID" data-name="uuid">
+      <a href="../UUID.html">UUID</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">enum</span> BSON::Element
+
+</h1>
+
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>List of BSON elements</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L67" target="_blank">
+        bson.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>
+      <a id="enum-members" class="anchor" href="#enum-members">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Enum Members
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="Double">
+        <strong>Double</strong> = <code><span class="n">1_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="String">
+        <strong>String</strong> = <code><span class="n">2_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Document">
+        <strong>Document</strong> = <code><span class="n">3_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Array">
+        <strong>Array</strong> = <code><span class="n">4_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Binary">
+        <strong>Binary</strong> = <code><span class="n">5_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Undefined">
+        <strong>Undefined</strong> = <code><span class="n">6_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="ObjectId">
+        <strong>ObjectId</strong> = <code><span class="n">7_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Boolean">
+        <strong>Boolean</strong> = <code><span class="n">8_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="DateTime">
+        <strong>DateTime</strong> = <code><span class="n">9_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Null">
+        <strong>Null</strong> = <code><span class="n">10_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Regexp">
+        <strong>Regexp</strong> = <code><span class="n">11_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="DBPointer">
+        <strong>DBPointer</strong> = <code><span class="n">12_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="JSCode">
+        <strong>JSCode</strong> = <code><span class="n">13_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Symbol">
+        <strong>Symbol</strong> = <code><span class="n">14_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="JSCodeWithScope">
+        <strong>JSCodeWithScope</strong> = <code><span class="n">15_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Int32">
+        <strong>Int32</strong> = <code><span class="n">16_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Timestamp">
+        <strong>Timestamp</strong> = <code><span class="n">17_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Int64">
+        <strong>Int64</strong> = <code><span class="n">18_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="Decimal128">
+        <strong>Decimal128</strong> = <code><span class="n">19_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="MinKey">
+        <strong>MinKey</strong> = <code><span class="n">255_u8</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="MaxKey">
+        <strong>MaxKey</strong> = <code><span class="n">127_u8</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#array?-instance-method" class="signature"><strong>#array?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#binary?-instance-method" class="signature"><strong>#binary?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#boolean?-instance-method" class="signature"><strong>#boolean?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#date_time?-instance-method" class="signature"><strong>#date_time?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#db_pointer?-instance-method" class="signature"><strong>#db_pointer?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#decimal128?-instance-method" class="signature"><strong>#decimal128?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#document?-instance-method" class="signature"><strong>#document?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#double?-instance-method" class="signature"><strong>#double?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#int32?-instance-method" class="signature"><strong>#int32?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#int64?-instance-method" class="signature"><strong>#int64?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#js_code?-instance-method" class="signature"><strong>#js_code?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#js_code_with_scope?-instance-method" class="signature"><strong>#js_code_with_scope?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#max_key?-instance-method" class="signature"><strong>#max_key?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#min_key?-instance-method" class="signature"><strong>#min_key?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#null?-instance-method" class="signature"><strong>#null?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#object_id?-instance-method" class="signature"><strong>#object_id?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#regexp?-instance-method" class="signature"><strong>#regexp?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#string?-instance-method" class="signature"><strong>#string?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#symbol?-instance-method" class="signature"><strong>#symbol?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#timestamp?-instance-method" class="signature"><strong>#timestamp?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#undefined?-instance-method" class="signature"><strong>#undefined?</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="array?-instance-method">
+      <div class="signature">
+        
+        def <strong>array?</strong>
+
+        <a class="method-permalink" href="#array?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L71" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="binary?-instance-method">
+      <div class="signature">
+        
+        def <strong>binary?</strong>
+
+        <a class="method-permalink" href="#binary?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L72" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="boolean?-instance-method">
+      <div class="signature">
+        
+        def <strong>boolean?</strong>
+
+        <a class="method-permalink" href="#boolean?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L75" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="date_time?-instance-method">
+      <div class="signature">
+        
+        def <strong>date_time?</strong>
+
+        <a class="method-permalink" href="#date_time?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L76" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="db_pointer?-instance-method">
+      <div class="signature">
+        
+        def <strong>db_pointer?</strong>
+
+        <a class="method-permalink" href="#db_pointer?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="decimal128?-instance-method">
+      <div class="signature">
+        
+        def <strong>decimal128?</strong>
+
+        <a class="method-permalink" href="#decimal128?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L86" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="document?-instance-method">
+      <div class="signature">
+        
+        def <strong>document?</strong>
+
+        <a class="method-permalink" href="#document?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L70" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="double?-instance-method">
+      <div class="signature">
+        
+        def <strong>double?</strong>
+
+        <a class="method-permalink" href="#double?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L68" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="int32?-instance-method">
+      <div class="signature">
+        
+        def <strong>int32?</strong>
+
+        <a class="method-permalink" href="#int32?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L83" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="int64?-instance-method">
+      <div class="signature">
+        
+        def <strong>int64?</strong>
+
+        <a class="method-permalink" href="#int64?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L85" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="js_code?-instance-method">
+      <div class="signature">
+        
+        def <strong>js_code?</strong>
+
+        <a class="method-permalink" href="#js_code?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L80" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="js_code_with_scope?-instance-method">
+      <div class="signature">
+        
+        def <strong>js_code_with_scope?</strong>
+
+        <a class="method-permalink" href="#js_code_with_scope?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L82" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="max_key?-instance-method">
+      <div class="signature">
+        
+        def <strong>max_key?</strong>
+
+        <a class="method-permalink" href="#max_key?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L88" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="min_key?-instance-method">
+      <div class="signature">
+        
+        def <strong>min_key?</strong>
+
+        <a class="method-permalink" href="#min_key?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L87" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="null?-instance-method">
+      <div class="signature">
+        
+        def <strong>null?</strong>
+
+        <a class="method-permalink" href="#null?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L77" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="object_id?-instance-method">
+      <div class="signature">
+        
+        def <strong>object_id?</strong>
+
+        <a class="method-permalink" href="#object_id?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L74" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="regexp?-instance-method">
+      <div class="signature">
+        
+        def <strong>regexp?</strong>
+
+        <a class="method-permalink" href="#regexp?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L78" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="string?-instance-method">
+      <div class="signature">
+        
+        def <strong>string?</strong>
+
+        <a class="method-permalink" href="#string?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L69" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="symbol?-instance-method">
+      <div class="signature">
+        
+        def <strong>symbol?</strong>
+
+        <a class="method-permalink" href="#symbol?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L81" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="timestamp?-instance-method">
+      <div class="signature">
+        
+        def <strong>timestamp?</strong>
+
+        <a class="method-permalink" href="#timestamp?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L84" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="undefined?-instance-method">
+      <div class="signature">
+        
+        def <strong>undefined?</strong>
+
+        <a class="method-permalink" href="#undefined?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L73" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

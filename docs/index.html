@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.33.0">
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="github.com/elbywan/bson.cr">
+  <title>README - github.com/elbywan/bson.cr</title>
+  <script type="text/javascript">
+  CrystalDoc.base_path = "";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BigInt" data-name="bigint">
+      <a href="BigInt.html">BigInt</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Bool" data-name="bool">
+      <a href="Bool.html">Bool</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/elbywan/bson.cr/BSON" data-name="bson">
+      <a href="BSON.html">BSON</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/elbywan/bson.cr/BSON/Binary" data-name="bson::binary">
+      <a href="BSON/Binary.html">Binary</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Binary/SubType" data-name="bson::binary::subtype">
+      <a href="BSON/Binary/SubType.html">SubType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Code" data-name="bson::code">
+      <a href="BSON/Code.html">Code</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/DBPointer" data-name="bson::dbpointer">
+      <a href="BSON/DBPointer.html">DBPointer</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/elbywan/bson.cr/BSON/Decimal128" data-name="bson::decimal128">
+      <a href="BSON/Decimal128.html">Decimal128</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Decimal128/InvalidRange" data-name="bson::decimal128::invalidrange">
+      <a href="BSON/Decimal128/InvalidRange.html">InvalidRange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Decimal128/InvalidString" data-name="bson::decimal128::invalidstring">
+      <a href="BSON/Decimal128/InvalidString.html">InvalidString</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Element" data-name="bson::element">
+      <a href="BSON/Element.html">Element</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/MaxKey" data-name="bson::maxkey">
+      <a href="BSON/MaxKey.html">MaxKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/MinKey" data-name="bson::minkey">
+      <a href="BSON/MinKey.html">MinKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/ObjectId" data-name="bson::objectid">
+      <a href="BSON/ObjectId.html">ObjectId</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Symbol" data-name="bson::symbol">
+      <a href="BSON/Symbol.html">Symbol</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Timestamp" data-name="bson::timestamp">
+      <a href="BSON/Timestamp.html">Timestamp</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Undefined" data-name="bson::undefined">
+      <a href="BSON/Undefined.html">Undefined</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Value" data-name="bson::value">
+      <a href="BSON/Value.html">Value</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Float64" data-name="float64">
+      <a href="Float64.html">Float64</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Int32" data-name="int32">
+      <a href="Int32.html">Int32</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Int64" data-name="int64">
+      <a href="Int64.html">Int64</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Nil" data-name="nil">
+      <a href="Nil.html">Nil</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Regex" data-name="regex">
+      <a href="Regex.html">Regex</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Slice" data-name="slice(t)">
+      <a href="Slice.html">Slice</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/String" data-name="string">
+      <a href="String.html">String</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Time" data-name="time">
+      <a href="Time.html">Time</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/UUID" data-name="uuid">
+      <a href="UUID.html">UUID</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1><a id="bson" class="anchor" href="#bson">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>bson</h1>
+
+<p>A pure Crystal implementation of the <a href="http://bsonspec.org" target="_blank">BSON specification</a>.</p>
+
+<h2><a id="reliability" class="anchor" href="#reliability">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Reliability</h2>
+
+<p>This library passes the official corpus tests located in the <a href="https://github.com/mongodb/specifications" target="_blank"><code>mongodb/specifications</code></a> repository.</p>
+
+<p><em>A few <a href="https://github.com/elbywan/bson.cr/tree/master/spec/corpus" target="_blank">minor</a> modifications have been made to the tests to comply with Crystal specifics.</em></p>
+
+<h2><a id="installation" class="anchor" href="#installation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Installation</h2>
+
+<ol><li>Add the dependency to your <code>shard.yml</code>:</li></ol>
+
+<p><code></code>`yaml
+   dependencies:</p>
+
+<pre><code> bson:
+   github: elbywan<span class="s">/bson.cr</code></pre>
+
+<p><code></code>`</p>
+
+<ol><li>Run <code>shards install</code></li></ol>
+
+<h2><a id="api" class="anchor" href="#api">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>API</h2>
+
+<p><a href="https://elbywan.github.io/bson.cr/BSON.html" target="_blank">Full API documentation is hosted here.</a></p>
+
+<h2><a id="usage" class="anchor" href="#usage">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Usage</h2>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;bson&quot;</span></code></pre>
+
+<h3><a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Constructors</h3>
+
+<pre><code class="language-crystal"><span class="c"># Constructor from a NamedTuple…</span>
+bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
+  hello: <span class="s">&quot;world&quot;</span>
+})
+…or a <span class="t">Hash…</span>
+bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
+  <span class="s">&quot;hello&quot;</span> => <span class="s">&quot;world&quot;</span>
+})
+…or hex binary representation…
+bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(<span class="t">BSON</span>.<span class="k">new</span>(<span class="s">&quot;160000000268656c6c6f0006000000776f726c640000&quot;</span>.hexbytes))
+…or <span class="t">JSON</span>.
+bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(<span class="s">&quot;160000000268656c6c6f0006000000776f726c640000&quot;</span>.hexbytes)</code></pre>
+
+<h3><a id="append-and-fetch-values" class="anchor" href="#append-and-fetch-values">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Append and fetch values</h3>
+
+<pre><code class="language-crystal">bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
+  hello: <span class="s">&quot;world&quot;</span>
+})
+
+<span class="c"># Append values</span>
+bson[<span class="s">&quot;name&quot;</span>] <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
+  first_name: <span class="s">&quot;John&quot;</span>,
+  last_name: <span class="s">&quot;Doe&quot;</span>
+})
+
+<span class="c"># Fetch values</span>
+puts bson[<span class="s">&quot;name&quot;</span>].<span class="k">as</span>(<span class="t">BSON</span>).to_canonical_extjson
+<span class="c"># =&gt; {&quot;first_name&quot;:&quot;John&quot;,&quot;last_name&quot;:&quot;Doe&quot;}</span>
+puts bson[<span class="s">&quot;404&quot;</span>]?
+<span class="c"># =&gt; nil</span>
+
+<span class="c"># Append another BSON</span>
+other_bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({ other: <span class="s">&quot;field&quot;</span> })
+bson.append(other_bson)
+puts bson[<span class="s">&quot;other&quot;</span>]
+<span class="c"># =&gt; field</span></code></pre>
+
+<h3><a id="iterate" class="anchor" href="#iterate">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Iterate</h3>
+
+<pre><code class="language-crystal">bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
+  one: <span class="n">1</span>,
+  two: <span class="n">2.0</span>,
+  three: <span class="n">3</span>
+})
+
+<span class="c"># Enumerator</span>
+bson.each { <span class="o">|</span>(key, value)<span class="o">|</span>
+  puts <span class="s">&quot;</span><span class="i">#{</span>key<span class="i">}</span><span class="s">, </span><span class="i">#{</span>value<span class="i">}</span><span class="s">&quot;</span>
+  <span class="c"># =&gt; one, 1</span>
+  <span class="c"># =&gt; two, 2.0</span>
+  <span class="c"># =&gt; three, 3</span>
+}
+
+<span class="c"># Iterator</span>
+puts bson.each.map { <span class="o">|</span>(key, value)<span class="o">|</span>
+  value.<span class="k">as</span>(<span class="t">Number</span>) <span class="o">+</span> <span class="n">1</span>
+}.to_a
+<span class="c"># =&gt; [2, 3.0, 4]</span></code></pre>
+
+<h3><a id="convert-to-other-structures" class="anchor" href="#convert-to-other-structures">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Convert to other structures</h3>
+
+<pre><code class="language-crystal">bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
+  one: <span class="n">1</span>,
+  two: <span class="s">&quot;2&quot;</span>,
+  binary: <span class="t">Slice</span>[<span class="n">0_u8</span>, <span class="n">1_u8</span>, <span class="n">2_u8</span>]
+})
+
+pp bson.to_h
+<span class="c"># =&gt; {&quot;one&quot; =&gt; 1, &quot;two&quot; =&gt; &quot;2&quot;, &quot;binary&quot; =&gt; Bytes[0, 1, 2]}</span>
+
+pp bson.each.to_a
+<span class="c"># =&gt; [{&quot;one&quot;, 1, Int32, nil}, {&quot;two&quot;, &quot;2&quot;, String, nil}, {&quot;binary&quot;, Bytes[0, 1, 2], Binary, Generic}]</span></code></pre>
+
+<h2><a id="decimal128" class="anchor" href="#decimal128">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Decimal128</h2>
+
+<p>The <code>Decimal128</code> code has been hastily copied from the (<code>bson-ruby</code>)[https://github.com/mongodb/bson-ruby/blob/master/lib/bson/decimal128.rb] library.
+It works, but performance is low because it uses an intermediate String representation.</p>
+
+<h2><a id="contributing" class="anchor" href="#contributing">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Contributing</h2>
+
+<ol><li>Fork it (&lt;https://github.com/your-github-user/bson/fork>)</li><li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li><li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li><li>Push to the branch (<code>git push origin my-new-feature</code>)</li><li>Create a new Pull Request</li></ol>
+
+<h2><a id="contributors" class="anchor" href="#contributors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Contributors</h2>
+
+<ul><li><a href="https://github.com/your-github-user" target="_blank">elbywan</a> - creator and maintainer</li></ul>
+</div>
+</body>
+</html>

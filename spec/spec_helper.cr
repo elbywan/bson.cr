@@ -20,9 +20,9 @@ module Runner::Corpus
         bson = BSON.new(bson_bytes)
         # Ensure that the underlying bytes are equal
         bson.data.should eq bson_bytes
-        # Serialize into canonical extended json and compare with the expected canonical json.
+        # Serialize to canonical extended json and compare with the expected canonical json.
         bson.to_canonical_extjson.should eq JSON.parse(test["canonical_extjson"].as_s).to_json
-        # Serialize into json and compare with the expected relaxed extended json.
+        # Serialize to json and compare with the expected relaxed extended json.
         json = bson.to_json
         if relaxed_json = test["relaxed_extjson"]?
           json.should eq relaxed_json.as_s.gsub(' ', "")

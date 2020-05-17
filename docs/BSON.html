@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.33.0">
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="github.com/elbywan/bson.cr">
+  <title>BSON - github.com/elbywan/bson.cr</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BigInt" data-name="bigint">
+      <a href="BigInt.html">BigInt</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Bool" data-name="bool">
+      <a href="Bool.html">Bool</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/elbywan/bson.cr/BSON" data-name="bson">
+      <a href="BSON.html">BSON</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/elbywan/bson.cr/BSON/Binary" data-name="bson::binary">
+      <a href="BSON/Binary.html">Binary</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Binary/SubType" data-name="bson::binary::subtype">
+      <a href="BSON/Binary/SubType.html">SubType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Code" data-name="bson::code">
+      <a href="BSON/Code.html">Code</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/DBPointer" data-name="bson::dbpointer">
+      <a href="BSON/DBPointer.html">DBPointer</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/elbywan/bson.cr/BSON/Decimal128" data-name="bson::decimal128">
+      <a href="BSON/Decimal128.html">Decimal128</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Decimal128/InvalidRange" data-name="bson::decimal128::invalidrange">
+      <a href="BSON/Decimal128/InvalidRange.html">InvalidRange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Decimal128/InvalidString" data-name="bson::decimal128::invalidstring">
+      <a href="BSON/Decimal128/InvalidString.html">InvalidString</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Element" data-name="bson::element">
+      <a href="BSON/Element.html">Element</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/MaxKey" data-name="bson::maxkey">
+      <a href="BSON/MaxKey.html">MaxKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/MinKey" data-name="bson::minkey">
+      <a href="BSON/MinKey.html">MinKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/ObjectId" data-name="bson::objectid">
+      <a href="BSON/ObjectId.html">ObjectId</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Symbol" data-name="bson::symbol">
+      <a href="BSON/Symbol.html">Symbol</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Timestamp" data-name="bson::timestamp">
+      <a href="BSON/Timestamp.html">Timestamp</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Undefined" data-name="bson::undefined">
+      <a href="BSON/Undefined.html">Undefined</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Value" data-name="bson::value">
+      <a href="BSON/Value.html">Value</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Float64" data-name="float64">
+      <a href="Float64.html">Float64</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Int32" data-name="int32">
+      <a href="Int32.html">Int32</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Int64" data-name="int64">
+      <a href="Int64.html">Int64</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Nil" data-name="nil">
+      <a href="Nil.html">Nil</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Regex" data-name="regex">
+      <a href="Regex.html">Regex</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Slice" data-name="slice(t)">
+      <a href="Slice.html">Slice</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/String" data-name="string">
+      <a href="String.html">String</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Time" data-name="time">
+      <a href="Time.html">Time</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/UUID" data-name="uuid">
+      <a href="UUID.html">UUID</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">struct</span> BSON
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="BSON.html">BSON</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p><strong>BSON is a binary format in which zero or more ordered key/value pairs are stored as a single entity.</strong></p>
+
+<p>BSON [bee · sahn], short for Bin­ary JSON, is a bin­ary-en­coded seri­al­iz­a­tion of JSON-like doc­u­ments.
+Like JSON, BSON sup­ports the em­bed­ding of doc­u­ments and ar­rays with­in oth­er doc­u­ments and ar­rays.
+BSON also con­tains ex­ten­sions that al­low rep­res­ent­a­tion of data types that are not part of the JSON spec.
+For ex­ample, BSON has a Date type and a BinData type.</p>
+
+<p><a href="http://bsonspec.org/" target="_blank">See: http://bsonspec.org/</a></p>
+
+<pre><code><span class="k">require</span> <span class="s">&quot;bson&quot;</span>
+
+data <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
+  hello: <span class="s">&quot;world&quot;</span>,
+  time: <span class="t">Time</span>.utc,
+  name: <span class="t">BSON</span>.<span class="k">new</span>({
+    first_name: <span class="s">&quot;John&quot;</span>,
+    last_name: <span class="s">&quot;Doe&quot;</span>
+  }),
+  fruits: [ <span class="s">&quot;Orange&quot;</span>, <span class="s">&quot;Banana&quot;</span> ]
+})
+
+puts data.to_json
+<span class="c"># =&gt; {&quot;hello&quot;:&quot;world&quot;,&quot;time&quot;:{&quot;$date&quot;:&quot;2020-05-18T07:32:13.621000000Z&quot;},&quot;name&quot;:{&quot;first_name&quot;:&quot;John&quot;,&quot;last_name&quot;:&quot;Doe&quot;},&quot;fruits&quot;:[&quot;Orange&quot;,&quot;Banana&quot;]}</span></code></pre>
+
+
+
+
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">Comparable(<a href="BSON.html">BSON</a>)</li>
+    
+      <li class="other-type">Enumerable(<a href="String.html">String</a>)</li>
+    
+      <li class="other-type">Iterable(<a href="String.html">String</a>)</li>
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/binary.cr#L3" target="_blank">
+        bson/binary.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/code.cr#L1" target="_blank">
+        bson/code.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/dbpointer.cr#L1" target="_blank">
+        bson/dbpointer.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L23" target="_blank">
+        bson/decimal128.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/keys.cr#L1" target="_blank">
+        bson/keys.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/object_id.cr#L1" target="_blank">
+        bson/object_id.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/symbol.cr#L1" target="_blank">
+        bson/symbol.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/timestamp.cr#L1" target="_blank">
+        bson/timestamp.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/undefined.cr#L1" target="_blank">
+        bson/undefined.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/helpers/builder.cr#L1" target="_blank">
+        bson/helpers/builder.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/helpers/decoder.cr#L1" target="_blank">
+        bson/helpers/decoder.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L32" target="_blank">
+        bson.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(data:Bytes?=nil,validate?=false)-class-method" class="signature"><strong>.new</strong>(data : Bytes? = <span class="n">nil</span>, validate? = <span class="n">false</span>)</a>
+        
+          <div class="summary"><p>Allocate a BSON instance from a byte array.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(tuple:NamedTuple)-class-method" class="signature"><strong>.new</strong>(tuple : NamedTuple)</a>
+        
+          <div class="summary"><p>Allocate a BSON instance from a NamedTuple.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(h:Hash)-class-method" class="signature"><strong>.new</strong>(h : Hash)</a>
+        
+          <div class="summary"><p>Allocate a BSON instance from a Hash.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#from_json(json:String)-class-method" class="signature"><strong>.from_json</strong>(json : String)</a>
+        
+          <div class="summary"><p>Allocate a BSON instance from a relaxed extended json representation.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#(other:BSON)-instance-method" class="signature"><strong>#<=></strong>(other : BSON)</a>
+        
+          <div class="summary"><p>Compare with another BSON value.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#[](key:String%7C::Symbol):Value-instance-method" class="signature"><strong>#[]</strong>(key : String | ::Symbol) : Value</a>
+        
+          <div class="summary"><p>Return the element with the given key.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#[]=(key:String%7C::Symbol,value)-instance-method" class="signature"><strong>#[]=</strong>(key : String | ::Symbol, value)</a>
+        
+          <div class="summary"><p>Append a key/value pair.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#[]?(key:String%7C::Symbol):Value?-instance-method" class="signature"><strong>#[]?</strong>(key : String | ::Symbol) : Value?</a>
+        
+          <div class="summary"><p>Return the element with the given key, or <code>nil</code> if the key is not present.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#append(other:BSON)-instance-method" class="signature"><strong>#append</strong>(other : BSON)</a>
+        
+          <div class="summary"><p>Append the contents of another BSON instance.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#append(**args)-instance-method" class="signature"><strong>#append</strong>(**args)</a>
+        
+          <div class="summary"><p>Append one or more key/value pairs.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#data:Slice(UInt8)-instance-method" class="signature"><strong>#data</strong> : Slice(UInt8)</a>
+        
+          <div class="summary"><p>Underlying bytes</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each(&block:::Tuple(String,Value,Element,Binary::SubType?)-%3E_)-instance-method" class="signature"><strong>#each</strong>(&block : ::Tuple(String, Value, Element, Binary::SubType?) -> _)</a>
+        
+          <div class="summary"><p>Yield each key/value pair to the block.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each-instance-method" class="signature"><strong>#each</strong></a>
+        
+          <div class="summary"><p>Returns an Iterator over each key/value pair.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_canonical_extjson-instance-method" class="signature"><strong>#to_canonical_extjson</strong></a>
+        
+          <div class="summary"><p>Serialize this BSON instance into a canonical extended json representation.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_h-instance-method" class="signature"><strong>#to_h</strong></a>
+        
+          <div class="summary"><p>Returns a Hash representation.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#validate!-instance-method" class="signature"><strong>#validate!</strong></a>
+        
+          <div class="summary"><p>Validate that the BSON is well-formed.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(data:Bytes?=nil,validate?=false)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(data : Bytes? = <span class="n">nil</span>, validate? = <span class="n">false</span>)
+
+        <a class="method-permalink" href="#new(data:Bytes?=nil,validate?=false)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Allocate a BSON instance from a byte array.</p>
+
+<p><span class="flag purple">NOTE</span>  The byte array is cloned.</p>
+
+<pre><code>data <span class="o">=</span> <span class="s">&quot;160000000378000E0000000261000200000062000000&quot;</span>
+bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(data)
+bson.to_json <span class="c"># =&gt; {&quot;x&quot;:{&quot;a&quot;:&quot;b&quot;}}</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L100" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(tuple:NamedTuple)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(tuple : NamedTuple)
+
+        <a class="method-permalink" href="#new(tuple:NamedTuple)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Allocate a BSON instance from a NamedTuple.</p>
+
+<pre><code>puts <span class="t">BSON</span>.<span class="k">new</span>({
+  hello: <span class="s">&quot;world&quot;</span>
+}).to_json <span class="c"># =&gt; {&quot;hello&quot;:&quot;world&quot;}</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L117" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(h:Hash)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(h : Hash)
+
+        <a class="method-permalink" href="#new(h:Hash)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Allocate a BSON instance from a Hash.</p>
+
+<pre><code>puts <span class="t">BSON</span>.<span class="k">new</span>({
+  <span class="s">&quot;hello&quot;</span> => <span class="s">&quot;world&quot;</span>
+}).to_json <span class="c"># =&gt; {&quot;hello&quot;:&quot;world&quot;}</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L132" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="from_json(json:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>from_json</strong>(json : <a href="String.html">String</a>)
+
+        <a class="method-permalink" href="#from_json(json:String)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Allocate a BSON instance from a relaxed extended json representation.</p>
+
+<p><span class="flag purple">NOTE</span>  see https://github.com/mongodb/specifications/blob/master/source/extended-json.rst</p>
+
+<pre><code>bson <span class="o">=</span> <span class="t">BSON</span>.from_json(<span class="s">%({
+  &quot;_id&quot;: {
+    &quot;$oid&quot;: &quot;57e193d7a9cc81b4027498b5&quot;
+  },
+  &quot;String&quot;: &quot;string&quot;,
+  &quot;Int&quot;: 42,
+  &quot;Double&quot;: -1.0
+})</span>)
+puts bson.to_json <span class="c"># =&gt; {&quot;_id&quot;:{&quot;$oid&quot;:&quot;57e193d7a9cc81b4027498b5&quot;},&quot;String&quot;:&quot;string&quot;,&quot;Int&quot;:42,&quot;Double&quot;:-1.0}</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L375" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="(other:BSON)-instance-method">
+      <div class="signature">
+        
+        def <strong><=></strong>(other : <a href="BSON.html">BSON</a>)
+
+        <a class="method-permalink" href="#(other:BSON)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Compare with another BSON value.</p>
+
+<pre><code>puts <span class="t">BSON</span>.<span class="k">new</span>({ a: <span class="n">1</span> }) <span class="o">&lt;=&gt;</span> <span class="t">BSON</span>.<span class="k">new</span>({ a: <span class="n">1</span> }) <span class="c"># =&gt; 0</span>
+puts <span class="t">BSON</span>.<span class="k">new</span>({ a: <span class="n">1</span> }) <span class="o">&lt;=&gt;</span> <span class="t">BSON</span>.<span class="k">new</span>({ b: <span class="n">2</span> }) <span class="c"># =&gt; -1</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L264" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[](key:String|::Symbol):Value-instance-method">
+      <div class="signature">
+        
+        def <strong>[]</strong>(key : <a href="String.html">String</a> | ::Symbol) : <a href="BSON/Value.html">Value</a>
+
+        <a class="method-permalink" href="#[](key:String%7C::Symbol):Value-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Return the element with the given key.</p>
+
+<p><span class="flag purple">NOTE</span>  Will raise if the key is not found.</p>
+
+<pre><code>bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({ key: <span class="s">&quot;value&quot;</span> })
+puts bson[<span class="s">&quot;key&quot;</span>]? <span class="c"># =&gt;&quot;value&quot;</span>
+puts bson[<span class="s">&quot;nope&quot;</span>]? <span class="c"># =&gt; nil</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L253" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(key:String|::Symbol,value)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(key : <a href="String.html">String</a> | ::Symbol, value)
+
+        <a class="method-permalink" href="#[]=(key:String%7C::Symbol,value)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Append a key/value pair.</p>
+
+<pre><code>bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>
+bson[<span class="s">&quot;key&quot;</span>] <span class="o">=</span> <span class="s">&quot;value&quot;</span>
+puts bson.to_json <span class="c"># =&gt; {&quot;key&quot;:&quot;value&quot;}</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L167" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]?(key:String|::Symbol):Value?-instance-method">
+      <div class="signature">
+        
+        def <strong>[]?</strong>(key : <a href="String.html">String</a> | ::Symbol) : <a href="BSON/Value.html">Value</a>?
+
+        <a class="method-permalink" href="#[]?(key:String%7C::Symbol):Value?-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Return the element with the given key, or <code>nil</code> if the key is not present.</p>
+
+<pre><code>bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({ key: <span class="s">&quot;value&quot;</span> })
+puts bson[<span class="s">&quot;key&quot;</span>]? <span class="c"># =&gt;&quot;value&quot;</span>
+puts bson[<span class="s">&quot;nope&quot;</span>]? <span class="c"># =&gt; nil</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L221" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="append(other:BSON)-instance-method">
+      <div class="signature">
+        
+        def <strong>append</strong>(other : <a href="BSON.html">BSON</a>)
+
+        <a class="method-permalink" href="#append(other:BSON)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Append the contents of another BSON instance.</p>
+
+<pre><code>bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>
+other_bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({ key: <span class="s">&quot;value&quot;</span>, key2: <span class="s">&quot;value2&quot;</span> })
+bson.append(other_bson)
+puts bson.to_json <span class="c"># =&gt; {&quot;key&quot;:&quot;value&quot;,&quot;key2&quot;:&quot;value2&quot;}</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L203" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="append(**args)-instance-method">
+      <div class="signature">
+        
+        def <strong>append</strong>(**args)
+
+        <a class="method-permalink" href="#append(**args)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Append one or more key/value pairs.</p>
+
+<p><span class="flag purple">NOTE</span>  more efficient for appending multiple values than calling <code><a href="BSON.html#[]=(key:String%7C::Symbol,value)-instance-method">#[]=</a></code> individually.</p>
+
+<pre><code>bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>
+bson.append(key: <span class="s">&quot;value&quot;</span>, key2: <span class="s">&quot;value2&quot;</span>)
+puts bson.to_json <span class="c"># =&gt; {&quot;key&quot;:&quot;value&quot;,&quot;key2&quot;:&quot;value2&quot;}</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L184" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="data:Slice(UInt8)-instance-method">
+      <div class="signature">
+        
+        def <strong>data</strong> : <a href="Slice.html">Slice(UInt8)</a>
+
+        <a class="method-permalink" href="#data:Slice(UInt8)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Underlying bytes</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L39" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each(&amp;block:::Tuple(String,Value,Element,Binary::SubType?)-&gt;_)-instance-method">
+      <div class="signature">
+        
+        def <strong>each</strong>(&block : ::Tuple(<a href="String.html">String</a>, <a href="BSON/Value.html">Value</a>, <a href="BSON/Element.html">Element</a>, <a href="BSON/Binary/SubType.html">Binary::SubType</a>?) -> _)
+
+        <a class="method-permalink" href="#each(&block:::Tuple(String,Value,Element,Binary::SubType?)-%3E_)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Yield each key/value pair to the block.</p>
+
+<p><span class="flag purple">NOTE</span>  Underlying BSON code as well as the binary subtype are also yielded to the block as additional arguments.</p>
+
+<pre><code><span class="t">BSON</span>.<span class="k">new</span>({
+  a: <span class="n">1</span>,
+  b: <span class="s">&quot;2&quot;</span>,
+  c: <span class="t">Slice</span>[<span class="n">0_u8</span>, <span class="n">1_u8</span>, <span class="n">2_u8</span>]
+}).each { <span class="o">|</span>(key, value, code, binary_subtype)<span class="o">|</span>
+  puts <span class="s">&quot;</span><span class="i">#{</span>key<span class="i">}</span><span class="s"> =&gt; </span><span class="i">#{</span>value<span class="i">}</span><span class="s">, code: </span><span class="i">#{</span>code<span class="i">}</span><span class="s">, subtype: </span><span class="i">#{</span>binary_subtype<span class="i">}</span><span class="s">&quot;</span>
+  <span class="c"># a =&gt; 1, code: Int32, subtype:</span>
+  <span class="c"># b =&gt; 2, code: String, subtype:</span>
+  <span class="c"># c =&gt; Bytes[0, 1, 2], code: Binary, subtype: Generic</span>
+}</code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L284" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each-instance-method">
+      <div class="signature">
+        
+        def <strong>each</strong>
+
+        <a class="method-permalink" href="#each-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns an Iterator over each key/value pair.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L304" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_canonical_extjson-instance-method">
+      <div class="signature">
+        
+        def <strong>to_canonical_extjson</strong>
+
+        <a class="method-permalink" href="#to_canonical_extjson-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Serialize this BSON instance into a canonical extended json representation.</p>
+
+<p><span class="flag purple">NOTE</span>  see https://github.com/mongodb/specifications/blob/master/source/extended-json.rst</p>
+
+<pre><code>bson <span class="o">=</span> <span class="t">BSON</span>.from_json(<span class="s">%({
+  &quot;Int&quot;: 42,
+  &quot;Double&quot;: -1.0
+})</span>)
+puts bson.to_canonical_extjson <span class="c"># =&gt; {&quot;Int&quot;:{&quot;$numberLong&quot;:&quot;42&quot;},&quot;Double&quot;:{&quot;$numberDouble&quot;:&quot;-1.0&quot;}}</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L448" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_h-instance-method">
+      <div class="signature">
+        
+        def <strong>to_h</strong>
+
+        <a class="method-permalink" href="#to_h-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns a Hash representation.</p>
+
+<pre><code>bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
+  a: <span class="n">1</span>,
+  b: <span class="s">&quot;2&quot;</span>
+})
+pp bson.to_h <span class="c"># =&gt; {&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; &quot;2&quot;}</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L339" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="validate!-instance-method">
+      <div class="signature">
+        
+        def <strong>validate!</strong>
+
+        <a class="method-permalink" href="#validate!-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Validate that the BSON is well-formed.</p>
+
+<pre><code>bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(<span class="s">&quot;140000000461000D0000001030000A0000000000&quot;</span>.hexbytes)
+bson.validate!
+<span class="c"># =&gt; Unhandled exception: Invalid BSON (overflow) (Exception)</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson.cr#L354" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

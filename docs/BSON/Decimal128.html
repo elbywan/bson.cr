@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.33.0">
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="github.com/elbywan/bson.cr">
+  <title>BSON::Decimal128 - github.com/elbywan/bson.cr</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "../";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="../index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BigInt" data-name="bigint">
+      <a href="../BigInt.html">BigInt</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Bool" data-name="bool">
+      <a href="../Bool.html">Bool</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/elbywan/bson.cr/BSON" data-name="bson">
+      <a href="../BSON.html">BSON</a>
+      
+        <ul>
+  
+  <li class="parent " data-id="github.com/elbywan/bson.cr/BSON/Binary" data-name="bson::binary">
+      <a href="../BSON/Binary.html">Binary</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Binary/SubType" data-name="bson::binary::subtype">
+      <a href="../BSON/Binary/SubType.html">SubType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Code" data-name="bson::code">
+      <a href="../BSON/Code.html">Code</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/DBPointer" data-name="bson::dbpointer">
+      <a href="../BSON/DBPointer.html">DBPointer</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/elbywan/bson.cr/BSON/Decimal128" data-name="bson::decimal128">
+      <a href="../BSON/Decimal128.html">Decimal128</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Decimal128/InvalidRange" data-name="bson::decimal128::invalidrange">
+      <a href="../BSON/Decimal128/InvalidRange.html">InvalidRange</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Decimal128/InvalidString" data-name="bson::decimal128::invalidstring">
+      <a href="../BSON/Decimal128/InvalidString.html">InvalidString</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Element" data-name="bson::element">
+      <a href="../BSON/Element.html">Element</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/MaxKey" data-name="bson::maxkey">
+      <a href="../BSON/MaxKey.html">MaxKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/MinKey" data-name="bson::minkey">
+      <a href="../BSON/MinKey.html">MinKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/ObjectId" data-name="bson::objectid">
+      <a href="../BSON/ObjectId.html">ObjectId</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Symbol" data-name="bson::symbol">
+      <a href="../BSON/Symbol.html">Symbol</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Timestamp" data-name="bson::timestamp">
+      <a href="../BSON/Timestamp.html">Timestamp</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Undefined" data-name="bson::undefined">
+      <a href="../BSON/Undefined.html">Undefined</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Value" data-name="bson::value">
+      <a href="../BSON/Value.html">Value</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Float64" data-name="float64">
+      <a href="../Float64.html">Float64</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Int32" data-name="int32">
+      <a href="../Int32.html">Int32</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Int64" data-name="int64">
+      <a href="../Int64.html">Int64</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Nil" data-name="nil">
+      <a href="../Nil.html">Nil</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Regex" data-name="regex">
+      <a href="../Regex.html">Regex</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Slice" data-name="slice(t)">
+      <a href="../Slice.html">Slice</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/String" data-name="string">
+      <a href="../String.html">String</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Time" data-name="time">
+      <a href="../Time.html">Time</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/UUID" data-name="uuid">
+      <a href="../UUID.html">UUID</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">struct</span> BSON::Decimal128
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../BSON/Decimal128.html">BSON::Decimal128</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>128-bit decimal floating point.</p>
+
+<p><span class="flag purple">NOTE</span>  This implementation has been mostly ported from https://github.com/mongodb/bson-ruby/blob/master/lib/bson/decimal128.rb.</p>
+
+<p><strong>Performance is bad because it relies on a string representation of the value.</strong></p>
+
+<p>See: https://github.com/mongodb/specifications/blob/master/source/bson-decimal128/decimal128.rst</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L31" target="_blank">
+        bson/decimal128.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="EXPONENT_OFFSET">
+        <strong>EXPONENT_OFFSET</strong> = <code><span class="n">6176</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Exponent offset.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="INFINITY_MASK">
+        <strong>INFINITY_MASK</strong> = <code><span class="n">8646911284551352320_i64</span>.to_big_i</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Infinity mask.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="INFINITY_REGEX">
+        <strong>INFINITY_REGEX</strong> = <code><span class="s">/^(\+|\-)?Inf(inity)?$/</span>i</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Regex matching a string representing positive or negative Infinity.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="INFINITY_STRING">
+        <strong>INFINITY_STRING</strong> = <code><span class="s">&quot;Infinity&quot;</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>String representing an Infinity value.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="MAX_DIGITS_OF_PRECISION">
+        <strong>MAX_DIGITS_OF_PRECISION</strong> = <code><span class="n">34</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Maximum digits of precision.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="MAX_EXPONENT">
+        <strong>MAX_EXPONENT</strong> = <code><span class="n">6111</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Maximum exponent.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="MIN_EXPONENT">
+        <strong>MIN_EXPONENT</strong> = <code><span class="n">-6176</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Minimum exponent.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="NAN_MASK">
+        <strong>NAN_MASK</strong> = <code><span class="n">8935141660703064064_i64</span>.to_big_i</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>NaN mask.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="NAN_REGEX">
+        <strong>NAN_REGEX</strong> = <code><span class="s">/^(\-)?(S)?NaN$/</span>i</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Regex matching a string representing NaN.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="NAN_STRING">
+        <strong>NAN_STRING</strong> = <code><span class="s">&quot;NaN&quot;</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>String representing a NaN value.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="SCIENTIFIC_EXPONENT_REGEX">
+        <strong>SCIENTIFIC_EXPONENT_REGEX</strong> = <code><span class="s">/E\+?/</span>i</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Regex matching a scientific exponent.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="SIGN_AND_DIGITS_REGEX">
+        <strong>SIGN_AND_DIGITS_REGEX</strong> = <code><span class="s">/^(\-)?(\S+)/</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Regex for separating a negative sign from the significands.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="SIGN_BIT_MASK">
+        <strong>SIGN_BIT_MASK</strong> = <code>(<span class="n">1</span>.to_big_i <span class="o">&lt;&lt;</span> <span class="n">63</span>)</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Signed bit mask.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="SIGNIFICAND_WITH_LEADING_ZEROS_REGEX">
+        <strong>SIGNIFICAND_WITH_LEADING_ZEROS_REGEX</strong> = <code><span class="s">/(0*)(\d+)/</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Regex for the fraction, including leading zeros.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="SNAN_MASK">
+        <strong>SNAN_MASK</strong> = <code>(<span class="n">1</span>.to_big_i <span class="o">&lt;&lt;</span> <span class="n">57</span>)</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>SNaN mask.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="TRAILING_ZEROS_REGEX">
+        <strong>TRAILING_ZEROS_REGEX</strong> = <code><span class="s">/[1-9]*(0+)$/</span></code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Regex for capturing trailing zeros.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="TWO_HIGHEST_BITS_SET">
+        <strong>TWO_HIGHEST_BITS_SET</strong> = <code>(<span class="n">3</span>.to_big_i <span class="o">&lt;&lt;</span> <span class="n">61</span>)</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>The two highest bits of the 64 high order bits.</p>
+      </dd>
+      
+    
+      <dt class="entry-const" id="VALID_DECIMAL128_STRING_REGEX">
+        <strong>VALID_DECIMAL128_STRING_REGEX</strong> = <code><span class="s">/^[\-\+]?(\d+(\.\d*)?|\.\d+)(E[\-\+]?\d+)?$/</span>i</code>
+      </dt>
+      
+      <dd class="entry-const-doc">
+        <p>Regex for a valid decimal128 string format.</p>
+      </dd>
+      
+    
+  </dl>
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(significand:BigInt,exponent:Int32,is_negative:Bool)-class-method" class="signature"><strong>.new</strong>(significand : BigInt, exponent : Int32, is_negative : Bool)</a>
+        
+          <div class="summary"><p>Convert parts representing a Decimal128 into the corresponding bits.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(string:String)-class-method" class="signature"><strong>.new</strong>(string : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(big_decimal:BigDecimal)-class-method" class="signature"><strong>.new</strong>(big_decimal : BigDecimal)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(bytes:Bytes)-class-method" class="signature"><strong>.new</strong>(bytes : Bytes)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#bytes-instance-method" class="signature"><strong>#bytes</strong></a>
+        
+          <div class="summary"><p>BSON byte representation.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#high:BigInt-instance-method" class="signature"><strong>#high</strong> : BigInt</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#infinity?-instance-method" class="signature"><strong>#infinity?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#low:BigInt-instance-method" class="signature"><strong>#low</strong> : BigInt</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#nan?-instance-method" class="signature"><strong>#nan?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#negative?-instance-method" class="signature"><strong>#negative?</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_big_d-instance-method" class="signature"><strong>#to_big_d</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_canonical_extjson(builder:JSON::Builder)-instance-method" class="signature"><strong>#to_canonical_extjson</strong>(builder : JSON::Builder)</a>
+        
+          <div class="summary"><p>Serialize to a canonical extended json representation.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_json(builder:JSON::Builder)-instance-method" class="signature"><strong>#to_json</strong>(builder : JSON::Builder)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_s(io:IO)-instance-method" class="signature"><strong>#to_s</strong>(io : IO)</a>
+        
+          <div class="summary"><p>Same as <code>#inspect(io)</code>.</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(significand:BigInt,exponent:Int32,is_negative:Bool)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(significand : <a href="../BigInt.html">BigInt</a>, exponent : <a href="../Int32.html">Int32</a>, is_negative : <a href="../Bool.html">Bool</a>)
+
+        <a class="method-permalink" href="#new(significand:BigInt,exponent:Int32,is_negative:Bool)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Convert parts representing a Decimal128 into the corresponding bits.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L75" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(string:String)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(string : <a href="../String.html">String</a>)
+
+        <a class="method-permalink" href="#new(string:String)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L79" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(big_decimal:BigDecimal)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(big_decimal : BigDecimal)
+
+        <a class="method-permalink" href="#new(big_decimal:BigDecimal)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L114" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(bytes:Bytes)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(bytes : Bytes)
+
+        <a class="method-permalink" href="#new(bytes:Bytes)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L118" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="bytes-instance-method">
+      <div class="signature">
+        
+        def <strong>bytes</strong>
+
+        <a class="method-permalink" href="#bytes-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>BSON byte representation.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L161" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="high:BigInt-instance-method">
+      <div class="signature">
+        
+        def <strong>high</strong> : <a href="../BigInt.html">BigInt</a>
+
+        <a class="method-permalink" href="#high:BigInt-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="infinity?-instance-method">
+      <div class="signature">
+        
+        def <strong>infinity?</strong>
+
+        <a class="method-permalink" href="#infinity?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L131" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="low:BigInt-instance-method">
+      <div class="signature">
+        
+        def <strong>low</strong> : <a href="../BigInt.html">BigInt</a>
+
+        <a class="method-permalink" href="#low:BigInt-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="nan?-instance-method">
+      <div class="signature">
+        
+        def <strong>nan?</strong>
+
+        <a class="method-permalink" href="#nan?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L123" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="negative?-instance-method">
+      <div class="signature">
+        
+        def <strong>negative?</strong>
+
+        <a class="method-permalink" href="#negative?-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L127" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_big_d-instance-method">
+      <div class="signature">
+        
+        def <strong>to_big_d</strong>
+
+        <a class="method-permalink" href="#to_big_d-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L142" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_canonical_extjson(builder:JSON::Builder)-instance-method">
+      <div class="signature">
+        
+        def <strong>to_canonical_extjson</strong>(builder : JSON::Builder)
+
+        <a class="method-permalink" href="#to_canonical_extjson(builder:JSON::Builder)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Serialize to a canonical extended json representation.</p>
+
+<p><span class="flag purple">NOTE</span>  see https://github.com/mongodb/specifications/blob/master/source/extended-json.rst</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L153" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_json(builder:JSON::Builder)-instance-method">
+      <div class="signature">
+        
+        def <strong>to_json</strong>(builder : JSON::Builder)
+
+        <a class="method-permalink" href="#to_json(builder:JSON::Builder)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L146" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_s(io:IO)-instance-method">
+      <div class="signature">
+        
+        def <strong>to_s</strong>(io : IO)
+
+        <a class="method-permalink" href="#to_s(io:IO)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from struct Struct
+            </div>
+          
+          <p>Same as <code>#inspect(io)</code>.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/b887eb7cc0a232577ab438964b51f5028fa1f84a/src/bson/decimal128.cr#L135" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

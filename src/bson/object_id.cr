@@ -1,4 +1,7 @@
 struct BSON
+  # Unique object identifier.
+  #
+  # See: dochub.mongodb.org/core/objectids
   struct ObjectId
 
     getter data : Bytes
@@ -6,12 +9,15 @@ struct BSON
     @@counter : Int32 = rand(0x1000000)
     @@mutex = Mutex.new
 
+    # Initialize from a hex string representation.
     def initialize(str : String)
       @data = str.hexbytes
     end
 
+    # Initialize from a Byte array.
     def initialize(@data : Bytes); end
 
+    # Create a random ObjectId.
     def initialize
       io = IO::Memory.new
       io.write_bytes Time.utc.to_unix.to_u32, IO::ByteFormat::LittleEndian
@@ -23,6 +29,7 @@ struct BSON
       @data = io.to_slice
     end
 
+    # Return a string hex representation of the ObjectId.
     def to_s(io : IO) : Nil
       io << @data.hexstring
     end
@@ -31,6 +38,9 @@ struct BSON
       to_canonical_extjson(builder)
     end
 
+    # Serialize to a canonical extended json representation.
+    #
+    # NOTE: see https://github.com/mongodb/specifications/blob/master/source/extended-json.rst
     def to_canonical_extjson(builder : JSON::Builder)
       builder.object {
         builder.string("$oid")
