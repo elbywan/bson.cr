@@ -37,14 +37,16 @@ require "bson"
 bson = BSON.new({
   hello: "world"
 })
-…or a Hash…
+# …or a Hash…
 bson = BSON.new({
   "hello" => "world"
 })
-…or hex binary representation…
-bson = BSON.new(BSON.new("160000000268656c6c6f0006000000776f726c640000".hexbytes))
-…or JSON.
+# …or a hex binary representation…
 bson = BSON.new("160000000268656c6c6f0006000000776f726c640000".hexbytes)
+# …or JSON data.
+bson = BSON.from_json(%({
+  "hello": "world"
+}))
 ```
 
 ### Append and fetch values
