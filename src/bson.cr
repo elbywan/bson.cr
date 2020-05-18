@@ -52,13 +52,12 @@ struct BSON
                 Regex |
                 Decimal128 |
                 DBPointer |
-                Symbol |
+                BSON::Symbol |
                 Timestamp |
                 MinKey |
                 MaxKey |
                 Undefined |
                 Code |
-                Symbol |
                 Nil
 
   # List of BSON elements
@@ -166,7 +165,7 @@ struct BSON
     io = IO::Memory.new
     io.write @data[4...-1]
     builder = Builder.new(io)
-    builder["#{key}"] = value
+    builder[key.to_s] = value
     @data = builder.to_bson
   end
 
@@ -217,6 +216,25 @@ struct BSON
   # puts bson["nope"]? # => nil
   # ```
   def []?(key : String | ::Symbol) : Value?
+    fetch(key)[0]
+  end
+
+  # Return the element with the given key.
+  #
+  # NOTE: Will raise if the key is not found.
+  #
+  # ```
+  # bson = BSON.new({ key: "value" })
+  # puts bson["key"]? # =>"value"
+  # puts bson["nope"]? # => nil
+  def [](key : String | ::Symbol) : Value
+    value, found = fetch(key)
+    raise "Missing bson key: #{key}" unless found
+    value
+  end
+
+  private def fetch(key : String | ::Symbol)
+    key = key.to_s
     pointer = @data.to_unsafe
     size = pointer.as(Pointer(Int32)).value
     pos = 4
@@ -233,24 +251,13 @@ struct BSON
 
       if field == key
         _, data = Decoder.decode_field!(pointer, pos, {code, field}, max_pos: size)
-        return data[1]
+        return { data[1], true }
       else
         pos = Decoder.skip_field(code, pointer, pos, max_pos: size)
       end
     end
-  end
 
-  # Return the element with the given key.
-  #
-  # NOTE: Will raise if the key is not found.
-  #
-  # ```
-  # bson = BSON.new({ key: "value" })
-  # puts bson["key"]? # =>"value"
-  # puts bson["nope"]? # => nil
-  def [](key : String | ::Symbol) : Value
-    raise "Missing bson key: #{key}" unless value = self.[]?(key)
-    value
+    return { nil, false }
   end
 
   # Compare with another BSON value.
@@ -375,7 +382,7 @@ struct BSON
   end
 
   # ameba:disable Metrics/CyclomaticComplexity
-  protected def to_json(builder : JSON::Builder, *, array = false)
+  def to_json(builder : JSON::Builder, *, array = false)
     block = ->{
       self.each { |(key, value, code, subtype)|
         builder.string(key) unless array

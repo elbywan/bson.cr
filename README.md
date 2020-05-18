@@ -63,7 +63,7 @@ bson["name"] = BSON.new({
 })
 
 # Fetch values
-puts bson["name"].as(BSON).to_canonical_extjson
+puts bson["name"].as(BSON).to_json
 # => {"first_name":"John","last_name":"Doe"}
 puts bson["404"]?
 # => nil
@@ -99,7 +99,7 @@ puts bson.each.map { |(key, value)|
 # => [2, 3.0, 4]
 ```
 
-### Convert to other structures
+### Conversions
 
 ```crystal
 bson = BSON.new({
@@ -113,6 +113,34 @@ pp bson.to_h
 
 pp bson.each.to_a
 # => [{"one", 1, Int32, nil}, {"two", "2", String, nil}, {"binary", Bytes[0, 1, 2], Binary, Generic}]
+```
+
+### JSON
+
+```crystal
+# Initialize from data in Relaxed Extended Json format.
+# See: https://github.com/mongodb/specifications/blob/master/source/extended-json.rst
+bson = BSON.new(%({
+  "_id": {
+       "$oid": "57e193d7a9cc81b4027498b5"
+   },
+   "Binary": {
+       "$binary": {
+           "base64": "o0w498Or7cijeBSpkquNtg==",
+           "subType": "03"
+       }
+   },
+   string: "String",
+   number: 10.1
+}))
+
+# Serialize to Relaxed Extended Json format…
+puts bson.to_json
+# => {"_id":{"$oid":"57e193d7a9cc81b4027498b5"},"Binary":{"$binary":{"base64":"o0w498Or7cijeBSpkquNtg==","subType":"03"}},"string":"String","number":10.1}
+
+# …or Canonical Extended Json.
+puts bson.to_canonical_extjson
+# => {"_id":{"$oid":"57e193d7a9cc81b4027498b5"},"Binary":{"$binary":{"base64":"o0w498Or7cijeBSpkquNtg==","subType":"03"}},"string":"String","number":{"$numberDouble":"10.1"}}
 ```
 
 ## Decimal128

@@ -237,6 +237,7 @@ struct BSON
             break if max_pos && pos >= max_pos
             pos += 1
           end
+          pos += 1
         end
       when Element::DBPointer
         str_size = (pointer + pos).as(Pointer(Int32)).value

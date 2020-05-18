@@ -1,6 +1,7 @@
 require "spec"
 require "json"
 require "../src/bson"
+require "./reference_data"
 
 module Runner::Corpus
   extend self
@@ -18,6 +19,8 @@ module Runner::Corpus
         # Parse canonical bson
         bson_bytes = test["canonical_bson"].as_s.hexbytes
         bson = BSON.new(bson_bytes)
+        # Validate
+        bson.validate!
         # Ensure that the underlying bytes are equal
         bson.data.should eq bson_bytes
         # Serialize to canonical extended json and compare with the expected canonical json.
