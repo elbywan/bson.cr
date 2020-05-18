@@ -88,10 +88,10 @@ struct BSON
       @io << value.source
       @io.write_bytes 0x00_u8, IO::ByteFormat::LittleEndian
       options = String.build do |str|
-        str << "i"  if value.options.includes? :ignore_case
+        str << "i" if value.options.includes? :ignore_case
         str << "m" if value.options.includes? :multiline
-        str << "x"  if value.options.includes? :extended
-        str << "u"  if value.options.includes? :utf_8
+        str << "x" if value.options.includes? :extended
+        str << "u" if value.options.includes? :utf_8
       end
       @io << options
       @io.write_bytes 0x00_u8, IO::ByteFormat::LittleEndian

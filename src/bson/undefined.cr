@@ -1,7 +1,6 @@
 struct BSON
   # Undefined (value) — Deprecated
   struct Undefined
-
     def to_json(builder : JSON::Builder)
       to_canonical_extjson(builder)
     end

@@ -10,10 +10,10 @@ class Regex
         builder.string(self.source)
         builder.string("options")
         options = String.build do |str|
-          str << "i"  if self.options.includes? :ignore_case
-          str << "m"  if self.options.includes? :multiline
-          str << "x"  if self.options.includes? :extended
-          str << "u"  if self.options.includes? :utf_8
+          str << "i" if self.options.includes? :ignore_case
+          str << "m" if self.options.includes? :multiline
+          str << "x" if self.options.includes? :extended
+          str << "u" if self.options.includes? :utf_8
         end
         builder.string(options)
       }

@@ -1,7 +1,6 @@
 struct BSON
   # Min key - Special type which compares lower than all other possible BSON element values.
   struct MinKey
-
     def to_json(builder : JSON::Builder)
       to_canonical_extjson(builder)
     end
@@ -19,7 +18,6 @@ struct BSON
 
   # Max key - Special type which compares higher than all other possible BSON element values.
   struct MaxKey
-
     def to_json(builder : JSON::Builder)
       to_canonical_extjson(builder)
     end

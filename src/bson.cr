@@ -18,19 +18,18 @@ require "./bson/ext/*"
 #
 # data = BSON.new({
 #   hello: "world",
-#   time: Time.utc,
-#   name: BSON.new({
+#   time:  Time.utc,
+#   name:  BSON.new({
 #     first_name: "John",
-#     last_name: "Doe"
+#     last_name:  "Doe",
 #   }),
-#   fruits: [ "Orange", "Banana" ]
+#   fruits: ["Orange", "Banana"],
 # })
 #
 # puts data.to_json
 # # => {"hello":"world","time":{"$date":"2020-05-18T07:32:13.621000000Z"},"name":{"first_name":"John","last_name":"Doe"},"fruits":["Orange","Banana"]}
 # ```
 struct BSON
-
   include Enumerable(String)
   include Iterable(String)
   include Comparable(BSON)
@@ -39,53 +38,52 @@ struct BSON
   getter data
 
   # List of field values
-  alias Value =
-    Float64 |
-    String |
-    BSON |
-    Bytes |
-    ObjectId |
-    Bool |
-    Time |
-    Int32 |
-    Int64 |
-    UUID |
-    Code |
-    Regex |
-    Decimal128 |
-    DBPointer |
-    Symbol |
-    Timestamp |
-    MinKey |
-    MaxKey |
-    Undefined |
-    Code |
-    Symbol |
-    Nil
+  alias Value = Float64 |
+                String |
+                BSON |
+                Bytes |
+                ObjectId |
+                Bool |
+                Time |
+                Int32 |
+                Int64 |
+                UUID |
+                Code |
+                Regex |
+                Decimal128 |
+                DBPointer |
+                Symbol |
+                Timestamp |
+                MinKey |
+                MaxKey |
+                Undefined |
+                Code |
+                Symbol |
+                Nil
 
   # List of BSON elements
   enum Element : UInt8
-    Double = 0x01
-    String = 0x02
-    Document = 0x03
-    Array = 0x04
-    Binary = 0x05
-    Undefined = 0x06
-    ObjectId = 0x07
-    Boolean = 0x08
-    DateTime = 0x09
-    Null = 0x0A
-    Regexp = 0x0B
-    DBPointer = 0x0C
-    JSCode = 0x0D
-    Symbol = 0x0E
+    Double          = 0x01
+    String          = 0x02
+    Document        = 0x03
+    Array           = 0x04
+    Binary          = 0x05
+    Undefined       = 0x06
+    ObjectId        = 0x07
+    Boolean         = 0x08
+    DateTime        = 0x09
+    Null            = 0x0A
+    Regexp          = 0x0B
+    DBPointer       = 0x0C
+    JSCode          = 0x0D
+    Symbol          = 0x0E
     JSCodeWithScope = 0x0F
-    Int32 = 0x10
-    Timestamp = 0x11
-    Int64 = 0x12
-    Decimal128 = 0x13
-    MinKey = 0xFF
-    MaxKey = 0x7F
+    Int32           = 0x10
+    Timestamp       = 0x11
+    Int64           = 0x12
+    Decimal128      = 0x13
+    MinKey          = 0xFF
+    MaxKey          = 0x7F
   end
 
   # Allocate a BSON instance from a byte array.
@@ -111,7 +109,7 @@ struct BSON
   #
   # ```
   # puts BSON.new({
-  #   hello: "world"
+  #   hello: "world",
   # }).to_json # => {"hello":"world"}
   # ```
   def initialize(tuple : NamedTuple)
@@ -126,7 +124,7 @@ struct BSON
   #
   # ```
   # puts BSON.new({
-  #   "hello" => "world"
+  #   "hello" => "world",
   # }).to_json # => {"hello":"world"}
   # ```
   def initialize(h : Hash)
@@ -196,7 +194,7 @@ struct BSON
   #
   # ```
   # bson = BSON.new
-  # other_bson = BSON.new({ key: "value", key2: "value2" })
+  # other_bson = BSON.new({ key: "value", key2: "value2"})
   # bson.append(other_bson)
   # puts bson.to_json # => {"key":"value","key2":"value2"}
   # ```
@@ -214,8 +212,8 @@ struct BSON
   # Return the element with the given key, or `nil` if the key is not present.
   #
   # ```
-  # bson = BSON.new({ key: "value" })
-  # puts bson["key"]? # =>"value"
+  # bson = BSON.new({key: "value"})
+  # puts bson["key"]?  # => "value"
   # puts bson["nope"]? # => nil
   # ```
   def []?(key : String | ::Symbol) : Value?
@@ -234,7 +232,7 @@ struct BSON
       pos += field.bytesize + 1
 
       if field == key
-        _, data = Decoder.decode_field!(pointer, pos, { code, field }, max_pos: size)
+        _, data = Decoder.decode_field!(pointer, pos, {code, field}, max_pos: size)
         return data[1]
       else
         pos = Decoder.skip_field(code, pointer, pos, max_pos: size)
@@ -258,8 +256,8 @@ struct BSON
   # Compare with another BSON value.
   #
   # ```
-  # puts BSON.new({ a: 1 }) <=> BSON.new({ a: 1 }) # => 0
-  # puts BSON.new({ a: 1 }) <=> BSON.new({ b: 2 }) # => -1
+  # puts BSON.new({a: 1}) <=> BSON.new({a: 1}) # => 0
+  # puts BSON.new({a: 1}) <=> BSON.new({b: 2}) # => -1
   # ```
   def <=>(other : BSON)
     self.data <=> other.data
@@ -273,15 +271,15 @@ struct BSON
   # BSON.new({
   #   a: 1,
   #   b: "2",
-  #   c: Slice[0_u8, 1_u8, 2_u8]
+  #   c: Slice[0_u8, 1_u8, 2_u8],
   # }).each { |(key, value, code, binary_subtype)|
   #   puts "#{key} => #{value}, code: #{code}, subtype: #{binary_subtype}"
-  #   # a => 1, code: Int32, subtype:
-  #   # b => 2, code: String, subtype:
-  #   # c => Bytes[0, 1, 2], code: Binary, subtype: Generic
+  # # a => 1, code: Int32, subtype:
+  # # b => 2, code: String, subtype:
+  # # c => Bytes[0, 1, 2], code: Binary, subtype: Generic
   # }
   # ```
-  def each(&block : ({ String, Value, Element, Binary::SubType? }) -> _)
+  def each(&block : ({String, Value, Element, Binary::SubType?}) -> _)
     pointer = @data.to_unsafe
     size = pointer.as(Pointer(Int32)).value
     pos = 4
@@ -332,7 +330,7 @@ struct BSON
   # ```
   # bson = BSON.new({
   #   a: 1,
-  #   b: "2"
+  #   b: "2",
   # })
   # pp bson.to_h # => {"a" => 1, "b" => "2"}
   # ```
@@ -352,8 +350,8 @@ struct BSON
   # # => Unhandled exception: Invalid BSON (overflow) (Exception)
   # ```
   def validate!
-    self.each { |(k,v)|
-      { k, v }
+    self.each { |(k, v)|
+      {k, v}
     }
   end
 
@@ -378,7 +376,7 @@ struct BSON
 
   # ameba:disable Metrics/CyclomaticComplexity
   protected def to_json(builder : JSON::Builder, *, array = false)
-    block = ->() {
+    block = ->{
       self.each { |(key, value, code, subtype)|
         builder.string(key) unless array
         if code == Element::Array && value.is_a? BSON
@@ -414,7 +412,7 @@ struct BSON
   end
 
   protected def to_canonical_extjson(builder : JSON::Builder, *, array = false)
-    block = ->() {
+    block = ->{
       self.each { |(key, value, code, subtype)|
         builder.string(key) unless array
         if code == Element::Array && value.is_a? BSON

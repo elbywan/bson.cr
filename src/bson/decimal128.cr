@@ -29,7 +29,6 @@ struct BSON
   #
   # See: https://github.com/mongodb/specifications/blob/master/source/bson-decimal128/decimal128.rst
   struct Decimal128
-
     getter low : BigInt, high : BigInt
 
     # Infinity mask.
@@ -63,7 +62,7 @@ struct BSON
     SCIENTIFIC_EXPONENT_REGEX = /E\+?/i
     # Regex for capturing trailing zeros.
     TRAILING_ZEROS_REGEX = /[1-9]*(0+)$/
-     # Regex for a valid decimal128 string format.
+    # Regex for a valid decimal128 string format.
     VALID_DECIMAL128_STRING_REGEX = /^[\-\+]?(\d+(\.\d*)?|\.\d+)(E[\-\+]?\d+)?$/i
 
     # String representing a NaN value.
@@ -172,6 +171,7 @@ struct BSON
 
     class InvalidString < Exception
     end
+
     class InvalidRange < Exception
     end
 
@@ -193,7 +193,7 @@ struct BSON
         high |= SIGN_BIT_MASK
       end
 
-      { low, high }
+      {low, high}
     end
 
     protected def self.round_exact(exponent, significand)
@@ -202,22 +202,22 @@ struct BSON
           round = MIN_EXPONENT - exponent
           exponent += round
         elsif trailing_zeros = TRAILING_ZEROS_REGEX.match(significand)
-          round = [ (MIN_EXPONENT - exponent),
-                    trailing_zeros[1].size ].min
+          round = [(MIN_EXPONENT - exponent),
+                   trailing_zeros[1].size].min
           significand = significand[0...-round]
           exponent += round
         end
       elsif significand.size > MAX_DIGITS_OF_PRECISION
         trailing_zeros = TRAILING_ZEROS_REGEX.match(significand)
         if trailing_zeros
-          round = [ trailing_zeros[1].size,
-                    (significand.size - MAX_DIGITS_OF_PRECISION),
-                    (MAX_EXPONENT - exponent)].min
+          round = [trailing_zeros[1].size,
+                   (significand.size - MAX_DIGITS_OF_PRECISION),
+                   (MAX_EXPONENT - exponent)].min
           significand = significand[0...-round]
           exponent += round
         end
       end
-      { exponent, significand }
+      {exponent, significand}
     end
 
     protected def self.clamp(exponent, significand)
@@ -226,14 +226,14 @@ struct BSON
           adjust = exponent - MAX_EXPONENT
           significand = "0"
         else
-          adjust = [ (exponent - MAX_EXPONENT),
-                     MAX_DIGITS_OF_PRECISION - significand.size ].min
+          adjust = [(exponent - MAX_EXPONENT),
+                    MAX_DIGITS_OF_PRECISION - significand.size].min
           significand + "0" * adjust
         end
         exponent -= adjust
       end
 
-      { exponent, significand }
+      {exponent, significand}
     end
 
     protected def self.validate_range!(exponent : Int32, significand : BigInt)
@@ -261,7 +261,7 @@ struct BSON
       elsif exponent < 0
         if significand.size > exponent.abs
           decimal_point_index = significand.size - exponent.abs
-          str = "#{significand[0..decimal_point_index-1]}.#{significand[decimal_point_index..-1]}"
+          str = "#{significand[0..decimal_point_index - 1]}.#{significand[decimal_point_index..-1]}"
         else
           left_zero_pad = (exponent + significand.size).abs
           str = "0.#{"0" * left_zero_pad}#{significand}"
@@ -271,6 +271,7 @@ struct BSON
     end
 
     @scientific_exponent : BigInt?
+
     private def scientific_exponent
       @scientific_exponent ||= (significand.size - 1) + exponent
     end
@@ -280,13 +281,13 @@ struct BSON
     end
 
     @exponent : BigInt?
+
     private def exponent
-      @exponent ||= two_highest_bits_set? ?
-          ((@high & 0x1fffe00000000000) >> 47) - Decimal128::EXPONENT_OFFSET :
-          ((@high & 0x7fff800000000000) >> 49) - Decimal128::EXPONENT_OFFSET
+      @exponent ||= two_highest_bits_set? ? ((@high & 0x1fffe00000000000) >> 47) - Decimal128::EXPONENT_OFFSET : ((@high & 0x7fff800000000000) >> 49) - Decimal128::EXPONENT_OFFSET
     end
 
     @significand : String?
+
     private def significand
       @significand ||= two_highest_bits_set? ? "0" : bits_to_significand.to_s
     end
