@@ -251,13 +251,13 @@ struct BSON
 
       if field == key
         _, data = Decoder.decode_field!(pointer, pos, {code, field}, max_pos: size)
-        return { data[1], true }
+        return {data[1], true}
       else
         pos = Decoder.skip_field(code, pointer, pos, max_pos: size)
       end
     end
 
-    return { nil, false }
+    return {nil, false}
   end
 
   # Compare with another BSON value.

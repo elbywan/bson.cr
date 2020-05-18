@@ -197,13 +197,17 @@
 
 
 <div class="main-content">
-<h1><a id="bson" class="anchor" href="#bson">
+<h1><a id="bson-build-statushttpstravis-ci.orgelbywanbson.cr.svgbranchmasterhttpstravis-ci.orgelbywanbson.cr" class="anchor" href="#bson-build-statushttpstravis-ci.orgelbywanbson.cr.svgbranchmasterhttpstravis-ci.orgelbywanbson.cr">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>bson</h1>
+</a>bson <a href="https://travis-ci.org/elbywan/bson.cr" target="_blank"><img src="https://travis-ci.org/elbywan/bson.cr.svg?branch=master" alt="Build Status"/></a></h1>
 
-<p>A pure Crystal implementation of the <a href="http://bsonspec.org" target="_blank">BSON specification</a>.</p>
+<h4><a id="a-pure-crystal-implementation-of-the-bson-specificationhttpbsonspec.org." class="anchor" href="#a-pure-crystal-implementation-of-the-bson-specificationhttpbsonspec.org.">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>A pure Crystal implementation of the <a href="http://bsonspec.org" target="_blank">BSON specification</a>.</h4>
 
 <h2><a id="reliability" class="anchor" href="#reliability">
   <svg class="octicon-link" aria-hidden="true">
@@ -259,14 +263,16 @@
 bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
   hello: <span class="s">&quot;world&quot;</span>
 })
-…or a <span class="t">Hash…</span>
+<span class="c"># …or a Hash…</span>
 bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
   <span class="s">&quot;hello&quot;</span> => <span class="s">&quot;world&quot;</span>
 })
-…or hex binary representation…
-bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(<span class="t">BSON</span>.<span class="k">new</span>(<span class="s">&quot;160000000268656c6c6f0006000000776f726c640000&quot;</span>.hexbytes))
-…or <span class="t">JSON</span>.
-bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(<span class="s">&quot;160000000268656c6c6f0006000000776f726c640000&quot;</span>.hexbytes)</code></pre>
+<span class="c"># …or a hex binary representation…</span>
+bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(<span class="s">&quot;160000000268656c6c6f0006000000776f726c640000&quot;</span>.hexbytes)
+<span class="c"># …or JSON data.</span>
+bson <span class="o">=</span> <span class="t">BSON</span>.from_json(<span class="s">%({
+  &quot;hello&quot;: &quot;world&quot;
+})</span>)</code></pre>
 
 <h3><a id="append-and-fetch-values" class="anchor" href="#append-and-fetch-values">
   <svg class="octicon-link" aria-hidden="true">
@@ -285,7 +291,7 @@ bson[<span class="s">&quot;name&quot;</span>] <span class="o">=</span> <span cla
 })
 
 <span class="c"># Fetch values</span>
-puts bson[<span class="s">&quot;name&quot;</span>].<span class="k">as</span>(<span class="t">BSON</span>).to_canonical_extjson
+puts bson[<span class="s">&quot;name&quot;</span>].<span class="k">as</span>(<span class="t">BSON</span>).to_json
 <span class="c"># =&gt; {&quot;first_name&quot;:&quot;John&quot;,&quot;last_name&quot;:&quot;Doe&quot;}</span>
 puts bson[<span class="s">&quot;404&quot;</span>]?
 <span class="c"># =&gt; nil</span>
@@ -322,11 +328,11 @@ puts bson.each.map { <span class="o">|</span>(key, value)<span class="o">|</span
 }.to_a
 <span class="c"># =&gt; [2, 3.0, 4]</span></code></pre>
 
-<h3><a id="convert-to-other-structures" class="anchor" href="#convert-to-other-structures">
+<h3><a id="conversions" class="anchor" href="#conversions">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Convert to other structures</h3>
+</a>Conversions</h3>
 
 <pre><code class="language-crystal">bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
   one: <span class="n">1</span>,
@@ -339,6 +345,36 @@ pp bson.to_h
 
 pp bson.each.to_a
 <span class="c"># =&gt; [{&quot;one&quot;, 1, Int32, nil}, {&quot;two&quot;, &quot;2&quot;, String, nil}, {&quot;binary&quot;, Bytes[0, 1, 2], Binary, Generic}]</span></code></pre>
+
+<h3><a id="json" class="anchor" href="#json">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>JSON</h3>
+
+<pre><code class="language-crystal"><span class="c"># Initialize from data in Relaxed Extended Json format.</span>
+<span class="c"># See: https://github.com/mongodb/specifications/blob/master/source/extended-json.rst</span>
+bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(<span class="s">%({
+  &quot;_id&quot;: {
+       &quot;$oid&quot;: &quot;57e193d7a9cc81b4027498b5&quot;
+   },
+   &quot;Binary&quot;: {
+       &quot;$binary&quot;: {
+           &quot;base64&quot;: &quot;o0w498Or7cijeBSpkquNtg==&quot;,
+           &quot;subType&quot;: &quot;03&quot;
+       }
+   },
+   string: &quot;String&quot;,
+   number: 10.1
+})</span>)
+
+<span class="c"># Serialize to Relaxed Extended Json format…</span>
+puts bson.to_json
+<span class="c"># =&gt; {&quot;_id&quot;:{&quot;$oid&quot;:&quot;57e193d7a9cc81b4027498b5&quot;},&quot;Binary&quot;:{&quot;$binary&quot;:{&quot;base64&quot;:&quot;o0w498Or7cijeBSpkquNtg==&quot;,&quot;subType&quot;:&quot;03&quot;}},&quot;string&quot;:&quot;String&quot;,&quot;number&quot;:10.1}</span>
+
+<span class="c"># …or Canonical Extended Json.</span>
+puts bson.to_canonical_extjson
+<span class="c"># =&gt; {&quot;_id&quot;:{&quot;$oid&quot;:&quot;57e193d7a9cc81b4027498b5&quot;},&quot;Binary&quot;:{&quot;$binary&quot;:{&quot;base64&quot;:&quot;o0w498Or7cijeBSpkquNtg==&quot;,&quot;subType&quot;:&quot;03&quot;}},&quot;string&quot;:&quot;String&quot;,&quot;number&quot;:{&quot;$numberDouble&quot;:&quot;10.1&quot;}}</span></code></pre>
 
 <h2><a id="decimal128" class="anchor" href="#decimal128">
   <svg class="octicon-link" aria-hidden="true">

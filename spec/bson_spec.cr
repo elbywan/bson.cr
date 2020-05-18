@@ -52,8 +52,8 @@ describe BSON do
       BSON.new(bson.data).data.should eq REFERENCE_BYTES
     end
     it "#initialize(tuple)" do
-     bson = BSON.new(REFERENCE_TUPLE)
-     bson.data.should eq REFERENCE_BYTES
+      bson = BSON.new(REFERENCE_TUPLE)
+      bson.data.should eq REFERENCE_BYTES
     end
     it "#initialize(hash)" do
       bson = BSON.new(REFERENCE_TUPLE.to_h)
@@ -67,8 +67,8 @@ describe BSON do
 
   describe "append" do
     merged_bson_data = BSON.new(REFERENCE_TUPLE.merge({
-      field: "value",
-      field2: "value2"
+      field:  "value",
+      field2: "value2",
     })).data
 
     it "#[]=" do
@@ -86,7 +86,7 @@ describe BSON do
 
     it "#append(bson)" do
       bson = BSON.new(REFERENCE_TUPLE)
-      bson.append(BSON.new({ field: "value", field2: "value2" }))
+      bson.append(BSON.new({field: "value", field2: "value2"}))
       bson.data.should eq merged_bson_data
     end
   end
@@ -133,7 +133,7 @@ describe BSON do
       comparison = BSON.new(REFERENCE_BYTES) <=> BSON.new(REFERENCE_BYTES)
       comparison.should eq 0
 
-      comparison = BSON.new(REFERENCE_BYTES) <=> BSON.new({ a: 1 })
+      comparison = BSON.new(REFERENCE_BYTES) <=> BSON.new({a: 1})
       comparison.should_not eq 0
     end
   end
