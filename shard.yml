@@ -1,6 +1,11 @@
 name: bson.cr
 version: 0.1.0
 
+description: |
+  A pure Crystal Implementation of the BSON Specification.
+
+crystal: 0.34.0
+
 authors:
   - elbywan <elbywan@hotmail.com>
 
