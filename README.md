@@ -1,4 +1,4 @@
-# bson
+# bson [![Build Status](https://travis-ci.org/elbywan/bson.cr.svg?branch=master)](https://travis-ci.org/elbywan/bson.cr)
 
 #### A pure Crystal implementation of the [BSON specification](http://bsonspec.org).
 
