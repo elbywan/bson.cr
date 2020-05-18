@@ -31,8 +31,8 @@ require "./bson/ext/*"
 # ```
 struct BSON
 
-  include Enumerable(Value)
-  include Iterable(Value)
+  include Enumerable(String)
+  include Iterable(String)
   include Comparable(BSON)
 
   # Underlying bytes
@@ -61,7 +61,6 @@ struct BSON
     Undefined |
     Code |
     Symbol |
-    Binary |
     Nil
 
   # List of BSON elements
@@ -193,6 +192,25 @@ struct BSON
     @data = builder.to_bson
   end
 
+  # Append the contents of another BSON instance.
+  #
+  # ```
+  # bson = BSON.new
+  # other_bson = BSON.new({ key: "value", key2: "value2" })
+  # bson.append(other_bson)
+  # puts bson.to_json # => {"key":"value","key2":"value2"}
+  # ```
+  def append(other : BSON)
+    size = @data.to_unsafe.as(Pointer(Int32)).value
+    io = IO::Memory.new(size)
+    io.write @data[4...-1]
+    builder = Builder.new(io)
+    other.each { |key, value|
+      builder["#{key}"] = value
+    }
+    @data = builder.to_bson
+  end
+
   # Return the element with the given key, or `nil` if the key is not present.
   #
   # ```
@@ -288,7 +306,7 @@ struct BSON
   end
 
   private struct Iterator
-    include ::Iterator(BSON)
+    include ::Iterator({String, Value, Element, Binary::SubType?})
 
     @data : Bytes
     @pos = 4

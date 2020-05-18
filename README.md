@@ -1,6 +1,12 @@
 # bson
 
-A pure Crystal implementation of the [BSON specification](http://bsonspec.org).
+#### A pure Crystal implementation of the [BSON specification](http://bsonspec.org).
+
+## Reliability
+
+This library passes the official corpus tests located in the [`mongodb/specifications`](https://github.com/mongodb/specifications) repository.
+
+*A few [minor](https://github.com/elbywan/bson.cr/tree/master/spec/corpus) modifications have been made to the tests to comply with Crystal specifics.*
 
 ## Installation
 
@@ -14,51 +20,103 @@ A pure Crystal implementation of the [BSON specification](http://bsonspec.org).
 
 2. Run `shards install`
 
+## API
+
+[Full API documentation is hosted here.](https://elbywan.github.io/bson.cr/BSON.html)
+
 ## Usage
 
 ```crystal
 require "bson"
-
-bson = BSON.new({
-  null: nil,
-  string: "text",
-  int: 20,
-  array: [1, 2, 3],
-  document: BSON.new({
-    a: 1
-  }),
-  binary: Bytes[0, 1, 2, 3],
-  uuid: UUID.new,
-  oid: BSON::ObjectId.new,
-  bool_true: true,
-  bool_false: false,
-  date_time: Time.parse_iso8601("2012-12-24T12:15:30.501Z"),
-  regex: /abc/imx
-})
-
-
-bson.each { |(key, value)|
-  puts key, value
-}
-
-puts bson["string"]
-puts bson["some_key"]?
-puts bson.to_canonical_extended_json
-
-json = bson.to_json
-puts json
-BSON.from_json(json)
-
-puts bson.to_h
-
-# and more…
 ```
 
-TODO: Write usage instructions here
+### Constructors
 
-## Development
+```crystal
+# Constructor from a NamedTuple…
+bson = BSON.new({
+  hello: "world"
+})
+…or a Hash…
+bson = BSON.new({
+  "hello" => "world"
+})
+…or hex binary representation…
+bson = BSON.new(BSON.new("160000000268656c6c6f0006000000776f726c640000".hexbytes))
+…or JSON.
+bson = BSON.new("160000000268656c6c6f0006000000776f726c640000".hexbytes)
+```
 
-TODO: Write development instructions here
+### Append and fetch values
+
+```crystal
+bson = BSON.new({
+  hello: "world"
+})
+
+# Append values
+bson["name"] = BSON.new({
+  first_name: "John",
+  last_name: "Doe"
+})
+
+# Fetch values
+puts bson["name"].as(BSON).to_canonical_extjson
+# => {"first_name":"John","last_name":"Doe"}
+puts bson["404"]?
+# => nil
+
+# Append another BSON
+other_bson = BSON.new({ other: "field" })
+bson.append(other_bson)
+puts bson["other"]
+# => field
+```
+
+### Iterate
+
+```crystal
+bson = BSON.new({
+  one: 1,
+  two: 2.0,
+  three: 3
+})
+
+# Enumerator
+bson.each { |(key, value)|
+  puts "#{key}, #{value}"
+  # => one, 1
+  # => two, 2.0
+  # => three, 3
+}
+
+# Iterator
+puts bson.each.map { |(key, value)|
+  value.as(Number) + 1
+}.to_a
+# => [2, 3.0, 4]
+```
+
+### Convert to other structures
+
+```crystal
+bson = BSON.new({
+  one: 1,
+  two: "2",
+  binary: Slice[0_u8, 1_u8, 2_u8]
+})
+
+pp bson.to_h
+# => {"one" => 1, "two" => "2", "binary" => Bytes[0, 1, 2]}
+
+pp bson.each.to_a
+# => [{"one", 1, Int32, nil}, {"two", "2", String, nil}, {"binary", Bytes[0, 1, 2], Binary, Generic}]
+```
+
+## Decimal128
+
+The `Decimal128` code has been hastily copied from the (`bson-ruby`)[https://github.com/mongodb/bson-ruby/blob/master/lib/bson/decimal128.rb] library.
+It works, but performance is low because it uses an intermediate String representation.
 
 ## Contributing
 
