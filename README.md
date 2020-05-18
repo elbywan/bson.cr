@@ -47,6 +47,10 @@ bson = BSON.new("160000000268656c6c6f0006000000776f726c640000".hexbytes)
 bson = BSON.from_json(%({
   "hello": "world"
 }))
+
+# The BSON binary representation is stored in the data property.
+puts bson.data.hexstring
+# => 160000000268656c6c6f0006000000776f726c640000
 ```
 
 ### Append and fetch values
