@@ -33,22 +33,29 @@ require "bson"
 ### Constructors
 
 ```crystal
-# Constructor from a NamedTuple…
+# Create a BSON instance from a NamedTuple…
 bson = BSON.new({
   hello: "world"
 })
+
 # …or a Hash…
 bson = BSON.new({
   "hello" => "world"
 })
+
 # …or a hex binary representation…
-bson = BSON.new("160000000268656c6c6f0006000000776f726c640000".hexbytes)
-# …or JSON data.
+bytes = "160000000268656c6c6f0006000000776f726c640000".hexbytes
+bson = BSON.new(bytes)
+
+# …or an IO…
+bson = BSON.new(IO::Memory.new bytes)
+
+# …or JSON data
 bson = BSON.from_json(%({
   "hello": "world"
 }))
 
-# The BSON binary representation is stored in the data property.
+# The BSON binary representation is stored in the data property
 puts bson.data.hexstring
 # => 160000000268656c6c6f0006000000776f726c640000
 ```

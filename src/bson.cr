@@ -90,9 +90,10 @@ struct BSON
   # NOTE: The byte array is cloned.
   #
   # ```
-  # data = "160000000378000E0000000261000200000062000000"
-  # bson = BSON.new(data)
-  # bson.to_json # => {"x":{"a":"b"}}
+  # data = "160000000378000E0000000261000200000062000000".hexbytes
+  # io = IO::Memory.new(data)
+  # bson = BSON.new(io)
+  # puts bson.to_json # => {"x":{"a":"b"}}
   # ```
   def initialize(data : Bytes? = nil, validate? = false)
     if d = data
@@ -102,6 +103,21 @@ struct BSON
     else
       @data = Bytes.new(5)
     end
+  end
+
+  # Allocate a BSON instance from an IO
+  #
+  # ```
+  # data = "160000000378000E0000000261000200000062000000".hexbytes
+  # bson = BSON.new(data)
+  # puts bson.to_json # => {"x":{"a":"b"}}
+  # ```
+  def initialize(io : IO)
+    size = Int32.from_io(io, IO::ByteFormat::LittleEndian)
+    Decoder.check_size! size, 5
+    @data = Bytes.new(size)
+    @data.to_unsafe.as(Pointer(Int32)).copy_from(pointerof(size), 4)
+    io.read(@data[4..])
   end
 
   # Allocate a BSON instance from a NamedTuple.

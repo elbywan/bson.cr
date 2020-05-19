@@ -51,6 +51,12 @@ describe BSON do
       bson.to_json.should eq JSON.parse(REFERENCE_JSON).to_json
       BSON.new(bson.data).data.should eq REFERENCE_BYTES
     end
+    it "#initialize(io)" do
+      io = IO::Memory.new(REFERENCE_BYTES)
+      bson = BSON.new(io)
+      bson.to_json.should eq JSON.parse(REFERENCE_JSON).to_json
+      BSON.new(bson.data).data.should eq REFERENCE_BYTES
+    end
     it "#initialize(tuple)" do
       bson = BSON.new(REFERENCE_TUPLE)
       bson.data.should eq REFERENCE_BYTES
