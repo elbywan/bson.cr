@@ -1,5 +1,5 @@
-name: bson.cr
-version: 0.1.0
+name: bson
+version: 0.1.1
 
 description: |
   A pure Crystal Implementation of the BSON Specification.
