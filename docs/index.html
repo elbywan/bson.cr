@@ -105,6 +105,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Item" data-name="bson::item">
+      <a href="BSON/Item.html">Item</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/elbywan/bson.cr/BSON/MaxKey" data-name="bson::maxkey">
       <a href="BSON/MaxKey.html">MaxKey</a>
       
@@ -117,6 +122,11 @@
   
   <li class=" " data-id="github.com/elbywan/bson.cr/BSON/ObjectId" data-name="bson::objectid">
       <a href="BSON/ObjectId.html">ObjectId</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/RecursiveValue" data-name="bson::recursivevalue">
+      <a href="BSON/RecursiveValue.html">RecursiveValue</a>
       
     </li>
   
@@ -259,20 +269,31 @@
   </svg>
 </a>Constructors</h3>
 
-<pre><code class="language-crystal"><span class="c"># Constructor from a NamedTuple…</span>
+<pre><code class="language-crystal"><span class="c"># Create a BSON instance from a NamedTuple…</span>
 bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
   hello: <span class="s">&quot;world&quot;</span>
 })
+
 <span class="c"># …or a Hash…</span>
 bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
   <span class="s">&quot;hello&quot;</span> => <span class="s">&quot;world&quot;</span>
 })
+
 <span class="c"># …or a hex binary representation…</span>
-bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(<span class="s">&quot;160000000268656c6c6f0006000000776f726c640000&quot;</span>.hexbytes)
-<span class="c"># …or JSON data.</span>
+bytes <span class="o">=</span> <span class="s">&quot;160000000268656c6c6f0006000000776f726c640000&quot;</span>.hexbytes
+bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(bytes)
+
+<span class="c"># …or an IO…</span>
+bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(<span class="t">IO</span><span class="t">::</span><span class="t">Memory</span>.<span class="k">new</span> bytes)
+
+<span class="c"># …or JSON data</span>
 bson <span class="o">=</span> <span class="t">BSON</span>.from_json(<span class="s">%({
   &quot;hello&quot;: &quot;world&quot;
-})</span>)</code></pre>
+})</span>)
+
+<span class="c"># The BSON binary representation is stored in the data property</span>
+puts bson.data.hexstring
+<span class="c"># =&gt; 160000000268656c6c6f0006000000776f726c640000</span></code></pre>
 
 <h3><a id="append-and-fetch-values" class="anchor" href="#append-and-fetch-values">
   <svg class="octicon-link" aria-hidden="true">

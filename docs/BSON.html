@@ -105,6 +105,11 @@
       
     </li>
   
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Item" data-name="bson::item">
+      <a href="BSON/Item.html">Item</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/elbywan/bson.cr/BSON/MaxKey" data-name="bson::maxkey">
       <a href="BSON/MaxKey.html">MaxKey</a>
       
@@ -117,6 +122,11 @@
   
   <li class=" " data-id="github.com/elbywan/bson.cr/BSON/ObjectId" data-name="bson::objectid">
       <a href="BSON/ObjectId.html">ObjectId</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/RecursiveValue" data-name="bson::recursivevalue">
+      <a href="BSON/RecursiveValue.html">RecursiveValue</a>
       
     </li>
   
@@ -258,9 +268,9 @@ puts data.to_json
     
       <li class="other-type">Comparable(<a href="BSON.html">BSON</a>)</li>
     
-      <li class="other-type">Enumerable(<a href="String.html">String</a>)</li>
+      <li class="other-type">Enumerable({<a href="String.html">String</a>, <a href="BSON.html">BSON</a> | <a href="BSON/Code.html">BSON::Code</a> | <a href="BSON/DBPointer.html">BSON::DBPointer</a> | <a href="BSON/Decimal128.html">BSON::Decimal128</a> | <a href="BSON/MaxKey.html">BSON::MaxKey</a> | <a href="BSON/MinKey.html">BSON::MinKey</a> | <a href="BSON/ObjectId.html">BSON::ObjectId</a> | <a href="BSON/Symbol.html">BSON::Symbol</a> | <a href="BSON/Timestamp.html">BSON::Timestamp</a> | <a href="BSON/Undefined.html">BSON::Undefined</a> | <a href="Bool.html">Bool</a> | <a href="Float64.html">Float64</a> | <a href="Int32.html">Int32</a> | <a href="Int64.html">Int64</a> | <a href="Regex.html">Regex</a> | <a href="Slice.html">Slice(UInt8)</a> | <a href="String.html">String</a> | <a href="Time.html">Time</a> | <a href="UUID.html">UUID</a> | <a href="Nil.html">Nil</a>, <a href="BSON/Element.html">BSON::Element</a>, <a href="BSON/Binary/SubType.html">BSON::Binary::SubType</a>?})</li>
     
-      <li class="other-type">Iterable(<a href="String.html">String</a>)</li>
+      <li class="other-type">Iterable({<a href="String.html">String</a>, <a href="BSON.html">BSON</a> | <a href="BSON/Code.html">BSON::Code</a> | <a href="BSON/DBPointer.html">BSON::DBPointer</a> | <a href="BSON/Decimal128.html">BSON::Decimal128</a> | <a href="BSON/MaxKey.html">BSON::MaxKey</a> | <a href="BSON/MinKey.html">BSON::MinKey</a> | <a href="BSON/ObjectId.html">BSON::ObjectId</a> | <a href="BSON/Symbol.html">BSON::Symbol</a> | <a href="BSON/Timestamp.html">BSON::Timestamp</a> | <a href="BSON/Undefined.html">BSON::Undefined</a> | <a href="Bool.html">Bool</a> | <a href="Float64.html">Float64</a> | <a href="Int32.html">Int32</a> | <a href="Int64.html">Int64</a> | <a href="Regex.html">Regex</a> | <a href="Slice.html">Slice(UInt8)</a> | <a href="String.html">String</a> | <a href="Time.html">Time</a> | <a href="UUID.html">UUID</a> | <a href="Nil.html">Nil</a>, <a href="BSON/Element.html">BSON::Element</a>, <a href="BSON/Binary/SubType.html">BSON::Binary::SubType</a>?})</li>
     
   </ul>
 
@@ -283,84 +293,91 @@ puts data.to_json
   </h2>
   
     
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson/binary.cr#L3" target="_blank">
-        bson/binary.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson/code.cr#L1" target="_blank">
-        bson/code.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson/dbpointer.cr#L1" target="_blank">
-        bson/dbpointer.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson/decimal128.cr#L23" target="_blank">
-        bson/decimal128.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson/keys.cr#L1" target="_blank">
-        bson/keys.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson/object_id.cr#L1" target="_blank">
-        bson/object_id.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson/symbol.cr#L1" target="_blank">
-        bson/symbol.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson/timestamp.cr#L1" target="_blank">
-        bson/timestamp.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson/undefined.cr#L1" target="_blank">
-        bson/undefined.cr
-      </a>
-    
-    <br/>
-  
-    
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson/helpers/builder.cr#L1" target="_blank">
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/helpers/builder.cr#L1" target="_blank">
         bson/helpers/builder.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson/helpers/decoder.cr#L1" target="_blank">
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/helpers/decoder.cr#L1" target="_blank">
         bson/helpers/decoder.cr
       </a>
     
     <br/>
   
     
-      <a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L32" target="_blank">
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/helpers/types.cr#L1" target="_blank">
+        bson/helpers/types.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/binary.cr#L3" target="_blank">
+        bson/binary.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/code.cr#L1" target="_blank">
+        bson/code.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/dbpointer.cr#L1" target="_blank">
+        bson/dbpointer.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/decimal128.cr#L23" target="_blank">
+        bson/decimal128.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/keys.cr#L1" target="_blank">
+        bson/keys.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/object_id.cr#L1" target="_blank">
+        bson/object_id.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/symbol.cr#L1" target="_blank">
+        bson/symbol.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/timestamp.cr#L1" target="_blank">
+        bson/timestamp.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson/undefined.cr#L1" target="_blank">
+        bson/undefined.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L32" target="_blank">
         bson.cr
       </a>
     
@@ -385,6 +402,13 @@ puts data.to_json
         <a href="#new(data:Bytes?=nil,validate?=false)-class-method" class="signature"><strong>.new</strong>(data : Bytes? = <span class="n">nil</span>, validate? = <span class="n">false</span>)</a>
         
           <div class="summary"><p>Allocate a BSON instance from a byte array.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(io:IO)-class-method" class="signature"><strong>.new</strong>(io : IO)</a>
+        
+          <div class="summary"><p>Allocate a BSON instance from an IO</p></div>
         
       </li>
     
@@ -487,7 +511,7 @@ puts data.to_json
       </li>
     
       <li class="entry-summary">
-        <a href="#each(&block:::Tuple(String,Value,Element,Binary::SubType?)-%3E_)-instance-method" class="signature"><strong>#each</strong>(&block : ::Tuple(String, Value, Element, Binary::SubType?) -> _)</a>
+        <a href="#each(&block:Item-%3E_)-instance-method" class="signature"><strong>#each</strong>(&block : Item -> _)</a>
         
           <div class="summary"><p>Yield each key/value pair to the block.</p></div>
         
@@ -508,7 +532,7 @@ puts data.to_json
       </li>
     
       <li class="entry-summary">
-        <a href="#to_h-instance-method" class="signature"><strong>#to_h</strong></a>
+        <a href="#to_h(is_array:Bool=false)-instance-method" class="signature"><strong>#to_h</strong>(is_array : Bool = <span class="n">false</span>)</a>
         
           <div class="summary"><p>Returns a Hash representation.</p></div>
         
@@ -622,15 +646,41 @@ puts data.to_json
 
 <p><span class="flag purple">NOTE</span>  The byte array is cloned.</p>
 
-<pre><code>data <span class="o">=</span> <span class="s">&quot;160000000378000E0000000261000200000062000000&quot;</span>
-bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(data)
-bson.to_json <span class="c"># =&gt; {&quot;x&quot;:{&quot;a&quot;:&quot;b&quot;}}</span></code></pre>
+<pre><code>data <span class="o">=</span> <span class="s">&quot;160000000378000E0000000261000200000062000000&quot;</span>.hexbytes
+io <span class="o">=</span> <span class="t">IO</span><span class="t">::</span><span class="t">Memory</span>.<span class="k">new</span>(data)
+bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(io)
+puts bson.to_json <span class="c"># =&gt; {&quot;x&quot;:{&quot;a&quot;:&quot;b&quot;}}</span></code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L97" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L51" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(io:IO)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(io : IO)
+
+        <a class="method-permalink" href="#new(io:IO)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Allocate a BSON instance from an IO</p>
+
+<pre><code>data <span class="o">=</span> <span class="s">&quot;160000000378000E0000000261000200000062000000&quot;</span>.hexbytes
+bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>(data)
+puts bson.to_json <span class="c"># =&gt; {&quot;x&quot;:{&quot;a&quot;:&quot;b&quot;}}</span></code></pre>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -655,7 +705,7 @@ bson.to_json <span class="c"># =&gt; {&quot;x&quot;:{&quot;a&quot;:&quot;b&quot;
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L114" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L83" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -680,7 +730,7 @@ bson.to_json <span class="c"># =&gt; {&quot;x&quot;:{&quot;a&quot;:&quot;b&quot;
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L129" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L98" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -725,7 +775,7 @@ puts bson.to_json <span class="c"># =&gt; {&quot;_id&quot;:{&quot;$oid&quot;:&qu
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L380" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L378" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -761,7 +811,7 @@ puts <span class="t">BSON</span>.<span class="k">new</span>({a: <span class="n">
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L269" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L238" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -788,7 +838,7 @@ puts bson[<span class="s">&quot;nope&quot;</span>]? <span class="c"># =&gt; nil<
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L230" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L199" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -813,7 +863,7 @@ puts bson.to_json <span class="c"># =&gt; {&quot;key&quot;:&quot;value&quot;}</s
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L164" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L133" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -838,7 +888,7 @@ puts bson[<span class="s">&quot;nope&quot;</span>]? <span class="c"># =&gt; nil<
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L218" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L187" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -864,7 +914,7 @@ puts bson.to_json <span class="c"># =&gt; {&quot;key&quot;:&quot;value&quot;,&qu
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L200" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L169" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -891,7 +941,7 @@ puts bson.to_json <span class="c"># =&gt; {&quot;key&quot;:&quot;value&quot;,&qu
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L181" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L150" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -912,17 +962,17 @@ puts bson.to_json <span class="c"># =&gt; {&quot;key&quot;:&quot;value&quot;,&qu
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L38" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="each(&amp;block:::Tuple(String,Value,Element,Binary::SubType?)-&gt;_)-instance-method">
+    <div class="entry-detail" id="each(&amp;block:Item-&gt;_)-instance-method">
       <div class="signature">
         
-        def <strong>each</strong>(&block : ::Tuple(<a href="String.html">String</a>, <a href="BSON/Value.html">Value</a>, <a href="BSON/Element.html">Element</a>, <a href="BSON/Binary/SubType.html">Binary::SubType</a>?) -> _)
+        def <strong>each</strong>(&block : <a href="BSON/Item.html">Item</a> -> _)
 
-        <a class="method-permalink" href="#each(&block:::Tuple(String,Value,Element,Binary::SubType?)-%3E_)-instance-method">#</a>
+        <a class="method-permalink" href="#each(&block:Item-%3E_)-instance-method">#</a>
       </div>
       
         <div class="doc">
@@ -946,7 +996,7 @@ puts bson.to_json <span class="c"># =&gt; {&quot;key&quot;:&quot;value&quot;,&qu
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L289" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L258" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -967,7 +1017,7 @@ puts bson.to_json <span class="c"># =&gt; {&quot;key&quot;:&quot;value&quot;,&qu
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L309" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L278" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -996,34 +1046,39 @@ puts bson.to_canonical_extjson <span class="c"># =&gt; {&quot;Int&quot;:{&quot;$
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L453" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L451" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="to_h-instance-method">
+    <div class="entry-detail" id="to_h(is_array:Bool=false)-instance-method">
       <div class="signature">
         
-        def <strong>to_h</strong>
+        def <strong>to_h</strong>(is_array : <a href="Bool.html">Bool</a> = <span class="n">false</span>)
 
-        <a class="method-permalink" href="#to_h-instance-method">#</a>
+        <a class="method-permalink" href="#to_h(is_array:Bool=false)-instance-method">#</a>
       </div>
       
         <div class="doc">
           
           <p>Returns a Hash representation.</p>
 
+<p><span class="flag purple">NOTE</span>  This function is recursive and will convert nested BSON to hash objects.</p>
+
 <pre><code>bson <span class="o">=</span> <span class="t">BSON</span>.<span class="k">new</span>({
   a: <span class="n">1</span>,
   b: <span class="s">&quot;2&quot;</span>,
+  c: {
+    d: <span class="n">1</span>
+  }
 })
-pp bson.to_h <span class="c"># =&gt; {&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; &quot;2&quot;}</span></code></pre>
+pp bson.to_h <span class="c"># =&gt; {&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; &quot;2&quot;, &quot;c&quot; =&gt; { &quot;d&quot; =&gt; 1}}</span></code></pre>
         </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L344" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L318" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1044,7 +1099,7 @@ pp bson.to_h <span class="c"># =&gt; {&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt;
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L385" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L383" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1069,7 +1124,7 @@ bson.validate!
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/9a9cfde67cb1f6286d848e69b494c4a6f3984137/src/bson.cr#L359" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/7c310d8275b2e5ecf5c7552cb363bffe51c9aff5/src/bson.cr#L357" target="_blank">View source</a>]
         
       </div>
     </div>
