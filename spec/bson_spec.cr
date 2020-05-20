@@ -188,6 +188,10 @@ describe BSON do
           v.each_with_index { |item, idx|
             bson[k]?.as(BSON)["#{idx}"].should eq item
           }
+        elsif v.is_a? Hash
+          v.each { |key, value|
+            bson[k]?.as(BSON)[key].should eq value
+          }
         else
           bson[k]?.should eq v
         end

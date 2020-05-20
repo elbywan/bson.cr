@@ -1,7 +1,7 @@
 require "json"
 require "base64"
-require "./bson/*"
 require "./bson/helpers/*"
+require "./bson/*"
 require "./bson/ext/*"
 
 # **BSON is a binary format in which zero or more ordered key/value pairs are stored as a single entity.**
@@ -30,60 +30,13 @@ require "./bson/ext/*"
 # # => {"hello":"world","time":{"$date":"2020-05-18T07:32:13.621000000Z"},"name":{"first_name":"John","last_name":"Doe"},"fruits":["Orange","Banana"]}
 # ```
 struct BSON
-  include Enumerable(String)
-  include Iterable(String)
-  include Comparable(BSON)
 
   # Underlying bytes
   getter data
 
-  # List of field values
-  alias Value = Float64 |
-                String |
-                BSON |
-                Bytes |
-                ObjectId |
-                Bool |
-                Time |
-                Int32 |
-                Int64 |
-                UUID |
-                Code |
-                Regex |
-                Decimal128 |
-                DBPointer |
-                BSON::Symbol |
-                Timestamp |
-                MinKey |
-                MaxKey |
-                Undefined |
-                Code |
-                Nil
-
-  # List of BSON elements
-  enum Element : UInt8
-    Double          = 0x01
-    String          = 0x02
-    Document        = 0x03
-    Array           = 0x04
-    Binary          = 0x05
-    Undefined       = 0x06
-    ObjectId        = 0x07
-    Boolean         = 0x08
-    DateTime        = 0x09
-    Null            = 0x0A
-    Regexp          = 0x0B
-    DBPointer       = 0x0C
-    JSCode          = 0x0D
-    Symbol          = 0x0E
-    JSCodeWithScope = 0x0F
-    Int32           = 0x10
-    Timestamp       = 0x11
-    Int64           = 0x12
-    Decimal128      = 0x13
-    MinKey          = 0xFF
-    MaxKey          = 0x7F
-  end
+  include Enumerable(Item)
+  include Iterable(Item)
+  include Comparable(BSON)
 
   # Allocate a BSON instance from a byte array.
   #
@@ -218,7 +171,7 @@ struct BSON
     io = IO::Memory.new(size)
     io.write @data[4...-1]
     builder = Builder.new(io)
-    other.each { |key, value|
+    other.each { |(key, value)|
       builder["#{key}"] = value
     }
     @data = builder.to_bson
@@ -302,7 +255,7 @@ struct BSON
   # # c => Bytes[0, 1, 2], code: Binary, subtype: Generic
   # }
   # ```
-  def each(&block : ({String, Value, Element, Binary::SubType?}) -> _)
+  def each(&block : Item -> _)
     pointer = @data.to_unsafe
     size = pointer.as(Pointer(Int32)).value
     pos = 4
@@ -327,7 +280,7 @@ struct BSON
   end
 
   private struct Iterator
-    include ::Iterator({String, Value, Element, Binary::SubType?})
+    include ::Iterator(Item)
 
     @data : Bytes
     @pos = 4
@@ -350,19 +303,48 @@ struct BSON
 
   # Returns a Hash representation.
   #
+  # NOTE: This function is recursive and will convert nested BSON to hash objects.
+  #
   # ```
   # bson = BSON.new({
   #   a: 1,
   #   b: "2",
+  #   c: {
+  #     d: 1
+  #   }
   # })
-  # pp bson.to_h # => {"a" => 1, "b" => "2"}
+  # pp bson.to_h # => {"a" => 1, "b" => "2", "c" => { "d" => 1}}
   # ```
-  def to_h
-    hash = Hash(String, Value).new
-    self.each { |(key, value)|
-      hash[key] = value
+  def to_h(is_array : Bool = false)
+    hash = Hash(String, RecursiveValue).new
+    self.each { |(key, value, code)|
+      value = value.as(RecursiveValue)
+      if value.is_a? BSON
+        if code.array?
+          hash[key] = value.to_h_array
+        else
+          hash[key] = value.to_h
+        end
+      else
+        hash[key] = value
+      end
     }
     hash
+  end
+
+  protected def to_h_array
+    self.map { |_, value, code|
+      value = value.as(RecursiveValue)
+      if value.is_a? BSON
+        if code.array?
+          value.to_h_array
+        else
+          value.to_h
+        end
+      else
+        value
+      end
+    }
   end
 
   # Validate that the BSON is well-formed.

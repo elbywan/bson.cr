@@ -2,7 +2,7 @@ struct Slice(T)
   # Serialize to a canonical extended json representation.
   #
   # NOTE: see https://github.com/mongodb/specifications/blob/master/source/extended-json.rst
-  def to_canonical_extjson(builder : JSON::Builder, subtype = nil)
+  def to_canonical_extjson(builder : JSON::Builder, subtype : BSON::Binary::SubType? = nil)
     builder.object {
       builder.string("$binary")
       builder.object {
