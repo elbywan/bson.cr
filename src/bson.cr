@@ -134,7 +134,11 @@ struct BSON
     io = IO::Memory.new
     io.write @data[4...-1]
     builder = Builder.new(io)
-    builder[key.to_s] = value
+    if value.responds_to? :to_bson
+      builder[key.to_s] = value.to_bson
+    else
+      builder[key.to_s] = value
+    end
     @data = builder.to_bson
   end
 
@@ -315,7 +319,7 @@ struct BSON
   # })
   # pp bson.to_h # => {"a" => 1, "b" => "2", "c" => { "d" => 1}}
   # ```
-  def to_h(is_array : Bool = false)
+  def to_h
     hash = Hash(String, RecursiveValue).new
     self.each { |(key, value, code)|
       value = value.as(RecursiveValue)

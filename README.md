@@ -154,6 +154,47 @@ puts bson.to_canonical_extjson
 # => {"_id":{"$oid":"57e193d7a9cc81b4027498b5"},"Binary":{"$binary":{"base64":"o0w498Or7cijeBSpkquNtg==","subType":"03"}},"string":"String","number":{"$numberDouble":"10.1"}}
 ```
 
+## Serialization
+
+```crystal
+class Data
+  include BSON::Serializable
+  include JSON::Serializable
+
+  property field : String
+  property counter : Int32
+
+  property nested : Nested
+
+  class Nested
+    include BSON::Serializable
+    include JSON::Serializable
+
+    property array : Array(String | Int32)
+  end
+end
+
+data = Data.from_json(%({
+  "field": "value",
+  "counter": 0,
+  "nested": {
+    "array": [
+      "element",
+      1
+    ]
+  }
+}))
+
+puts data.to_json
+# => {"field":"value","counter":0,"nested":{"array":["element",1]}}
+
+puts data.to_bson.data.hexstring
+# => 52000000026669656c64000600000076616c75650010636f756e7465720000000000036e65737465640027000000046172726179001b00000002300008000000656c656d656e740010310001000000000000
+
+puts Data.from_bson(data.to_bson).to_json
+# => {"field":"value","counter":0,"nested":{"array":["element",1]}}
+```
+
 ## Decimal128
 
 The `Decimal128` code has been hastily copied from the (`bson-ruby`)[https://github.com/mongodb/bson-ruby/blob/master/lib/bson/decimal128.rb] library.

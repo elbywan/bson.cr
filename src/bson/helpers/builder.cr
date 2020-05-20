@@ -45,7 +45,11 @@ struct BSON
     def []=(key : String, value : Array)
       array_builder = Builder.new
       value.each_with_index { |item, index|
-        array_builder["#{index}"] = item
+        if item.responds_to? :to_bson
+          array_builder["#{index}"] = item.to_bson
+        else
+          array_builder["#{index}"] = item
+        end
       }
       array_document = BSON.new(array_builder.to_bson)
       field(:array, key)
