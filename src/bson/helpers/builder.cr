@@ -27,6 +27,16 @@ struct BSON
       @io.write value.data
     end
 
+    def []=(key : String, value : NamedTuple)
+      field(:document, key)
+      @io.write BSON.new(value).data
+    end
+
+    def []=(key : String, value : Hash)
+      field(:document, key)
+      @io.write BSON.new(value).data
+    end
+
     def append_array(key : String, value : BSON)
       field(:array, key)
       @io.write value.data
