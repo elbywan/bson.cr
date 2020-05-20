@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/elbywan/bson.cr">
-  <title>BigInt - github.com/elbywan/bson.cr</title>
+  <title>Array(T) - github.com/elbywan/bson.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "";
   </script>
@@ -40,12 +40,12 @@
   <div class="types-list">
     <ul>
   
-  <li class=" " data-id="github.com/elbywan/bson.cr/Array" data-name="array(t)">
+  <li class=" current" data-id="github.com/elbywan/bson.cr/Array" data-name="array(t)">
       <a href="Array.html">Array</a>
       
     </li>
   
-  <li class=" current" data-id="github.com/elbywan/bson.cr/BigInt" data-name="bigint">
+  <li class=" " data-id="github.com/elbywan/bson.cr/BigInt" data-name="bigint">
       <a href="BigInt.html">BigInt</a>
       
     </li>
@@ -229,12 +229,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> BigInt
+  <span class="kind">class</span> Array(T)
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="BigInt.html">BigInt</a></li><li class="superclass">Int</li><li class="superclass">Number</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="Array.html">Array(T)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -248,9 +248,43 @@
     Overview
   </h2>
 
-  <p>A <code><a href="BigInt.html">BigInt</a></code> can represent arbitrarily large integers.</p>
+  <p>An <code><a href="Array.html">Array</a></code> is an ordered, integer-indexed collection of objects of type T.</p>
 
-<p>It is implemented under the hood with <a href="https://gmplib.org/" target="_blank">GMP</a>.</p>
+<p>Array indexing starts at 0. A negative index is assumed to be
+relative to the end of the array: -1 indicates the last element,
+-2 is the next to last element, and so on.</p>
+
+<p>An <code><a href="Array.html">Array</a></code> can be created using the usual <code>new</code> method (several are provided), or with an array literal:</p>
+
+<pre><code><span class="t">Array</span>(<span class="t">Int32</span>).<span class="k">new</span>  <span class="c"># =&gt; []</span>
+[<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]         <span class="c"># Array(Int32)</span>
+[<span class="n">1</span>, <span class="s">&quot;hello&quot;</span>, <span class="s">&#39;x&#39;</span>] <span class="c"># Array(Int32 | String | Char)</span></code></pre>
+
+<p>An <code><a href="Array.html">Array</a></code> can have mixed types, meaning T will be a union of types, but these are determined
+when the array is created, either by specifying T or by using an array literal. In the latter
+case, T will be set to the union of the array literal elements' types.</p>
+
+<p>When creating an empty array you must always specify T:</p>
+
+<pre><code><span class="o">[]</span> <span class="k">of</span> <span class="t">Int32</span> <span class="c"># same as Array(Int32)</span>
+<span class="o">[]</span>          <span class="c"># syntax error</span></code></pre>
+
+<p>An <code><a href="Array.html">Array</a></code> is implemented using an internal buffer of some capacity
+and is reallocated when elements are pushed to it when more capacity
+is needed. This is normally known as a <a href="http://en.wikipedia.org/wiki/Dynamic_array" target="_blank">dynamic array</a>.</p>
+
+<p>You can use a special array literal syntax with other types too, as long as they define an argless
+<code>new</code> method and a <code><<</code> method. <code>Set</code> is one such type:</p>
+
+<pre><code>set <span class="o">=</span> <span class="t">Set</span>{<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>} <span class="c"># =&gt; Set{1, 2, 3}</span>
+set.<span class="k">class</span>          <span class="c"># =&gt; Set(Int32)</span></code></pre>
+
+<p>The above is the same as this:</p>
+
+<pre><code>set <span class="o">=</span> <span class="t">Set</span>(<span class="k">typeof</span>(<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>)).<span class="k">new</span>
+set <span class="o">&lt;&lt;</span> <span class="n">1</span>
+set <span class="o">&lt;&lt;</span> <span class="n">2</span>
+set <span class="o">&lt;&lt;</span> <span class="n">3</span></code></pre>
 
 
 
@@ -266,13 +300,9 @@
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type">Comparable(Float)</li>
+      <li class="other-type">Comparable(<a href="Array.html">Array(T)</a>)</li>
     
-      <li class="other-type">Comparable(<a href="BigInt.html">BigInt</a>)</li>
-    
-      <li class="other-type">Comparable(UInt128 | UInt16 | UInt32 | UInt64 | UInt8)</li>
-    
-      <li class="other-type">Comparable(Int128 | Int16 | <a href="Int32.html">Int32</a> | <a href="Int64.html">Int64</a> | Int8)</li>
+      <li class="other-type">Indexable(T)</li>
     
   </ul>
 
@@ -295,8 +325,8 @@
   </h2>
   
     
-      <a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/decimal128.cr#L8" target="_blank">
-        bson/decimal128.cr
+      <a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/ext/array.cr#L1" target="_blank">
+        bson/ext/array.cr
       </a>
     
     <br/>
@@ -317,9 +347,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(bytes:Bytes)-class-method" class="signature"><strong>.new</strong>(bytes : Bytes)</a>
-        
-          <div class="summary"><p>Initialize from a Byte array.</p></div>
+        <a href="#from_bson(bson:BSON):self-class-method" class="signature"><strong>.from_bson</strong>(bson : BSON) : <span class="k">self</span></a>
         
       </li>
     
@@ -328,101 +356,12 @@
 
 
 
-
-  <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Summary
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#bytes-instance-method" class="signature"><strong>#bytes</strong></a>
-        
-          <div class="summary"><p>Fetch a copy of the underlying byte representation.</p></div>
-        
-      </li>
-    
-  </ul>
 
 
 
 
 
 <div class="methods-inherited">
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
     
 
@@ -496,23 +435,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(bytes:Bytes)-class-method">
+    <div class="entry-detail" id="from_bson(bson:BSON):self-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(bytes : Bytes)
+        def self.<strong>from_bson</strong>(bson : <a href="BSON.html">BSON</a>) : <span class="k">self</span>
 
-        <a class="method-permalink" href="#new(bytes:Bytes)-class-method">#</a>
+        <a class="method-permalink" href="#from_bson(bson:BSON):self-class-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Initialize from a Byte array.</p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/decimal128.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/ext/array.cr#L2" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -521,37 +455,6 @@
 
 
 
-
-  <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Detail
-  </h2>
-  
-    <div class="entry-detail" id="bytes-instance-method">
-      <div class="signature">
-        
-        def <strong>bytes</strong>
-
-        <a class="method-permalink" href="#bytes-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Fetch a copy of the underlying byte representation.</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/decimal128.cr#L10" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 

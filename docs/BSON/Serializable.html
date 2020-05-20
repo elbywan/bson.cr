@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/elbywan/bson.cr">
-  <title>BSON::Timestamp - github.com/elbywan/bson.cr</title>
+  <title>BSON::Serializable - github.com/elbywan/bson.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../";
   </script>
@@ -140,7 +140,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Serializable" data-name="bson::serializable">
+  <li class=" current" data-id="github.com/elbywan/bson.cr/BSON/Serializable" data-name="bson::serializable">
       <a href="../BSON/Serializable.html">Serializable</a>
       
     </li>
@@ -150,7 +150,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/elbywan/bson.cr/BSON/Timestamp" data-name="bson::timestamp">
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Timestamp" data-name="bson::timestamp">
       <a href="../BSON/Timestamp.html">Timestamp</a>
       
     </li>
@@ -229,26 +229,13 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> BSON::Timestamp
+  <span class="kind">module</span> BSON::Serializable
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../BSON/Timestamp.html">BSON::Timestamp</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
-
-
-  <h2>
-    <a id="overview" class="anchor" href="#overview">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Overview
-  </h2>
-
-  <p>Timestamp - Special internal type used by MongoDB replication and sharding. First 4 bytes are an increment, second 4 are a timestamp.</p>
 
 
 
@@ -273,8 +260,8 @@
   </h2>
   
     
-      <a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/timestamp.cr#L3" target="_blank">
-        bson/timestamp.cr
+      <a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/serializable.cr#L1" target="_blank">
+        bson/serializable.cr
       </a>
     
     <br/>
@@ -284,60 +271,9 @@
 
 
 
-  <h2>
-    <a id="constructors" class="anchor" href="#constructors">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Constructors
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#new(t:UInt32,i:UInt32)-class-method" class="signature"><strong>.new</strong>(t : UInt32, i : UInt32)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
-
-
-  <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Summary
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#i:UInt32-instance-method" class="signature"><strong>#i</strong> : UInt32</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#t:UInt32-instance-method" class="signature"><strong>#t</strong> : UInt32</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#to_canonical_extjson(builder:JSON::Builder)-instance-method" class="signature"><strong>#to_canonical_extjson</strong>(builder : JSON::Builder)</a>
-        
-          <div class="summary"><p>Serialize to a canonical extended json representation.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#to_json(builder:JSON::Builder)-instance-method" class="signature"><strong>#to_json</strong>(builder : JSON::Builder)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -345,149 +281,12 @@
 
 <div class="methods-inherited">
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
-  <h2>
-    <a id="constructor-detail" class="anchor" href="#constructor-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Constructor Detail
-  </h2>
-  
-    <div class="entry-detail" id="new(t:UInt32,i:UInt32)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(t : UInt32, i : UInt32)
-
-        <a class="method-permalink" href="#new(t:UInt32,i:UInt32)-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/timestamp.cr#L6" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
-
-
-  <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Detail
-  </h2>
-  
-    <div class="entry-detail" id="i:UInt32-instance-method">
-      <div class="signature">
-        
-        def <strong>i</strong> : UInt32
-
-        <a class="method-permalink" href="#i:UInt32-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/timestamp.cr#L4" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="t:UInt32-instance-method">
-      <div class="signature">
-        
-        def <strong>t</strong> : UInt32
-
-        <a class="method-permalink" href="#t:UInt32-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/timestamp.cr#L4" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="to_canonical_extjson(builder:JSON::Builder)-instance-method">
-      <div class="signature">
-        
-        def <strong>to_canonical_extjson</strong>(builder : JSON::Builder)
-
-        <a class="method-permalink" href="#to_canonical_extjson(builder:JSON::Builder)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Serialize to a canonical extended json representation.</p>
-
-<p><span class="flag purple">NOTE</span>  see https://github.com/mongodb/specifications/blob/master/source/extended-json.rst</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/timestamp.cr#L16" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="to_json(builder:JSON::Builder)-instance-method">
-      <div class="signature">
-        
-        def <strong>to_json</strong>(builder : JSON::Builder)
-
-        <a class="method-permalink" href="#to_json(builder:JSON::Builder)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/timestamp.cr#L9" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 

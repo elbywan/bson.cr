@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/elbywan/bson.cr">
-  <title>BigInt - github.com/elbywan/bson.cr</title>
+  <title>Hash(K, V) - github.com/elbywan/bson.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "";
   </script>
@@ -45,7 +45,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/elbywan/bson.cr/BigInt" data-name="bigint">
+  <li class=" " data-id="github.com/elbywan/bson.cr/BigInt" data-name="bigint">
       <a href="BigInt.html">BigInt</a>
       
     </li>
@@ -175,7 +175,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/elbywan/bson.cr/Hash" data-name="hash(k, v)">
+  <li class=" current" data-id="github.com/elbywan/bson.cr/Hash" data-name="hash(k, v)">
       <a href="Hash.html">Hash</a>
       
     </li>
@@ -229,12 +229,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> BigInt
+  <span class="kind">class</span> Hash(K, V)
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="BigInt.html">BigInt</a></li><li class="superclass">Int</li><li class="superclass">Number</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="Hash.html">Hash(K, V)</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -248,9 +248,34 @@
     Overview
   </h2>
 
-  <p>A <code><a href="BigInt.html">BigInt</a></code> can represent arbitrarily large integers.</p>
+  <p>A <code><a href="Hash.html">Hash</a></code> represents a collection of key-value mappings, similar to a dictionary.</p>
 
-<p>It is implemented under the hood with <a href="https://gmplib.org/" target="_blank">GMP</a>.</p>
+<p>Main operations are storing a key-value mapping (<code>#[]=</code>) and
+querying the value associated to a key (<code>#[]</code>). Key-value mappings can also be
+deleted (<code>#delete</code>).
+Keys are unique within a hash. When adding a key-value mapping with a key that
+is already in use, the old value will be forgotten.</p>
+
+<pre><code><span class="c"># Create a new Hash for mapping String to Int32</span>
+hash <span class="o">=</span> <span class="t">Hash</span>(<span class="t">String</span>, <span class="t">Int32</span>).<span class="k">new</span>
+hash[<span class="s">&quot;one&quot;</span>] <span class="o">=</span> <span class="n">1</span>
+hash[<span class="s">&quot;two&quot;</span>] <span class="o">=</span> <span class="n">2</span>
+hash[<span class="s">&quot;one&quot;</span>] <span class="c"># =&gt; 1</span></code></pre>
+
+<p><a href="http://crystal-lang.org/reference/syntax_and_semantics/literals/hash.html" target="_blank">Hash literals</a>
+can also be used to create a <code><a href="Hash.html">Hash</a></code>:</p>
+
+<pre><code>{<span class="s">&quot;one&quot;</span> => <span class="n">1</span>, <span class="s">&quot;two&quot;</span> => <span class="n">2</span>}</code></pre>
+
+<p>Implementation is based on an open hash table.
+Two objects refer to the same hash key when their hash value (<code>Object#hash</code>)
+is identical and both objects are equal to each other (<code>Object#==</code>).</p>
+
+<p>Enumeration follows the order that the corresponding keys were inserted.</p>
+
+<p><span class="flag purple">NOTE</span>  When using mutable data types as keys, changing the value of a key after
+it was inserted into the <code><a href="Hash.html">Hash</a></code> may lead to undefined behaviour. This can be
+restored by re-indexing the hash with <code>#rehash</code>.</p>
 
 
 
@@ -266,13 +291,9 @@
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type">Comparable(Float)</li>
+      <li class="other-type">Enumerable({K, V})</li>
     
-      <li class="other-type">Comparable(<a href="BigInt.html">BigInt</a>)</li>
-    
-      <li class="other-type">Comparable(UInt128 | UInt16 | UInt32 | UInt64 | UInt8)</li>
-    
-      <li class="other-type">Comparable(Int128 | Int16 | <a href="Int32.html">Int32</a> | <a href="Int64.html">Int64</a> | Int8)</li>
+      <li class="other-type">Iterable({K, V})</li>
     
   </ul>
 
@@ -295,8 +316,8 @@
   </h2>
   
     
-      <a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/decimal128.cr#L8" target="_blank">
-        bson/decimal128.cr
+      <a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/ext/hash.cr#L1" target="_blank">
+        bson/ext/hash.cr
       </a>
     
     <br/>
@@ -317,9 +338,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new(bytes:Bytes)-class-method" class="signature"><strong>.new</strong>(bytes : Bytes)</a>
-        
-          <div class="summary"><p>Initialize from a Byte array.</p></div>
+        <a href="#from_bson(bson:BSON):self-class-method" class="signature"><strong>.from_bson</strong>(bson : BSON) : <span class="k">self</span></a>
         
       </li>
     
@@ -328,121 +347,12 @@
 
 
 
-
-  <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Summary
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#bytes-instance-method" class="signature"><strong>#bytes</strong></a>
-        
-          <div class="summary"><p>Fetch a copy of the underlying byte representation.</p></div>
-        
-      </li>
-    
-  </ul>
 
 
 
 
 
 <div class="methods-inherited">
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
   
     
 
@@ -496,23 +406,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(bytes:Bytes)-class-method">
+    <div class="entry-detail" id="from_bson(bson:BSON):self-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(bytes : Bytes)
+        def self.<strong>from_bson</strong>(bson : <a href="BSON.html">BSON</a>) : <span class="k">self</span>
 
-        <a class="method-permalink" href="#new(bytes:Bytes)-class-method">#</a>
+        <a class="method-permalink" href="#from_bson(bson:BSON):self-class-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Initialize from a Byte array.</p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/decimal128.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/ext/hash.cr#L2" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -521,37 +426,6 @@
 
 
 
-
-  <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Detail
-  </h2>
-  
-    <div class="entry-detail" id="bytes-instance-method">
-      <div class="signature">
-        
-        def <strong>bytes</strong>
-
-        <a class="method-permalink" href="#bytes-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Fetch a copy of the underlying byte representation.</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ffc75d0d708a558b556b804e38e1dab7b9ad91b4/src/bson/decimal128.cr#L10" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 

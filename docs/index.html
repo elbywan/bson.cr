@@ -40,6 +40,11 @@
   <div class="types-list">
     <ul>
   
+  <li class=" " data-id="github.com/elbywan/bson.cr/Array" data-name="array(t)">
+      <a href="Array.html">Array</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/elbywan/bson.cr/BigInt" data-name="bigint">
       <a href="BigInt.html">BigInt</a>
       
@@ -125,8 +130,18 @@
       
     </li>
   
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Prop" data-name="bson::prop">
+      <a href="BSON/Prop.html">Prop</a>
+      
+    </li>
+  
   <li class=" " data-id="github.com/elbywan/bson.cr/BSON/RecursiveValue" data-name="bson::recursivevalue">
       <a href="BSON/RecursiveValue.html">RecursiveValue</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Serializable" data-name="bson::serializable">
+      <a href="BSON/Serializable.html">Serializable</a>
       
     </li>
   
@@ -157,6 +172,11 @@
   
   <li class=" " data-id="github.com/elbywan/bson.cr/Float64" data-name="float64">
       <a href="Float64.html">Float64</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/elbywan/bson.cr/Hash" data-name="hash(k, v)">
+      <a href="Hash.html">Hash</a>
       
     </li>
   
@@ -396,6 +416,49 @@ puts bson.to_json
 <span class="c"># …or Canonical Extended Json.</span>
 puts bson.to_canonical_extjson
 <span class="c"># =&gt; {&quot;_id&quot;:{&quot;$oid&quot;:&quot;57e193d7a9cc81b4027498b5&quot;},&quot;Binary&quot;:{&quot;$binary&quot;:{&quot;base64&quot;:&quot;o0w498Or7cijeBSpkquNtg==&quot;,&quot;subType&quot;:&quot;03&quot;}},&quot;string&quot;:&quot;String&quot;,&quot;number&quot;:{&quot;$numberDouble&quot;:&quot;10.1&quot;}}</span></code></pre>
+
+<h2><a id="serialization" class="anchor" href="#serialization">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Serialization</h2>
+
+<pre><code class="language-crystal"><span class="k">class</span> <span class="t">Data</span>
+  <span class="k">include</span> <span class="t">BSON</span><span class="t">::</span><span class="t">Serializable</span>
+  <span class="k">include</span> <span class="t">JSON</span><span class="t">::</span><span class="t">Serializable</span>
+
+  property field : <span class="t">String</span>
+  property counter : <span class="t">Int32</span>
+
+  property nested : <span class="t">Nested</span>
+
+  <span class="k">class</span> <span class="t">Nested</span>
+    <span class="k">include</span> <span class="t">BSON</span><span class="t">::</span><span class="t">Serializable</span>
+    <span class="k">include</span> <span class="t">JSON</span><span class="t">::</span><span class="t">Serializable</span>
+
+    property array : <span class="t">Array</span>(<span class="t">String</span> <span class="o">|</span> <span class="t">Int32</span>)
+  <span class="k">end</span>
+<span class="k">end</span>
+
+data <span class="o">=</span> <span class="t">Data</span>.from_json(<span class="s">%({
+  &quot;field&quot;: &quot;value&quot;,
+  &quot;counter&quot;: 0,
+  &quot;nested&quot;: {
+    &quot;array&quot;: [
+      &quot;element&quot;,
+      1
+    ]
+  }
+})</span>)
+
+puts data.to_json
+<span class="c"># =&gt; {&quot;field&quot;:&quot;value&quot;,&quot;counter&quot;:0,&quot;nested&quot;:{&quot;array&quot;:[&quot;element&quot;,1]}}</span>
+
+puts data.to_bson.data.hexstring
+<span class="c"># =&gt; 52000000026669656c64000600000076616c75650010636f756e7465720000000000036e65737465640027000000046172726179001b00000002300008000000656c656d656e740010310001000000000000</span>
+
+puts <span class="t">Data</span>.from_bson(data.to_bson).to_json
+<span class="c"># =&gt; {&quot;field&quot;:&quot;value&quot;,&quot;counter&quot;:0,&quot;nested&quot;:{&quot;array&quot;:[&quot;element&quot;,1]}}</span></code></pre>
 
 <h2><a id="decimal128" class="anchor" href="#decimal128">
   <svg class="octicon-link" aria-hidden="true">
