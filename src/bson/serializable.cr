@@ -38,8 +38,8 @@ module BSON::Serializable
     # data["name"] = "John"
     # User.new(data)
     # ```
-    def self.new(bson : BSON)
-      self.from_bson bson
+    def initialize(bson : BSON)
+      {{@type}}.from_bson bson
     end
 
     # NOTE: See `self.new`.
