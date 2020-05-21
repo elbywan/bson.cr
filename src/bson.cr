@@ -54,6 +54,7 @@ struct BSON
       @data = d.clone
     else
       @data = Bytes.new(5)
+      @data.to_unsafe.as(Pointer(Int32)).value = 5
     end
   end
 
@@ -197,8 +198,8 @@ struct BSON
   #
   # ```
   # bson = BSON.new({ key: "value" })
-  # puts bson["key"]? # =>"value"
-  # puts bson["nope"]? # => nil
+  # puts bson["key"] # =>"value"
+  # puts bson["nope"] # => Unhandled exception: Missing bson key: nope (Exception)
   def [](key : String | ::Symbol) : Value
     value, found = fetch(key)
     raise "Missing bson key: #{key}" unless found
