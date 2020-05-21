@@ -38,6 +38,24 @@ class Outer
   property ignored_field : String?
 end
 
+@[BSON::Options(camelize: true)]
+class CamelizeTest
+  include BSON::Serializable
+  include JSON::Serializable
+
+  property snake_case_field : String
+  property other : Int32
+end
+
+@[BSON::Options(camelize: "lower")]
+class LowerCamelizeTest
+  include BSON::Serializable
+  include JSON::Serializable
+
+  property snake_case_field : String
+  property other : Int32
+end
+
 reference_json = %({
       "str": "str",
       "optional_int": 10,
@@ -99,5 +117,44 @@ describe BSON::Serializable do
     instance.to_json.should eq expected_json
     # bson::serializable -> bson -> json
     JSON.parse(instance.to_bson.to_json).to_json.should eq expected_json
+  end
+
+  it "should camelize keys" do
+    json = %({
+      "snake_case_field": "test",
+      "other": 1
+    })
+
+    test = CamelizeTest.from_json(json)
+    bson = test.to_bson
+    bson.each { |key, value|
+      case key
+      when "SnakeCaseField"
+        value.should eq test.snake_case_field
+      when "Other"
+        value.should eq test.other
+      else
+        raise "Bad key: #{key}"
+      end
+    }
+    round_trip = CamelizeTest.from_bson(bson)
+    round_trip.snake_case_field.should eq test.snake_case_field
+    round_trip.other.should eq test.other
+
+    test = LowerCamelizeTest.from_json(json)
+    bson = test.to_bson
+    bson.each { |key, value|
+      case key
+      when "snakeCaseField"
+        value.should eq test.snake_case_field
+      when "other"
+        value.should eq test.other
+      else
+        raise "Bad key: #{key}"
+      end
+    }
+    round_trip = LowerCamelizeTest.from_bson(bson)
+    round_trip.snake_case_field.should eq test.snake_case_field
+    round_trip.other.should eq test.other
   end
 end

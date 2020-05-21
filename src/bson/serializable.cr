@@ -1,4 +1,17 @@
 module BSON::Serializable
+  # This annotation can be used to set global serialization options.
+  #
+  # ```
+  # # Use `camelize: "lower"` or `camelize: true` to set lower or higher camelcased properties on the target BSON.
+  # @[BSON::Options(camelize: true)]
+  # struct Model
+  #   include BSON::Serializable
+  #   # (…)
+  # end
+  # ```
+  annotation BSON::Options
+  end
+
   # This annotation can be used to ignore or rename properties.
   #
   # ```
@@ -33,11 +46,15 @@ module BSON::Serializable
     def self.from_bson(bson : BSON)
       instance = allocate
 
+      {% begin %}
+      {% global_options = @type.annotations(BSON::Options) %}
+      {% camelize = global_options.reduce(false) { |_, a| a[:camelize] } %}
+
       {% for ivar in @type.instance_vars %}
         {% ann = ivar.annotation(BSON::Field) %}
         {% types = ivar.type.union_types.select { |t| t != Nil } %}
         {% key = ivar.name %}
-        {% bson_key = ann && ann[:key] || ivar.name %}
+        {% bson_key = ann ? ann[:key] : camelize ? ivar.name.camelcase(lower: camelize == "lower") : ivar.name %}
 
         {% unless ann && ann[:ignore] %}
           bson_value = bson["{{ bson_key }}"]?
@@ -66,6 +83,7 @@ module BSON::Serializable
           end
         {% end %}
       {% end %}
+      {% end %}
 
       instance
     end
@@ -77,11 +95,14 @@ module BSON::Serializable
     # bson = user.to_bson
     # ```
     def to_bson(bson = BSON.new)
+      {% begin %}
+      {% global_options = @type.annotations(BSON::Options) %}
+      {% camelize = global_options.reduce(false) { |_, a| a[:camelize] } %}
       {% for ivar in @type.instance_vars %}
         {% ann = ivar.annotation(BSON::Field) %}
         {% typ = ivar.type.union_types.select { |t| t != Nil }[0] %}
         {% key = ivar.name %}
-        {% bson_key = ann && ann[:key] || ivar.name %}
+        {% bson_key = ann ? ann[:key] : camelize ? ivar.name.camelcase(lower: camelize == "lower") : ivar.name %}
         {% unless ann && ann[:ignore] %}
           {% unless ann && ann[:emit_null] %}
             unless self.{{ key }}.nil?
@@ -95,6 +116,7 @@ module BSON::Serializable
             end
           {% end %}
         {% end %}
+      {% end %}
       {% end %}
       bson
     end
