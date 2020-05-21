@@ -70,7 +70,7 @@ struct BSON
     Decoder.check_size! size, 5
     @data = Bytes.new(size)
     @data.to_unsafe.as(Pointer(Int32)).copy_from(pointerof(size), 4)
-    io.read(@data[4..])
+    io.read_fully(@data[4..])
   end
 
   # Allocate a BSON instance from a NamedTuple.
