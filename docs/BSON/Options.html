@@ -15,7 +15,7 @@
 </svg>
 
   <meta id="repository-name" content="github.com/elbywan/bson.cr">
-  <title>BSON::Code - github.com/elbywan/bson.cr</title>
+  <title>BSON::Options - github.com/elbywan/bson.cr</title>
   <script type="text/javascript">
     CrystalDoc.base_path = "../";
   </script>
@@ -75,7 +75,7 @@
       
     </li>
   
-  <li class=" current" data-id="github.com/elbywan/bson.cr/BSON/Code" data-name="bson::code">
+  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Code" data-name="bson::code">
       <a href="../BSON/Code.html">Code</a>
       
     </li>
@@ -135,7 +135,7 @@
       
     </li>
   
-  <li class=" " data-id="github.com/elbywan/bson.cr/BSON/Options" data-name="bson::options">
+  <li class=" current" data-id="github.com/elbywan/bson.cr/BSON/Options" data-name="bson::options">
       <a href="../BSON/Options.html">Options</a>
       
     </li>
@@ -234,12 +234,10 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">struct</span> BSON::Code
+  <span class="kind">annotation</span> BSON::Options
 
 </h1>
 
-
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../BSON/Code.html">BSON::Code</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -253,7 +251,14 @@
     Overview
   </h2>
 
-  <p>JavaScript code.</p>
+  <p>This annotation can be used to set global serialization options.</p>
+
+<pre><code><span class="c"># Use `camelize: &quot;lower&quot;` or `camelize: true` to set lower or higher camelcased properties on the target BSON.</span>
+@[<span class="t">BSON</span><span class="t">::</span><span class="t">Options</span>(camelize: <span class="n">true</span>)]
+<span class="k">struct</span> <span class="t">Model</span>
+  <span class="k">include</span> <span class="t">BSON</span><span class="t">::</span><span class="t">Serializable</span>
+  <span class="c"># (…)</span>
+<span class="k">end</span></code></pre>
 
 
 
@@ -278,8 +283,8 @@
   </h2>
   
     
-      <a href="https://github.com/elbywan/bson.cr/blob/ce1a6266b3cb57ffbfa6d5a14a052e1058aa2532/src/bson/code.cr#L3" target="_blank">
-        bson/code.cr
+      <a href="https://github.com/elbywan/bson.cr/blob/ce1a6266b3cb57ffbfa6d5a14a052e1058aa2532/src/bson/serializable.cr#L12" target="_blank">
+        bson/serializable.cr
       </a>
     
     <br/>
@@ -289,60 +294,9 @@
 
 
 
-  <h2>
-    <a id="constructors" class="anchor" href="#constructors">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Constructors
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#new(code:String,scope:BSON?=nil)-class-method" class="signature"><strong>.new</strong>(code : String, scope : BSON? = <span class="n">nil</span>)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
-
-
-  <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Summary
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#code:String-instance-method" class="signature"><strong>#code</strong> : String</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#scope:BSON?-instance-method" class="signature"><strong>#scope</strong> : BSON?</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#to_canonical_extjson(builder:JSON::Builder)-instance-method" class="signature"><strong>#to_canonical_extjson</strong>(builder : JSON::Builder)</a>
-        
-          <div class="summary"><p>Serialize to a canonical extended json representation.</p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#to_json(builder:JSON::Builder)-instance-method" class="signature"><strong>#to_json</strong>(builder : JSON::Builder)</a>
-        
-      </li>
-    
-  </ul>
 
 
 
@@ -350,149 +304,12 @@
 
 <div class="methods-inherited">
   
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
-    
-
-
-    
-
-
-    
-
-
-  
 </div>
 
 
-  <h2>
-    <a id="constructor-detail" class="anchor" href="#constructor-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Constructor Detail
-  </h2>
-  
-    <div class="entry-detail" id="new(code:String,scope:BSON?=nil)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(code : <a href="../String.html">String</a>, scope : <a href="../BSON.html">BSON</a>? = <span class="n">nil</span>)
-
-        <a class="method-permalink" href="#new(code:String,scope:BSON?=nil)-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ce1a6266b3cb57ffbfa6d5a14a052e1058aa2532/src/bson/code.cr#L6" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
-
-
-  <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Detail
-  </h2>
-  
-    <div class="entry-detail" id="code:String-instance-method">
-      <div class="signature">
-        
-        def <strong>code</strong> : <a href="../String.html">String</a>
-
-        <a class="method-permalink" href="#code:String-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ce1a6266b3cb57ffbfa6d5a14a052e1058aa2532/src/bson/code.cr#L4" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="scope:BSON?-instance-method">
-      <div class="signature">
-        
-        def <strong>scope</strong> : <a href="../BSON.html">BSON</a>?
-
-        <a class="method-permalink" href="#scope:BSON?-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ce1a6266b3cb57ffbfa6d5a14a052e1058aa2532/src/bson/code.cr#L4" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="to_canonical_extjson(builder:JSON::Builder)-instance-method">
-      <div class="signature">
-        
-        def <strong>to_canonical_extjson</strong>(builder : JSON::Builder)
-
-        <a class="method-permalink" href="#to_canonical_extjson(builder:JSON::Builder)-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>Serialize to a canonical extended json representation.</p>
-
-<p><span class="flag purple">NOTE</span>  see https://github.com/mongodb/specifications/blob/master/source/extended-json.rst</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ce1a6266b3cb57ffbfa6d5a14a052e1058aa2532/src/bson/code.cr#L15" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="to_json(builder:JSON::Builder)-instance-method">
-      <div class="signature">
-        
-        def <strong>to_json</strong>(builder : JSON::Builder)
-
-        <a class="method-permalink" href="#to_json(builder:JSON::Builder)-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/elbywan/bson.cr/blob/ce1a6266b3cb57ffbfa6d5a14a052e1058aa2532/src/bson/code.cr#L8" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
 
 
 
