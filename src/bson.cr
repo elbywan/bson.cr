@@ -30,7 +30,6 @@ require "./bson/ext/*"
 # # => {"hello":"world","time":{"$date":"2020-05-18T07:32:13.621000000Z"},"name":{"first_name":"John","last_name":"Doe"},"fruits":["Orange","Banana"]}
 # ```
 struct BSON
-
   # Underlying bytes
   getter data
 
@@ -314,8 +313,8 @@ struct BSON
   #   a: 1,
   #   b: "2",
   #   c: {
-  #     d: 1
-  #   }
+  #     d: 1,
+  #   },
   # })
   # pp bson.to_h # => {"a" => 1, "b" => "2", "c" => { "d" => 1}}
   # ```

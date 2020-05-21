@@ -88,9 +88,9 @@ describe BSON::Serializable do
     bson["str"] = "str"
     bson["optional_int"] = 10
     bson["array_of_union_types"] = [10, "str"]
-    bson["nested_object"] = { key: "value" }
+    bson["nested_object"] = {key: "value"}
     bson["array_of_objects"] = [{
-      "key": "0"
+      "key": "0",
     }]
     free_form = BSON.new
     free_form["one"] = 1
