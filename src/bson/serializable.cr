@@ -54,7 +54,7 @@ module BSON::Serializable
         {% ann = ivar.annotation(BSON::Field) %}
         {% types = ivar.type.union_types.select { |t| t != Nil } %}
         {% key = ivar.name %}
-        {% bson_key = ann ? ann[:key] : camelize ? ivar.name.camelcase(lower: camelize == "lower") : ivar.name %}
+        {% bson_key = ann ? ann[:key].id : camelize ? ivar.name.camelcase(lower: camelize == "lower") : ivar.name %}
 
         {% unless ann && ann[:ignore] %}
           bson_value = bson["{{ bson_key }}"]?
@@ -102,7 +102,7 @@ module BSON::Serializable
         {% ann = ivar.annotation(BSON::Field) %}
         {% typ = ivar.type.union_types.select { |t| t != Nil }[0] %}
         {% key = ivar.name %}
-        {% bson_key = ann ? ann[:key] : camelize ? ivar.name.camelcase(lower: camelize == "lower") : ivar.name %}
+        {% bson_key = ann ? ann[:key].id : camelize ? ivar.name.camelcase(lower: camelize == "lower") : ivar.name %}
         {% unless ann && ann[:ignore] %}
           {% unless ann && ann[:emit_null] %}
             unless self.{{ key }}.nil?
