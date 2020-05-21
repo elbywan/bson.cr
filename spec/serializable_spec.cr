@@ -29,11 +29,11 @@ class Outer
   property free_form : JSON::Any
   property hash : Hash(String, String | Int32)
 
-  @[BSON::Prop(key: other_str)]
+  @[BSON::Field(key: other_str)]
   @[JSON::Field(key: other_str)]
   property renamed_string : String
 
-  @[BSON::Prop(ignore: true)]
+  @[BSON::Field(ignore: true)]
   @[JSON::Field(ignore: true)]
   property ignored_field : String?
 end

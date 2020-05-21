@@ -2,12 +2,12 @@ module BSON::Serializable
   # This annotation can be used to ignore or rename properties.
   #
   # ```
-  # @[BSON::Prop(ignore: true)]
+  # @[BSON::Field(ignore: true)]
   # property ignored_property : Type
-  # @[BSON::Prop(key: new_name)]
+  # @[BSON::Field(key: new_name)]
   # property renamed_property
   # ```
-  annotation BSON::Prop
+  annotation BSON::Field
   end
 
   macro included
@@ -34,7 +34,7 @@ module BSON::Serializable
       instance = allocate
 
       {% for ivar in @type.instance_vars %}
-        {% ann = ivar.annotation(BSON::Prop) %}
+        {% ann = ivar.annotation(BSON::Field) %}
         {% types = ivar.type.union_types.select { |t| t != Nil } %}
         {% key = ivar.name %}
         {% bson_key = ann && ann[:key] || ivar.name %}
@@ -78,7 +78,7 @@ module BSON::Serializable
     # ```
     def to_bson(bson = BSON.new)
       {% for ivar in @type.instance_vars %}
-        {% ann = ivar.annotation(BSON::Prop) %}
+        {% ann = ivar.annotation(BSON::Field) %}
         {% typ = ivar.type.union_types.select { |t| t != Nil }[0] %}
         {% key = ivar.name %}
         {% bson_key = ann && ann[:key] || ivar.name %}
