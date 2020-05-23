@@ -70,12 +70,12 @@ module BSON::Serializable
             {% end %}
             {% end %}
             else
-              raise Exception.new "Unable to deserialize key '#{{{key.stringify}}}' for type '#{{{@type.stringify}}}'."
+              raise Exception.new "Unable to deserialize key (#{{{key.stringify}}}) having value (#{bson_value}) and of type (#{bson_value.class}) belonging to type '#{{{@type.stringify}}}'."
             end
           {% if !ivar.type.nilable? %}
           else
             # The key is required but was not found - or nil.
-            raise Exception.new "Unable to deserialize key '#{{{key.stringify}}}' for type '#{{{@type.stringify}}}'."
+            raise Exception.new "Unable to deserialize key (#{{{key.stringify}}}) having value (#{bson_value}) of type (#{bson_value.class}) belonging to type '#{{{@type.stringify}}}'."
           {% else %}
           else
             instance.{{ key }} = nil
