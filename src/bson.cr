@@ -103,6 +103,24 @@ struct BSON
     @data = builder.to_bson
   end
 
+  # No-op
+  def self.new(bson : BSON)
+    bson
+  end
+
+  # Allocate a BSON instance from an Array.
+  #
+  # ```
+  # puts BSON.new([1, 2, 3]).to_json # => [1,2,3]
+  # ```
+  def initialize(ary : Array)
+    builder = Builder.new
+    ary.each_with_index { |value, index|
+      builder["#{index}"] = value
+    }
+    @data = builder.to_bson
+  end
+
   protected def initialize(pull : JSON::PullParser)
     builder = Builder.new
     is_array = pull.kind.begin_array?
