@@ -141,6 +141,11 @@ struct BSON
     @data = builder.to_bson
   end
 
+  # Return the size of the BSON instance in bytes.
+  def size
+    data.size
+  end
+
   # Append a key/value pair.
   #
   # ```
