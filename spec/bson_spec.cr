@@ -142,6 +142,13 @@ describe BSON do
       comparison = BSON.new(REFERENCE_BYTES) <=> BSON.new({a: 1})
       comparison.should_not eq 0
     end
+
+    it "ObjectId(<=>)", focus: true do
+      iod = BSON::ObjectId.new
+      iod2 = BSON::ObjectId.new(iod.data.hexstring)
+      iod.should eq iod2
+      iod.should_not eq BSON::ObjectId.new
+    end
   end
 
   describe "iterate" do

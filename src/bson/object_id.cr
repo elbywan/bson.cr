@@ -3,6 +3,8 @@ struct BSON
   #
   # See: dochub.mongodb.org/core/objectids
   struct ObjectId
+    include Comparable(ObjectId)
+
     getter data : Bytes
 
     @@counter : Int32 = rand(0x1000000)
@@ -45,6 +47,10 @@ struct BSON
         builder.string("$oid")
         builder.scalar(@data.hexstring)
       }
+    end
+
+    def <=>(other : ObjectId)
+      @data <=> other.data
     end
   end
 end

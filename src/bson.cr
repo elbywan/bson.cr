@@ -189,7 +189,7 @@ struct BSON
   #
   # ```
   # bson = BSON.new
-  # other_bson = BSON.new({ key: "value", key2: "value2"})
+  # other_bson = BSON.new({key: "value", key2: "value2"})
   # bson.append(other_bson)
   # puts bson.to_json # => {"key":"value","key2":"value2"}
   # ```
