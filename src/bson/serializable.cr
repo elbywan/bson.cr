@@ -64,19 +64,29 @@ module BSON::Serializable
             {% if typ <= BSON::Serializable || typ.class.has_method? :from_bson %}
             when BSON
               instance.{{ key }} = {{ typ }}.from_bson(bson_value)
+            {% elsif typ <= Int %}
+            when {{ typ }}
+              instance.{{ key }} = bson_value.as({{ typ }})
+            when Int, Float
+              instance.{{ key }} = {{typ}}.new!(bson_value)
+            {% elsif typ <= Float %}
+            when {{ typ }}
+              instance.{{ key }} = bson_value.as({{ typ }})
+            when Int, Float
+              instance.{{ key }} = {{typ}}.new!(bson_value)
             {% else %}
             when {{ typ }}
               instance.{{ key }} = bson_value.as({{ typ }})
             {% end %}
             {% end %}
             else
-              raise Exception.new "Unable to deserialize key (#{{{key.stringify}}}) having value (#{bson_value}) and of type (#{bson_value.class}) belonging to type '#{{{@type.stringify}}}'."
+              raise Exception.new "Unable to deserialize key (#{{{key.stringify}}}) having value (#{bson_value}) and of type (#{bson_value.class}) belonging to type '#{{{@type.stringify}}}'. Expected type(s) '#{{{types}}}'."
             end
-          {% if !ivar.type.nilable? %}
+          {% if !ivar.type.nilable? && !ivar.has_default_value? %}
           else
             # The key is required but was not found - or nil.
-            raise Exception.new "Unable to deserialize key (#{{{key.stringify}}}) having value (#{bson_value}) of type (#{bson_value.class}) belonging to type '#{{{@type.stringify}}}'."
-          {% else %}
+            raise Exception.new "Unable to deserialize key (#{{{key.stringify}}}) having value (#{bson_value}) of type (#{bson_value.class}) belonging to type '#{{{@type.stringify}}}'. Expected type(s) '#{{{types}}}'."
+          {% elsif ivar.type.nilable? %}
           else
             instance.{{ key }} = nil
           {% end %}
