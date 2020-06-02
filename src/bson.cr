@@ -229,6 +229,17 @@ struct BSON
     value
   end
 
+  # Returns `true` when key given by *key* exists, otherwise `false`.
+  def has_key?(key : String | ::Symbol) : Bool
+    _, found = fetch(key)
+    found
+  end
+
+  # Returns `true` if the BSON is empty.
+  def empty? : Bool
+    size == 5
+  end
+
   private def fetch(key : String | ::Symbol)
     key = key.to_s
     pointer = @data.to_unsafe
