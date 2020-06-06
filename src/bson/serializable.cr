@@ -55,6 +55,7 @@ module BSON::Serializable
         {% types = ivar.type.union_types.select { |t| t != Nil } %}
         {% key = ivar.name %}
         {% bson_key = ann ? ann[:key].id : camelize ? ivar.name.camelcase(lower: camelize == "lower") : ivar.name %}
+        {% number_conversion_added = false %}
 
         {% unless ann && ann[:ignore] %}
           bson_value = bson["{{ bson_key }}"]?
@@ -64,16 +65,15 @@ module BSON::Serializable
             {% if typ <= BSON::Serializable || typ.class.has_method? :from_bson %}
             when BSON
               instance.{{ key }} = {{ typ }}.from_bson(bson_value)
-            {% elsif typ <= Int %}
+            {% elsif typ <= Int || typ <= Float %}
             when {{ typ }}
               instance.{{ key }} = bson_value.as({{ typ }})
+            {% unless number_conversion_added %}
+            # ameba:disable Lint/UselessAssign
+            {% number_conversion_added = true %}
             when Int, Float
               instance.{{ key }} = {{typ}}.new!(bson_value)
-            {% elsif typ <= Float %}
-            when {{ typ }}
-              instance.{{ key }} = bson_value.as({{ typ }})
-            when Int, Float
-              instance.{{ key }} = {{typ}}.new!(bson_value)
+            {% end %}
             {% else %}
             when {{ typ }}
               instance.{{ key }} = bson_value.as({{ typ }})
@@ -118,7 +118,7 @@ module BSON::Serializable
             unless self.{{ key }}.nil?
           {% end %}
             {% if typ.has_method? :to_bson %}
-              bson["{{ bson_key }}"] = self.{{ key }}.to_bson
+              bson["{{ bson_key }}"] = self.{{ key }}.try &.to_bson
             {% else %}
               bson["{{ bson_key }}"] = self.{{ key }}
             {% end %}
