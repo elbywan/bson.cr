@@ -10,4 +10,4 @@ Y10K datetime raises an "Invalid time: seconds out of range" error.
 
 Makes up for issues in the Crystal Parser (-0.0 parsed as 0.0, minimum Int64 value raises).
 
-- Slightly modified relaxed_extjson value for some datetime tests because Crystal does not allow 3 fraction digits. (see: https://github.com/crystal-lang/crystal/pull/9283)
+- Slightly modified relaxed_extjson values for a datetime testto enforce 3 fraction digits.

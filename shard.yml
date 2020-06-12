@@ -1,14 +1,12 @@
 name: bson
-version: 0.2.4
+version: 0.2.5
 
 description: |
   A pure Crystal Implementation of the BSON Specification.
 
-crystal: 0.34.0
+crystal: 0.35.0
 
 authors:
   - elbywan <elbywan@hotmail.com>
-
-crystal: 0.34.0
 
 license: MIT

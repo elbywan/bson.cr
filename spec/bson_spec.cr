@@ -143,7 +143,7 @@ describe BSON do
       comparison.should_not eq 0
     end
 
-    it "ObjectId(<=>)", focus: true do
+    it "ObjectId(<=>)" do
       iod = BSON::ObjectId.new
       iod2 = BSON::ObjectId.new(iod.data.hexstring)
       iod.should eq iod2
