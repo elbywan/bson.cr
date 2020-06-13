@@ -9,6 +9,8 @@ struct BSON
 
     @@counter : Int32 = rand(0x1000000)
     @@mutex = Mutex.new
+    # Fixed random bytes in order to have a better ordering.
+    @@random_bytes : Bytes = Random.new.random_bytes(5)
 
     # Initialize from a hex string representation.
     def initialize(str : String)
@@ -18,11 +20,17 @@ struct BSON
     # Initialize from a Byte array.
     def initialize(@data : Bytes); end
 
+    def self.new(pull : JSON::PullParser)
+      value = BSON::ObjectId.new pull.string_value
+      pull.read_next
+      value
+    end
+
     # Create a random ObjectId.
     def initialize
       io = IO::Memory.new
       io.write_bytes Time.utc.to_unix.to_u32, IO::ByteFormat::LittleEndian
-      io.write Random.new.random_bytes(5)
+      io.write @@random_bytes
       counter = @@mutex.synchronize {
         @@counter = (@@counter + 1) % 0xFFFFFF
       }
