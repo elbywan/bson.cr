@@ -34,7 +34,9 @@ struct BSON
       counter = @@mutex.synchronize {
         @@counter = (@@counter + 1) % 0xFFFFFF
       }
-      io.write counter.unsafe_as(StaticArray(UInt8, 3)).to_slice
+      counter_slice = Bytes.new(4)
+      IO::ByteFormat::BigEndian.encode(counter, counter_slice)
+      io.write counter_slice[1..3]
       @data = io.to_slice
     end
 
