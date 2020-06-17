@@ -15,6 +15,11 @@ struct BSON
       @io.write_bytes value, IO::ByteFormat::LittleEndian
     end
 
+    def []=(key : String, value : Float32)
+      field(:double, key)
+      @io.write_bytes value.to_f64, IO::ByteFormat::LittleEndian
+    end
+
     def []=(key : String, value : String)
       field(:string, key)
       @io.write_bytes value.bytesize + 1, IO::ByteFormat::LittleEndian
@@ -25,6 +30,11 @@ struct BSON
     def []=(key : String, value : BSON)
       field(:document, key)
       @io.write value.data
+    end
+
+    def []=(key : String, value : BSON::Serializable)
+      field(:document, key)
+      @io.write value.to_bson.data
     end
 
     def []=(key : String, value : NamedTuple)

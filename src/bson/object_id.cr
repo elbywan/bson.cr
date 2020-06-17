@@ -20,9 +20,13 @@ struct BSON
     # Initialize from a Byte array.
     def initialize(@data : Bytes); end
 
+    # Initialize from a JSON object.
     def self.new(pull : JSON::PullParser)
-      value = BSON::ObjectId.new pull.string_value
-      pull.read_next
+      pull.read_begin_object
+      key = pull.read_object_key
+      raise "ObjectID key must be $oid but is #{key}." if key != "$oid"
+      value = BSON::ObjectId.new pull.read_string
+      pull.read_end_object
       value
     end
 

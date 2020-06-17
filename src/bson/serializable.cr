@@ -55,8 +55,11 @@ module BSON::Serializable
             if !bson_value.nil?
               case bson_value
               {% for typ in types %}
-              {% if typ <= BSON::Serializable || typ.class.has_method? :from_bson %}
+              {% if typ <= BSON::Serializable %}
               when BSON
+                @{{ key }} = {{ typ }}.from_bson(bson_value)
+              {% elsif typ.class.has_method? :from_bson %}
+              when BSON, BSON::Value
                 @{{ key }} = {{ typ }}.from_bson(bson_value)
               {% elsif typ <= Int || typ <= Float %}
               when {{ typ }}

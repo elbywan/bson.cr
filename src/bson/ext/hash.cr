@@ -1,5 +1,7 @@
 class Hash(K, V)
-  def self.from_bson(bson : BSON) : self
+  def self.from_bson(bson : BSON::Value) : self
+    raise "Invalid BSON" unless bson.is_a? BSON
+
     {% begin %}
     {% types = V.union_types %}
 

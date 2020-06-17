@@ -121,6 +121,11 @@ struct BSON
     @data = builder.to_bson
   end
 
+  # Allocate a BSON instance from an instance of BSON::Serializable.
+  def initialize(serializable : BSON::Serializable)
+    initialize(serializable.to_bson.data)
+  end
+
   protected def initialize(pull : JSON::PullParser)
     builder = Builder.new
     is_array = pull.kind.begin_array?
@@ -202,6 +207,11 @@ struct BSON
       builder["#{key}"] = value
     }
     @data = builder.to_bson
+  end
+
+  # Clears the BSON instance.
+  def clear
+    @data = Bytes.new(5)
   end
 
   # Return the element with the given key, or `nil` if the key is not present.
