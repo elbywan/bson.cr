@@ -5,6 +5,22 @@ struct BSON
   struct ObjectId
     include Comparable(ObjectId)
 
+    # This converter can be used to serialize the ObjectId to a String value.
+    #
+    # ```
+    # @[JSON::Field(converter: BSON::ObjectId::StringConverter)]
+    # property _id : BSON::ObjectId
+    # ```
+    module StringConverter
+      def self.from_json(pull : JSON::PullParser) : BSON::ObjectId
+        BSON::ObjectId.new pull.read_string
+      end
+
+      def self.to_json(value : BSON::ObjectId, builder : JSON::Builder)
+        builder.string value.to_s
+      end
+    end
+
     getter data : Bytes
 
     @@counter : Int32 = rand(0x1000000)
