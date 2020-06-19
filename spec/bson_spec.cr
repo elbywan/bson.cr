@@ -132,6 +132,24 @@ describe BSON do
 
       bson[:unknown_key]?.should be_nil
     end
+
+    it "#dig" do
+      bson = BSON.new(REFERENCE_TUPLE)
+      bson.dig(:Subdocument, :foo).should eq "bar"
+      expect_raises(Exception) {
+        bson.dig(:Subdocument, :invalid_key)
+      }
+      expect_raises(Exception) {
+        bson.dig(:invalid_key)
+      }
+    end
+
+    it "#dig?" do
+      bson = BSON.new(REFERENCE_TUPLE)
+      bson.dig?(:Subdocument, :foo).should eq "bar"
+      bson.dig?(:Subdocument, :invalid_key).should be_nil
+      bson.dig?(:invalid_key).should be_nil
+    end
   end
 
   describe "compare" do

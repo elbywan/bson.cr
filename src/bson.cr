@@ -250,6 +250,32 @@ struct BSON
     size == 5
   end
 
+  # Traverses the depth of a structure and returns the value, otherwise raises.
+  def dig(key : String | ::Symbol, *subkeys)
+    if (value = self[key]) && value.is_a? BSON
+      return value.dig(*subkeys)
+    end
+    raise "BSON value not diggable for key: #{key.inspect}"
+  end
+
+  # Traverses the depth of a structure and returns the value.
+  # Returns `nil` if not found.
+  def dig?(key : String | ::Symbol, *subkeys)
+    if (value = self[key]?) && value.is_a? BSON
+      value.dig?(*subkeys)
+    end
+  end
+
+  # :nodoc:
+  def dig(key : String | ::Symbol)
+    self[key]
+  end
+
+  # :nodoc:
+  def dig?(key : String | ::Symbol)
+    self[key]?
+  end
+
   private def fetch(key : String | ::Symbol)
     key = key.to_s
     pointer = @data.to_unsafe
