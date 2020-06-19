@@ -271,7 +271,6 @@ struct BSON
       pos
     end
 
-    # ameba:disable Metrics/CyclomaticComplexity
     protected def decode_json_key(kind : JSON::PullParser::Kind, key : String, builder : Builder, pull : JSON::PullParser)
       case kind
       when .null?
@@ -292,137 +291,142 @@ struct BSON
           builder[key] = BSON.new(Builder.new.to_bson)
         else
           inner_key = pull.read_object_key
-          case inner_key
-          when "$oid"
-            builder[key] = ObjectId.new(pull.read_string)
-          when "$symbol"
-            builder[key] = Symbol.new(pull.read_string)
-          when "$numberDouble"
-            double_str = pull.read_string
-            if double_str == "Infinity"
-              builder[key] = Float64::INFINITY
-            elsif double_str == "-Infinity"
-              builder[key] = -Float64::INFINITY
-            elsif double_str == "NaN"
-              builder[key] = Float64::NAN
-            else
-              raise "Invalid double string representation: #{double_str}"
-            end
-          when "$numberDecimal"
-            builder[key] = Decimal128.new(pull.read_string)
-          when "$binary"
-            binary_base64 = ""
-            binary_subtype : Binary::SubType = :generic
-            pull.read_object { |binary_key|
-              if binary_key == "base64"
-                binary_base64 = pull.read_string
-              elsif binary_key == "subType"
-                binary_subtype = Binary::SubType.from_value(pull.read_string.hexbytes.to_unsafe.value)
-              else
-                pull.read_next
-              end
-            }
-            binary_bytes = Base64.decode(binary_base64)
-            if binary_subtype.uuid?
-              builder[key] = UUID.new(binary_bytes)
-            else
-              builder[key] = Binary.new(binary_subtype, binary_bytes)
-            end
-          when "$code"
-            code_str = pull.read_string
-            scope_document = nil
-            unless pull.kind.end_object?
-              pull.read_object_key
-              scope_document = BSON.new(pull)
-            end
-            builder[key] = Code.new(code_str, scope_document)
-          when "$timestamp"
-            timestamp_i = timestamp_t = 0
-            pull.read_object { |timestamp_key|
-              if timestamp_key == "i"
-                timestamp_i = pull.read_int
-              elsif timestamp_key == "t"
-                timestamp_t = pull.read_int
-              else
-                pull.read_next
-              end
-            }
-            builder[key] = Timestamp.new(timestamp_t.to_u32, timestamp_i.to_u32)
-          when "$regularExpression"
-            regex_pattern = ""
-            regex_options = ""
-
-            pull.read_object { |regex_key|
-              if regex_key == "pattern"
-                regex_pattern = pull.read_string
-              elsif regex_key == "options"
-                regex_options = pull.read_string
-              else
-                pull.read_next
-              end
-            }
-
-            regex_modifiers = Regex::Options::None
-            regex_modifiers |= Regex::Options::IGNORE_CASE if regex_options.index('i')
-            regex_modifiers |= Regex::Options::MULTILINE if regex_options.index('m') || regex_options.index('s')
-            regex_modifiers |= Regex::Options::EXTENDED if regex_options.index('x')
-            regex_modifiers |= Regex::Options::UTF_8 if regex_options.index('u')
-
-            builder[key] = Regex.new(regex_pattern, regex_modifiers)
-          when "$dbPointer"
-            db_ref = ""
-            db_oid = ""
-            pull.read_object { |db_ptr_key|
-              if db_ptr_key == "$ref"
-                db_ref = pull.read_string
-              elsif db_ptr_key == "$id"
-                pull.read_object { |oid_key|
-                  if oid_key === "$oid"
-                    db_oid = pull.read_string
-                  else
-                    pull.read_next
-                  end
-                }
-              else
-                pull.read_next
-              end
-            }
-            builder[key] = DBPointer.new(db_ref, ObjectId.new db_oid)
-          when "$date"
-            if pull.kind.string?
-              builder[key] = Time.new(pull)
-            else
-              date_time = ""
-              pull.read_object { |date_key|
-                if date_key === "$numberLong"
-                  date_time = pull.read_string
-                else
-                  pull.read_next
-                end
-              }
-              builder[key] = Time.unix_ms(date_time.to_i64)
-            end
-          when "$minKey"
-            builder[key] = MinKey.new
-            pull.read_next
-          when "$maxKey"
-            builder[key] = MaxKey.new
-            pull.read_next
-          when "$undefined"
-            builder[key] = Undefined.new
-            pull.read_next
-          else
-            object_builder = Builder.new
-            until pull.kind.end_object?
-              self.decode_json_key(pull.kind, inner_key, object_builder, pull)
-              inner_key = pull.read_object_key unless pull.kind.end_object?
-            end
-            builder[key] = BSON.new(object_builder.to_bson)
-          end
+          self.decode_json_object(inner_key, kind, key, builder, pull)
         end
         pull.read_end_object
       else
         # Ignore
+      end
+    end
+
+    # ameba:disable Metrics/CyclomaticComplexity
+    protected def decode_json_object(inner_key : String, kind : JSON::PullParser::Kind, key : String, builder : Builder, pull : JSON::PullParser)
+      case inner_key
+      when "$oid"
+        builder[key] = ObjectId.new(pull.read_string)
+      when "$symbol"
+        builder[key] = Symbol.new(pull.read_string)
+      when "$numberDouble"
+        double_str = pull.read_string
+        if double_str == "Infinity"
+          builder[key] = Float64::INFINITY
+        elsif double_str == "-Infinity"
+          builder[key] = -Float64::INFINITY
+        elsif double_str == "NaN"
+          builder[key] = Float64::NAN
+        else
+          raise "Invalid double string representation: #{double_str}"
+        end
+      when "$numberDecimal"
+        builder[key] = Decimal128.new(pull.read_string)
+      when "$binary"
+        binary_base64 = ""
+        binary_subtype : Binary::SubType = :generic
+        pull.read_object { |binary_key|
+          if binary_key == "base64"
+            binary_base64 = pull.read_string
+          elsif binary_key == "subType"
+            binary_subtype = Binary::SubType.from_value(pull.read_string.hexbytes.to_unsafe.value)
+          else
+            pull.read_next
+          end
+        }
+        binary_bytes = Base64.decode(binary_base64)
+        if binary_subtype.uuid?
+          builder[key] = UUID.new(binary_bytes)
+        else
+          builder[key] = Binary.new(binary_subtype, binary_bytes)
+        end
+      when "$code"
+        code_str = pull.read_string
+        scope_document = nil
+        unless pull.kind.end_object?
+          pull.read_object_key
+          scope_document = BSON.new(pull)
+        end
+        builder[key] = Code.new(code_str, scope_document)
+      when "$timestamp"
+        timestamp_i = timestamp_t = 0
+        pull.read_object { |timestamp_key|
+          if timestamp_key == "i"
+            timestamp_i = pull.read_int
+          elsif timestamp_key == "t"
+            timestamp_t = pull.read_int
+          else
+            pull.read_next
+          end
+        }
+        builder[key] = Timestamp.new(timestamp_t.to_u32, timestamp_i.to_u32)
+      when "$regularExpression"
+        regex_pattern = ""
+        regex_options = ""
+
+        pull.read_object { |regex_key|
+          if regex_key == "pattern"
+            regex_pattern = pull.read_string
+          elsif regex_key == "options"
+            regex_options = pull.read_string
+          else
+            pull.read_next
+          end
+        }
+
+        regex_modifiers = Regex::Options::None
+        regex_modifiers |= Regex::Options::IGNORE_CASE if regex_options.index('i')
+        regex_modifiers |= Regex::Options::MULTILINE if regex_options.index('m') || regex_options.index('s')
+        regex_modifiers |= Regex::Options::EXTENDED if regex_options.index('x')
+        regex_modifiers |= Regex::Options::UTF_8 if regex_options.index('u')
+
+        builder[key] = Regex.new(regex_pattern, regex_modifiers)
+      when "$dbPointer"
+        db_ref = ""
+        db_oid = ""
+        pull.read_object { |db_ptr_key|
+          if db_ptr_key == "$ref"
+            db_ref = pull.read_string
+          elsif db_ptr_key == "$id"
+            pull.read_object { |oid_key|
+              if oid_key === "$oid"
+                db_oid = pull.read_string
+              else
+                pull.read_next
+              end
+            }
+          else
+            pull.read_next
+          end
+        }
+        builder[key] = DBPointer.new(db_ref, ObjectId.new db_oid)
+      when "$date"
+        if pull.kind.string?
+          builder[key] = Time.new(pull)
+        else
+          date_time = ""
+          pull.read_object { |date_key|
+            if date_key === "$numberLong"
+              date_time = pull.read_string
+            else
+              pull.read_next
+            end
+          }
+          builder[key] = Time.unix_ms(date_time.to_i64)
+        end
+      when "$minKey"
+        builder[key] = MinKey.new
+        pull.read_next
+      when "$maxKey"
+        builder[key] = MaxKey.new
+        pull.read_next
+      when "$undefined"
+        builder[key] = Undefined.new
+        pull.read_next
+      else
+        object_builder = Builder.new
+        until pull.kind.end_object?
+          self.decode_json_key(pull.kind, inner_key, object_builder, pull)
+          inner_key = pull.read_object_key unless pull.kind.end_object?
+        end
+        builder[key] = BSON.new(object_builder.to_bson)
       end
     end
   end
