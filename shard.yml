@@ -1,5 +1,5 @@
 name: bson
-version: 0.2.7
+version: 0.2.8
 
 description: |
   A pure Crystal Implementation of the BSON Specification.
