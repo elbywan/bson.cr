@@ -170,6 +170,15 @@ struct BSON
     @data = builder.to_bson
   end
 
+  # Append a key/value pair and declare it as a BSON array.
+  def append_array(key : String | ::Symbol, value : BSON)
+    io = IO::Memory.new
+    io.write @data[4...-1]
+    builder = Builder.new(io)
+    builder.append_array(key, value)
+    @data = builder.to_bson
+  end
+
   # Append one or more key/value pairs.
   #
   # NOTE: more efficient for appending multiple values than calling `[]=` individually.
