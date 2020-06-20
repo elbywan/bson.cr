@@ -1,6 +1,11 @@
-# bson [![Build Status](https://travis-ci.org/elbywan/bson.cr.svg?branch=master)](https://travis-ci.org/elbywan/bson.cr)
-
-#### A pure Crystal implementation of the [BSON specification](http://bsonspec.org).
+<div align="center">
+	<img src="icon.svg" width="128" height="128" />
+	<h1>bson.cr</h1>
+  <h3>A pure Crystal implementation of the [BSON specification](http://bsonspec.org).</h3>
+  <a href="https://travis-ci.org/elbywan/bson.cr"><img alt="travis-badge" src="https://travis-ci.org/elbywan/bson.cr.svg?branch=master"></a>
+  <a href="https://github.com/elbywan/bson.cr/tags"><img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/v/tag/elbywan/bson.cr"></a>
+  <a href="https://github.com/elbywan/bson.cr/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/elbywan/bson.cr"></a>
+</div>
 
 ## Reliability
 
@@ -211,3 +216,7 @@ It works, but performance is low because it uses an intermediate String represen
 ## Contributors
 
 - [elbywan](https://github.com/your-github-user) - creator and maintainer
+
+## Credit
+
+- Icon made by [Vitaly Gorbachev](https://www.flaticon.com/authors/vitaly-gorbachev) from [www.flaticon.com](www.flaticon.com).
