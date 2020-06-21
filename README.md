@@ -202,7 +202,7 @@ puts Data.from_bson(data.to_bson).to_json
 
 ## Decimal128
 
-The `Decimal128` code has been hastily copied from the (`bson-ruby`)[https://github.com/mongodb/bson-ruby/blob/master/lib/bson/decimal128.rb] library.
+The `Decimal128` code has been hastily copied from the [`bson-ruby`](https://github.com/mongodb/bson-ruby/blob/master/lib/bson/decimal128.rb) library.
 It works, but performance is low because it uses an intermediate String representation.
 
 ## Contributing
