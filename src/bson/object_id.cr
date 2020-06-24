@@ -49,7 +49,7 @@ struct BSON
     # Create a random ObjectId.
     def initialize
       io = IO::Memory.new
-      io.write_bytes Time.utc.to_unix.to_u32, IO::ByteFormat::LittleEndian
+      io.write_bytes Time.utc.to_unix.to_u32, IO::ByteFormat::BigEndian
       io.write @@random_bytes
       counter = @@mutex.synchronize {
         @@counter = (@@counter + 1) % 0xFFFFFF
