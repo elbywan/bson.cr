@@ -207,7 +207,7 @@ It works, but performance is low because it uses an intermediate String represen
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/bson/fork>)
+1. Fork it (<https://github.com/elbywan/bson/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -215,8 +215,8 @@ It works, but performance is low because it uses an intermediate String represen
 
 ## Contributors
 
-- [elbywan](https://github.com/your-github-user) - creator and maintainer
+- [elbywan](https://github.com/elbywan) - creator and maintainer
 
 ## Credit
 
-- Icon made by [Vitaly Gorbachev](https://www.flaticon.com/authors/vitaly-gorbachev) from [www.flaticon.com](www.flaticon.com).
+- Icon made by [Vitaly Gorbachev](https://www.flaticon.com/authors/vitaly-gorbachev) from [www.flaticon.com](https://www.flaticon.com).
