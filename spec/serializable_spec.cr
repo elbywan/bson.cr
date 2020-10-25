@@ -56,6 +56,16 @@ class LowerCamelizeTest
   property other : Int32
 end
 
+class GettersTest
+  include BSON::Serializable
+  include JSON::Serializable
+
+  property regular : String
+  property? optional : String
+  property! mandatory : String
+  @ignored : Bool = true
+end
+
 reference_json = %({
       "str": "str",
       "optional_int": 10,
@@ -156,5 +166,28 @@ describe BSON::Serializable do
     round_trip = LowerCamelizeTest.from_bson(bson)
     round_trip.snake_case_field.should eq test.snake_case_field
     round_trip.other.should eq test.other
+  end
+
+  it "should take into account associated getters" do
+    json = %({
+      "regular": "regular",
+      "optional": "optional",
+      "mandatory": "mandatory"
+    })
+
+    test = GettersTest.from_json(json)
+    bson = test.to_bson
+    bson.each { |key, value|
+      case key
+      when "regular"
+        value.should eq test.regular
+      when "optional"
+        value.should eq test.optional?
+      when "mandatory"
+        value.should eq test.mandatory
+      else
+        raise "Bad key: #{key}"
+      end
+    }
   end
 end

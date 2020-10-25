@@ -113,16 +113,20 @@ module BSON::Serializable
         {% key = ivar.name %}
         {% bson_key = ann ? ann[:key].id : camelize ? ivar.name.camelcase(lower: camelize == "lower") : ivar.name %}
         {% unless ann && ann[:ignore] %}
-          {% unless ann && ann[:emit_null] %}
-            unless self.{{ key }}.nil?
-          {% end %}
-            {% if typ.has_method? :to_bson %}
-              bson["{{ bson_key }}"] = self.{{ key }}.try &.to_bson
-            {% else %}
-              bson["{{ bson_key }}"] = self.{{ key }}
+          {% getter_names = [key + "?", key , key + "!"] %}
+          {% getter_name = getter_names.find { |name| @type.methods.any? &.name.== name } %}
+          {% if getter_name %}
+            {% unless ann && ann[:emit_null] %}
+              unless self.{{ getter_name }}.nil?
             {% end %}
-          {% unless ann && ann[:emit_null] %}
-            end
+              {% if typ.has_method? :to_bson %}
+                bson["{{ bson_key }}"] = self.{{ getter_name }}.try &.to_bson
+              {% else %}
+                bson["{{ bson_key }}"] = self.{{ getter_name }}
+              {% end %}
+            {% unless ann && ann[:emit_null] %}
+              end
+            {% end %}
           {% end %}
         {% end %}
       {% end %}
