@@ -114,7 +114,7 @@ module BSON::Serializable
         {% bson_key = ann ? ann[:key].id : camelize ? ivar.name.camelcase(lower: camelize == "lower") : ivar.name %}
         {% unless ann && ann[:ignore] %}
           {% getter_names = [key + "?", key , key + "!"] %}
-          {% getter_name = getter_names.find { |name| @type.methods.any? &.name.== name } %}
+          {% getter_name = getter_names.find { |name| @type.has_method? name } %}
           {% if getter_name %}
             {% unless ann && ann[:emit_null] %}
               unless self.{{ getter_name }}.nil?
