@@ -28,6 +28,7 @@ class Outer
   property array_of_objects : Array(Inner)
   property free_form : JSON::Any
   property hash : Hash(String, String | Int32)
+  property named_tuple : {int: Int32, string: String}
 
   @[BSON::Field(key: other_str)]
   @[JSON::Field(key: other_str)]
@@ -89,6 +90,10 @@ reference_json = %({
           "one": 1,
           "two": "two"
       },
+      "named_tuple": {
+        "int": 1,
+        "string": "str"
+      },
       "other_str": "str"
   })
 
@@ -110,6 +115,10 @@ describe BSON::Serializable do
     hash["one"] = 1
     hash["two"] = "two"
     bson["hash"] = hash
+    named_tuple = BSON.new
+    named_tuple["int"] = 1
+    named_tuple["string"] = "str"
+    bson["named_tuple"] = named_tuple
     bson["other_str"] = "str"
 
     expected_json = JSON.parse(reference_json).to_json
