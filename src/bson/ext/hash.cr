@@ -11,7 +11,7 @@ class Hash(K, V)
       case v
       {% for typ in types %}
         {% if typ <= BSON::Serializable || typ.class.has_method? :from_bson %}
-        when BSON
+        when {{ typ }}
           hash[k] = {{ typ }}.from_bson(v)
         {% else %}
         when {{ typ }}
