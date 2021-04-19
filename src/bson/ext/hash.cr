@@ -15,7 +15,7 @@ class Hash(K, V)
 
     hash = self.new
 
-    bson.each do |(k, v, code, binary_subtype)|
+    bson.each do |(k, v, code, _)|
       case {v, code}
 
       {% htyp = types.find(&.<=(Hash)) %}
@@ -43,7 +43,7 @@ class Hash(K, V)
         {% end %}
       {% end %}
       else
-        raise Exception.new "Unable to deserialize key '#{k}' for hash '#{{{@type.stringify}}}'."
+        raise Exception.new "Unable to deserialize key '#{k}' for hash '{{@type.id}}'."
       end
     end
 
