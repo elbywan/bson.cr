@@ -200,6 +200,21 @@ puts Data.from_bson(data.to_bson).to_json
 # => {"field":"value","counter":0,"nested":{"array":["element",1]}}
 ```
 
+## Validating ObjectIds
+
+You can validate that a provided string is a valid MongoDB ObjectId before instantiating it with `.new()` with:
+
+```crystal
+# => true
+p BSON::ObjectId.validate("57e193d7a9cc81b4027498b5")
+
+# => false
+p BSON::ObjectId.validate("qwerty")
+
+# => false
+p BSON::ObjectId.validate("1234567890abcdefghijklmn")
+```
+
 ## Decimal128
 
 The `Decimal128` code has been hastily copied from the [`bson-ruby`](https://github.com/mongodb/bson-ruby/blob/master/lib/bson/decimal128.rb) library.

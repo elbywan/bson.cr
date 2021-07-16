@@ -82,5 +82,10 @@ struct BSON
     def <=>(other : ObjectId)
       @data <=> other.data
     end
+
+    # Validate that a provided string is a well formated ObjectId.
+    def self.validate(id : String) : Bool
+      id.hexbytes?.try &.size == 12
+    end
   end
 end
