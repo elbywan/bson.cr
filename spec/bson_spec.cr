@@ -223,4 +223,11 @@ describe BSON do
       }
     end
   end
+
+  describe "validate" do
+    it "ObjectId" do
+      BSON::ObjectId.validate(Random::Secure.hex(12)).should be_true
+      BSON::ObjectId.validate(Random::Secure.base64(Random.rand(48))).should be_false
+    end
+  end
 end
