@@ -121,17 +121,12 @@ struct BSON
       @io.write_bytes 0x00_u8, IO::ByteFormat::LittleEndian
     end
 
-    def []=(key : String, value : UInt8)
-      field(:int32, key)
-      @io.write_bytes value.to_i32, IO::ByteFormat::LittleEndian
-    end
-
     def []=(key : String, value : Int8)
       field(:int32, key)
       @io.write_bytes value.to_i32, IO::ByteFormat::LittleEndian
     end
 
-    def []=(key : String, value : UInt16)
+    def []=(key : String, value : UInt8)
       field(:int32, key)
       @io.write_bytes value.to_i32, IO::ByteFormat::LittleEndian
     end
@@ -141,7 +136,7 @@ struct BSON
       @io.write_bytes value.to_i32, IO::ByteFormat::LittleEndian
     end
 
-    def []=(key : String, value : UInt32)
+    def []=(key : String, value : UInt16)
       field(:int32, key)
       @io.write_bytes value.to_i32, IO::ByteFormat::LittleEndian
     end
@@ -151,7 +146,7 @@ struct BSON
       @io.write_bytes value, IO::ByteFormat::LittleEndian
     end
 
-    def []=(key : String, value : UInt64)
+    def []=(key : String, value : UInt32)
       field(:int64, key)
       @io.write_bytes value.to_i64, IO::ByteFormat::LittleEndian
     end
