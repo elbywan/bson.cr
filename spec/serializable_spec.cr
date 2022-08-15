@@ -23,11 +23,13 @@ class Outer
 
   property str : String
   property optional_int : Int32?
-  property array_of_union_types : Array(String | Int32)
+  property required_lighter_int : Int16
+  property required_uint : UInt32
+  property array_of_union_types : Array(String | UInt8 | Int32)
   property nested_object : Inner
   property array_of_objects : Array(Inner)
   property free_form : JSON::Any
-  property hash : Hash(String, String | Int32)
+  property hash : Hash(String, String | UInt16 | Int8 | Int32)
   property named_tuple : {int: Int32, string: String}
 
   @[BSON::Field(key: other_str)]
@@ -70,9 +72,12 @@ end
 reference_json = %({
       "str": "str",
       "optional_int": 10,
+      "required_lighter_int" : 1,
+      "required_uint": 150,
       "array_of_union_types": [
-          10,
-          "str"
+          -10,
+          "str",
+          10
       ],
       "nested_object": {
           "key": "value"
@@ -88,7 +93,9 @@ reference_json = %({
       },
       "hash": {
           "one": 1,
-          "two": "two"
+          "two": "two",
+          "three": -10,
+          "four": -129
       },
       "named_tuple": {
         "int": 1,
@@ -101,22 +108,26 @@ describe BSON::Serializable do
   it "should perform a round-trip" do
     bson = BSON.new
     bson["str"] = "str"
-    bson["optional_int"] = 10
-    bson["array_of_union_types"] = [10, "str"]
+    bson["optional_int"] = 10_i32
+    bson["required_lighter_int"] = 1_i16
+    bson["required_uint"] = 150_u32
+    bson["array_of_union_types"] = [-10_i32, "str", 10_u8]
     bson["nested_object"] = {key: "value"}
     bson["array_of_objects"] = [{
       "key": "0",
     }]
     free_form = BSON.new
-    free_form["one"] = 1
+    free_form["one"] = 1_i32
     free_form["two"] = "two"
     bson["free_form"] = free_form
     hash = BSON.new
-    hash["one"] = 1
+    hash["one"] = 1_u16
     hash["two"] = "two"
+    hash["three"] = -10_i8
+    hash["four"] = -129_i32
     bson["hash"] = hash
     named_tuple = BSON.new
-    named_tuple["int"] = 1
+    named_tuple["int"] = 1_i32
     named_tuple["string"] = "str"
     bson["named_tuple"] = named_tuple
     bson["other_str"] = "str"
