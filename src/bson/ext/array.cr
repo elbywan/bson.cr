@@ -39,6 +39,14 @@ class Array(T)
           arr << v.as({{ typ }})
         {% end %}
       {% end %}
+
+      {% if T <= Number %}
+        {% ntyp = types.find(&.<=(Number)) %}
+        {% if ntyp %}
+        when {Number, _}
+          arr << {{ ntyp }}.new(v)
+        {% end %}
+      {% end %}
       else
         raise Exception.new "Unable to deserialize BSON array '#{{{@type.stringify}}}'."
       end
