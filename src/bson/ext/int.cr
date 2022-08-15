@@ -1,27 +1,3 @@
-struct Int8
-  # Serialize to a canonical extended json representation.
-  #
-  # NOTE: see https://github.com/mongodb/specifications/blob/master/source/extended-json.rst
-  def to_canonical_extjson(builder : JSON::Builder)
-    builder.object {
-      builder.string("$numberInt")
-      builder.scalar(Int32.new(self).to_s)
-    }
-  end
-end
-
-struct Int16
-  # Serialize to a canonical extended json representation.
-  #
-  # NOTE: see https://github.com/mongodb/specifications/blob/master/source/extended-json.rst
-  def to_canonical_extjson(builder : JSON::Builder)
-    builder.object {
-      builder.string("$numberInt")
-      builder.scalar(Int32.new(self).to_s)
-    }
-  end
-end
-
 struct Int32
   # Serialize to a canonical extended json representation.
   #
