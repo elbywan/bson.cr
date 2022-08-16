@@ -42,6 +42,14 @@ class Hash(K, V)
           hash[k] = v.as({{typ}})
         {% end %}
       {% end %}
+
+      {% if T <= Number %}
+        {% ntyp = types.find(&.<=(Number)) %}
+        {% if ntyp %}
+        when {Number, _}
+          hash[k] = {{ ntyp }}.new(v)
+        {% end %}
+      {% end %}
       else
         raise Exception.new "Unable to deserialize key '#{k}' for hash '{{@type.id}}'."
       end
