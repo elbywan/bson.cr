@@ -1,8 +1,0 @@
-dist: bionic
-language: minimal
-
-install:
-  - curl -fsSL https://crystal-lang.org/install.sh | sudo bash
-
-script:
-  - crystal spec
