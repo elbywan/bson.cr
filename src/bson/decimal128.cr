@@ -8,7 +8,8 @@ end
 struct BigInt
   # Fetch a copy of the underlying byte representation.
   def bytes
-    ptr = LibGMP.export(nil, out size, -1, 1, -1, 0, self)
+    mpz = self
+    ptr = LibGMP.export(nil, out size, -1, 1, -1, 0, mpz)
     slice = Bytes.new(size)
     slice.copy_from(ptr, size)
     slice
